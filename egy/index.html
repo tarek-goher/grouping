@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مصر الأبدية | اكتشف حضارة الفراعنة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Tajawal:wght@300;400;500;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/*
+══════════════════════════════════════════════════
+  📁 دليل الملفات - ضعها في نفس فولدر الـ HTML
+══════════════════════════════════════════════════
+
+  🎬 فيديوهات:
+  ┌──────────────────────────────────────────────┐
+  │  hero-video.mp4    ← أهرامات الجيزة (هيرو)  │
+  │  sphinx-video.mp4  ← أبو الهول / الفراعنة   │
+  │  nile-video.mp4    ← نهر النيل               │
+  └──────────────────────────────────────────────┘
+
+  🖼️ صور:
+  ┌──────────────────────────────────────────────┐
+  │  pyramids.jpg    ← أهرامات الجيزة            │
+  │  sphinx.jpg      ← أبو الهول                 │
+  │  karnak.jpg      ← معبد الكرنك               │
+  │  abu-simbel.jpg  ← معابد أبو سمبل            │
+  │  redsea.jpg      ← البحر الأحمر              │
+  │  museum.jpg      ← المتحف المصري             │
+  │  nile.jpg        ← نهر النيل                 │
+  │  desert.jpg      ← الصحراء                   │
+  │  gallery-1.jpg   ← معرض - صورة 1             │
+  │  gallery-2.jpg   ← معرض - صورة 2             │
+  │  gallery-3.jpg   ← معرض - صورة 3             │
+  │  gallery-4.jpg   ← معرض - صورة 4             │
+  │  gallery-5.jpg   ← معرض - صورة 5             │
+  │  gallery-6.jpg   ← معرض - صورة 6             │
+  └──────────────────────────────────────────────┘
+*/
+
+:root{
+  --bg:#0a0703;--surface:#110e07;--surface2:#1a1509;
+  --gold:#c8963c;--gold2:#e8b84b;--gold3:#f5d06e;
+  --sand:#d4a96a;--teal:#1a6b5a;
+  --text:#f0e6d0;--text-muted:#9a8a6a;
+  --border:rgba(200,150,60,.18);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Tajawal',sans-serif;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.2rem 5rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s;}
+nav.scrolled{background:rgba(10,7,3,.97);border-bottom:1px solid var(--border);backdrop-filter:blur(20px);}
+.nav-logo{font-family:'Cinzel Decorative',serif;font-size:1.25rem;color:var(--gold2);text-decoration:none;letter-spacing:3px;text-shadow:0 0 30px rgba(200,150,60,.5);}
+.nav-links{display:flex;gap:2.5rem;}
+.nav-links a{color:rgba(240,230,208,.75);text-decoration:none;font-size:.88rem;letter-spacing:1px;transition:color .3s;}
+.nav-links a:hover{color:var(--gold2);}
+.nav-cta{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0703;border:none;padding:.55rem 1.6rem;font-size:.82rem;font-weight:700;cursor:pointer;font-family:'Tajawal',sans-serif;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);transition:all .3s;text-decoration:none;display:inline-block;}
+.nav-cta:hover{background:linear-gradient(135deg,var(--gold2),var(--gold3));}
+.lang-btn{background:transparent;border:1px solid rgba(200,150,60,.3);color:var(--text-muted);padding:.45rem .9rem;border-radius:3px;font-size:.75rem;cursor:pointer;font-family:'Tajawal',sans-serif;transition:all .3s;}
+.lang-btn:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ═══ HERO - فيديو الأهرامات ═══ */
+.hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(10,7,3,.25) 0%,rgba(10,7,3,.4) 50%,rgba(10,7,3,.88) 100%);}
+.hero-glow{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 65%,rgba(200,150,60,.07) 0%,transparent 70%);}
+#stars-wrap{position:absolute;inset:0;z-index:2;pointer-events:none;}
+.star{position:absolute;background:#fff;border-radius:50%;animation:tw var(--d,3s) ease-in-out infinite var(--dl,0s);}
+@keyframes tw{0%,100%{opacity:.15;}50%{opacity:.85;}}
+.moon{position:absolute;top:9%;right:13%;z-index:3;width:62px;height:62px;border-radius:50%;background:radial-gradient(circle at 37% 37%,#f5e6a0,#c8963c 70%);box-shadow:0 0 40px rgba(200,150,60,.5),0 0 90px rgba(200,150,60,.18);animation:moonP 4s ease-in-out infinite;}
+@keyframes moonP{0%,100%{box-shadow:0 0 40px rgba(200,150,60,.5),0 0 90px rgba(200,150,60,.18);}50%{box-shadow:0 0 65px rgba(200,150,60,.75),0 0 130px rgba(200,150,60,.3);}}
+.hero-content{position:relative;z-index:4;padding:0 2rem;max-width:900px;}
+.hero-eyebrow{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:6px;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:1.2rem;animation:fadeUp .9s ease both;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:55px;height:1px;}
+.hero-eyebrow::before{background:linear-gradient(to left,var(--gold),transparent);}
+.hero-eyebrow::after{background:linear-gradient(to right,var(--gold),transparent);}
+.hero-title{font-family:'Cinzel Decorative',serif;font-size:clamp(4rem,10vw,11rem);line-height:.9;margin-bottom:1rem;background:linear-gradient(160deg,#f5d06e 0%,#c8963c 35%,#e8b84b 65%,#f5d06e 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 50px rgba(200,150,60,.3));animation:fadeUp .9s .15s ease both;}
+.hero-sub-title{font-family:'Cinzel',serif;font-size:clamp(.9rem,2.2vw,1.8rem);letter-spacing:8px;color:var(--sand);display:block;margin-top:.6rem;animation:fadeUp .9s .3s ease both;}
+.hero-desc{font-size:1.05rem;color:rgba(240,230,208,.72);line-height:1.9;max-width:560px;margin:1.5rem auto 2.5rem;animation:fadeUp .9s .45s ease both;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .9s .6s ease both;}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0a0703;border:none;padding:1rem 2.8rem;font-size:.92rem;font-weight:700;cursor:pointer;font-family:'Tajawal',sans-serif;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:all .35s;text-decoration:none;display:inline-block;letter-spacing:.5px;}
+.btn-gold:hover{background:linear-gradient(135deg,var(--gold2),var(--gold3));transform:translateY(-3px);box-shadow:0 15px 40px rgba(200,150,60,.3);}
+.btn-outline{background:transparent;border:1px solid rgba(200,150,60,.45);color:var(--gold);padding:1rem 2.8rem;font-size:.92rem;cursor:pointer;font-family:'Tajawal',sans-serif;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:all .3s;text-decoration:none;display:inline-block;}
+.btn-outline:hover{background:rgba(200,150,60,.1);border-color:var(--gold2);color:var(--gold2);}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:4;color:rgba(200,150,60,.5);font-size:.7rem;letter-spacing:3px;display:flex;flex-direction:column;align-items:center;gap:.4rem;animation:sb 2.5s ease-in-out infinite;}
+@keyframes sb{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(8px);}}
+.scroll-arr{font-size:1.3rem;color:var(--gold);}
+
+/* HIERO */
+.hiero{text-align:center;padding:1.2rem 0;font-size:1.4rem;letter-spacing:10px;color:rgba(200,150,60,.2);background:linear-gradient(to right,transparent,rgba(200,150,60,.04),transparent);border-top:1px solid rgba(200,150,60,.06);border-bottom:1px solid rgba(200,150,60,.06);}
+
+/* SECTION */
+section{padding:7rem 5rem;position:relative;z-index:2;}
+.s-tag{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem;}
+.s-tag::before{content:'𓂀';font-size:.9rem;}
+.s-title{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,4.5vw,4.5rem);line-height:1.05;margin-bottom:1.2rem;background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.s-sub{color:var(--text-muted);font-size:.95rem;line-height:1.85;max-width:560px;}
+
+/* ═══ PLACES GRID ═══ */
+.places-hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem;}
+.places-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:300px 280px;gap:3px;}
+.place-card{position:relative;overflow:hidden;cursor:pointer;background:var(--surface2);}
+.place-card:first-child{grid-row:span 2;}
+.place-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease;display:block;}
+.place-card:hover img{transform:scale(1.07);}
+.place-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,7,3,.95) 0%,rgba(10,7,3,.35) 45%,rgba(10,7,3,.08) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;transition:background .4s;}
+.place-card:hover .place-overlay{background:linear-gradient(to top,rgba(10,7,3,.98) 0%,rgba(10,7,3,.6) 50%,rgba(10,7,3,.18) 100%);}
+.place-badge{position:absolute;top:1.2rem;right:1.2rem;background:rgba(200,150,60,.15);backdrop-filter:blur(12px);border:1px solid rgba(200,150,60,.4);padding:.3rem .9rem;font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:1.5px;color:var(--gold);}
+.place-cat{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:2.5px;color:var(--gold);text-transform:uppercase;margin-bottom:.5rem;}
+.place-name{font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:#fff;margin-bottom:.4rem;}
+.place-card:first-child .place-name{font-size:2rem;}
+.place-desc{font-size:.82rem;color:rgba(240,230,208,.65);line-height:1.65;margin-bottom:.8rem;max-height:0;overflow:hidden;transition:max-height .4s ease;}
+.place-card:hover .place-desc{max-height:80px;}
+.place-meta{display:flex;gap:1.2rem;font-size:.74rem;color:rgba(200,150,60,.8);}
+
+/* ═══ SPHINX SECTION - فيديو أبو الهول ═══ */
+.sphinx-sec{position:relative;overflow:hidden;padding:0;height:85vh;display:flex;align-items:center;}
+.sphinx-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.sphinx-ov{position:absolute;inset:0;z-index:1;background:linear-gradient(to left,rgba(10,7,3,.97) 38%,rgba(10,7,3,.25) 100%);}
+[data-lang="en"] .sphinx-ov{background:linear-gradient(to right,rgba(10,7,3,.97) 38%,rgba(10,7,3,.25) 100%);}
+.sphinx-content{position:relative;z-index:2;padding:0 5rem;max-width:580px;}
+.sphinx-quote{font-family:'Cinzel',serif;font-size:clamp(1.1rem,2.5vw,1.8rem);color:var(--gold3);line-height:1.7;margin:1.5rem 0;font-style:italic;}
+.sphinx-attr{font-size:.78rem;letter-spacing:2px;color:var(--text-muted);}
+
+/* ═══ TIMELINE ═══ */
+.timeline-sec{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.tl-wrap{display:grid;grid-template-columns:1fr 2px 1fr;gap:0 3rem;margin-top:4rem;}
+.tl-line{background:linear-gradient(to bottom,transparent,var(--gold),var(--gold2),var(--gold),transparent);width:2px;margin:0 auto;}
+.tl-col{display:flex;flex-direction:column;gap:2rem;}
+.tl-col.right{margin-top:3rem;}
+.ti{background:rgba(200,150,60,.04);border:1px solid rgba(200,150,60,.1);padding:1.5rem;transition:border-color .3s,background .3s;}
+.ti:hover{border-color:rgba(200,150,60,.3);background:rgba(200,150,60,.07);}
+.ti-yr{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:2px;color:var(--gold);margin-bottom:.5rem;}
+.ti-sym{font-size:1.5rem;display:block;margin-bottom:.4rem;}
+.ti-ttl{font-family:'Cinzel Decorative',serif;font-size:.95rem;color:var(--gold3);margin-bottom:.6rem;}
+.ti-desc{font-size:.84rem;color:var(--text-muted);line-height:1.8;}
+
+/* ═══ NILE VIDEO SECTION ═══ */
+.nile-sec{position:relative;overflow:hidden;padding:0;height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;}
+.nile-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;}
+.nile-ov{position:absolute;inset:0;z-index:1;background:rgba(10,7,3,.62);}
+.nile-content{position:relative;z-index:2;padding:0 2rem;max-width:680px;}
+.nile-title{font-family:'Cinzel Decorative',serif;font-size:clamp(2rem,5vw,5.5rem);background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;}
+.nile-sub{font-size:1rem;color:rgba(240,230,208,.72);line-height:1.9;margin-bottom:2rem;}
+
+/* STATS */
+.stats-sec{background:linear-gradient(135deg,rgba(200,150,60,.07),rgba(26,107,90,.04));border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3rem;text-align:center;}
+.stat-num{font-family:'Cinzel Decorative',serif;font-size:clamp(2.5rem,4vw,5rem);background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;line-height:1;margin-bottom:.5rem;}
+.stat-label{font-size:.82rem;color:var(--text-muted);letter-spacing:1px;line-height:1.5;}
+
+/* ═══ GALLERY ═══ */
+.gallery-sec{background:var(--surface);border-top:1px solid var(--border);}
+.gallery-intro{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-bottom:3rem;}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:260px 260px;gap:4px;}
+.g-item{overflow:hidden;position:relative;cursor:pointer;background:var(--surface2);}
+.g-item:first-child{grid-column:span 2;}
+.g-item:nth-child(4){grid-column:span 2;}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;display:block;}
+.g-item:hover img{transform:scale(1.06);}
+.g-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,7,3,.85),transparent 50%);opacity:0;transition:opacity .4s;display:flex;align-items:flex-end;padding:1.5rem;}
+.g-item:hover .g-ov{opacity:1;}
+.g-label{font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:2px;color:var(--gold);}
+
+/* EXP */
+.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(200,150,60,.06);border:1px solid rgba(200,150,60,.08);margin-top:3.5rem;}
+.exp-card{background:var(--surface);padding:0 0 2rem;position:relative;overflow:hidden;transition:background .3s;}
+.exp-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .4s;}
+.exp-card:hover{background:var(--surface2);}
+.exp-card:hover::after{transform:scaleX(1);}
+.exp-img{width:100%;height:170px;object-fit:cover;display:block;background:var(--surface2);}
+.exp-body{padding:1.5rem 1.8rem 0;}
+.exp-title{font-family:'Cinzel',serif;font-size:.88rem;letter-spacing:1px;color:var(--gold2);margin-bottom:.7rem;}
+.exp-desc{font-size:.83rem;color:var(--text-muted);line-height:1.75;}
+.exp-price{display:block;margin-top:1rem;font-family:'Cinzel',serif;font-size:.78rem;color:var(--gold);letter-spacing:1px;border-top:1px solid rgba(200,150,60,.15);padding-top:.8rem;}
+
+/* TESTIMONIALS */
+.t-sec{background:var(--surface);border-top:1px solid var(--border);}
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem;}
+.t-card{border:1px solid rgba(200,150,60,.12);padding:2rem;position:relative;background:rgba(200,150,60,.02);transition:border-color .3s;}
+.t-card:hover{border-color:rgba(200,150,60,.3);}
+.t-qmark{position:absolute;top:.8rem;right:1.5rem;font-family:'Cinzel Decorative',serif;font-size:5rem;color:rgba(200,150,60,.08);line-height:1;pointer-events:none;}
+.t-stars{color:var(--gold);letter-spacing:2px;margin-bottom:1rem;}
+.t-text{font-size:.88rem;color:var(--text-muted);line-height:1.9;margin-bottom:1.5rem;}
+.t-author{display:flex;align-items:center;gap:.8rem;}
+.t-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--teal));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:#0a0703;flex-shrink:0;}
+.t-name{font-weight:700;font-size:.88rem;}
+.t-origin{font-size:.72rem;color:var(--text-muted);}
+
+/* CTA */
+.cta-sec{position:relative;overflow:hidden;padding:10rem 5rem;text-align:center;}
+.cta-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:brightness(.28) saturate(.6);}
+.cta-ov{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at center,rgba(200,150,60,.1) 0%,rgba(10,7,3,.65) 70%);}
+.cta-content{position:relative;z-index:2;}
+.cta-title{font-family:'Cinzel Decorative',serif;font-size:clamp(2.5rem,6vw,7rem);background:linear-gradient(135deg,var(--gold3),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;filter:drop-shadow(0 0 40px rgba(200,150,60,.25));}
+.cta-sub{color:rgba(240,230,208,.7);font-size:1rem;line-height:1.9;max-width:520px;margin:0 auto 3rem;}
+
+/* FOOTER */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:5rem 5rem 2.5rem;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:4rem;}
+.footer-logo{font-family:'Cinzel Decorative',serif;font-size:1.4rem;color:var(--gold2);display:block;margin-bottom:1rem;text-shadow:0 0 20px rgba(200,150,60,.3);}
+.footer-desc{font-size:.85rem;color:var(--text-muted);line-height:1.85;}
+.footer-col h4{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;}
+.footer-col a{display:block;color:var(--text-muted);text-decoration:none;font-size:.85rem;margin-bottom:.65rem;transition:color .3s;}
+.footer-col a:hover{color:var(--gold2);}
+.footer-bottom{border-top:1px solid rgba(200,150,60,.08);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:var(--text-muted);}
+.ftr-hiero{letter-spacing:5px;color:rgba(200,150,60,.18);}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(35px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(45px);transition:opacity 1s ease,transform 1s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-l{opacity:0;transform:translateX(-45px);transition:opacity 1s ease,transform 1s ease;}
+.reveal-l.visible{opacity:1;transform:translateX(0);}
+.reveal-r{opacity:0;transform:translateX(45px);transition:opacity 1s ease,transform 1s ease;}
+.reveal-r.visible{opacity:1;transform:translateX(0);}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  nav,section,footer{padding-left:2.5rem;padding-right:2.5rem;}
+  .sphinx-content{padding:0 2.5rem;}
+  .places-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .place-card:first-child{grid-row:auto;grid-column:span 2;}
+  .exp-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-intro{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}
+  .g-item:first-child,.g-item:nth-child(4){grid-column:span 1;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .tl-wrap{grid-template-columns:1fr;gap:0;}
+  .tl-line{display:none;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .t-grid{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .places-grid{grid-template-columns:1fr;}
+  .place-card:first-child{grid-column:auto;}
+  .exp-grid{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr;}
+  .g-item:first-child,.g-item:nth-child(4){grid-column:auto;}
+  .footer-grid{grid-template-columns:1fr;}
+  section{padding:5rem 1.5rem;}
+}
+
+.lang-en{display:none;}
+[data-lang="en"] .lang-en{display:block;}
+[data-lang="en"] .lang-ar{display:none;}
+[data-lang="en"] html,[data-lang="en"] body{direction:ltr;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">𓂀 مصر الأبدية</a>
+  <div class="nav-links">
+    <a href="#places" class="lang-ar">الأماكن</a><a href="#places" class="lang-en">Places</a>
+    <a href="#history" class="lang-ar">التاريخ</a><a href="#history" class="lang-en">History</a>
+    <a href="#gallery" class="lang-ar">المعرض</a><a href="#gallery" class="lang-en">Gallery</a>
+    <a href="#experiences" class="lang-ar">التجارب</a><a href="#experiences" class="lang-en">Experiences</a>
+  </div>
+  <div style="display:flex;gap:.8rem;align-items:center">
+    <button class="lang-btn" onclick="toggleLang()">EN / عر</button>
+    <a href="#experiences" class="nav-cta lang-ar">احجز رحلتك</a>
+    <a href="#experiences" class="nav-cta lang-en" style="display:none">Book Your Trip</a>
+  </div>
+</nav>
+
+<!-- ════ HERO - 🎬 hero-video.mp4 ════ -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="./images/pyramids.jpg">
+    <source src="./images/video_1.mp4" type="video/mp4">
+    <!-- fallback: لو الفيديو مش موجود هيظهر صورة pyramids.jpg -->
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-glow"></div>
+  <div id="stars-wrap"></div>
+  <div class="moon"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow lang-ar">اكتشف حضارة الفراعنة</div>
+    <div class="hero-eyebrow lang-en" style="display:none">Discover the Pharaonic Civilization</div>
+    <h1 class="hero-title lang-ar">مصر<span class="hero-sub-title">أرض الأبدية</span></h1>
+    <h1 class="hero-title lang-en" style="display:none">Egypt<span class="hero-sub-title">Land of Eternity</span></h1>
+    <p class="hero-desc lang-ar">آلاف السنين من الحضارة، عظمة لا تُنكر، وأسرار لا تزال تُبهر العالم. رحلة عبر الزمن إلى أرض الفراعنة.</p>
+    <p class="hero-desc lang-en" style="display:none">Thousands of years of civilization, undeniable greatness, and mysteries that still amaze the world. A journey through time to the land of the Pharaohs.</p>
+    <div class="hero-btns">
+      <a href="#places" class="btn-gold lang-ar">🏺 استكشف الآن</a>
+      <a href="#places" class="btn-gold lang-en" style="display:none">🏺 Explore Now</a>
+      <a href="#history" class="btn-outline lang-ar">التاريخ الفرعوني</a>
+      <a href="#history" class="btn-outline lang-en" style="display:none">Pharaonic History</a>
+    </div>
+  </div>
+  <div class="scroll-hint lang-ar"><span>اكتشف</span><span class="scroll-arr">↓</span></div>
+  <div class="scroll-hint lang-en" style="display:none"><span>Discover</span><span class="scroll-arr">↓</span></div>
+</section>
+
+<div class="hiero">𓂀 𓃭 𓆣 𓅓 𓇋 𓆑 𓈖 𓇯 𓃀 𓅱 𓁹</div>
+
+<!-- ════ PLACES - 🖼️ صور حقيقية ════ -->
+<section id="places">
+  <div class="places-hdr reveal">
+    <div>
+      <div class="s-tag lang-ar">أشهر المعالم</div><div class="s-tag lang-en" style="display:none">Famous Landmarks</div>
+      <h2 class="s-title lang-ar">عجائب الدنيا<br>على أرض مصر</h2>
+      <h2 class="s-title lang-en" style="display:none">Wonders of the World<br>On Egyptian Soil</h2>
+    </div>
+    <p class="s-sub lang-ar">من الأهرامات الشاهقة إلى المتاحف الرائعة.</p>
+    <p class="s-sub lang-en" style="display:none">From towering pyramids to magnificent museums.</p>
+  </div>
+  <div class="places-grid reveal">
+
+    <!-- 🖼️ pyramids.jpg -->
+    <div class="place-card">
+      <img src="./images/pyramids.jpg" alt="أهرامات الجيزة" onerror="this.style.display='none'">
+      <div class="place-badge lang-ar">عجيبة الدنيا السابعة</div>
+      <div class="place-badge lang-en" style="display:none">7th Wonder</div>
+      <div class="place-overlay">
+        <div class="place-cat lang-ar">الجيزة · القاهرة</div><div class="place-cat lang-en" style="display:none">Giza · Cairo</div>
+        <div class="place-name lang-ar">أهرامات الجيزة وابو الهول</div><div class="place-name lang-en" style="display:none">Giza Pyramids & The Sphinx</div>
+        <p class="place-desc lang-ar">المعجزة الهندسية التي أبهرت العالم لأكثر من 4500 عام. أهرامات خوفو وخفرع ومنقرع تقف شامخة في صحراء الجيزة.</p>
+        <p class="place-desc lang-en" style="display:none">The engineering miracle that amazed the world for over 4,500 years. The Pyramids of Khufu, Khafre, and Menkaure stand tall in the Giza Desert.</p>
+        <div class="place-meta"><span>📍 الجيزة</span><span>🕐 2560 ق.م</span><span>⭐ 4.9</span></div>
+      </div>
+    </div>
+
+    <!-- 🖼️ museum.jpg -->
+    <div class="place-card">
+      <img src="./images/museum.jpg" alt="المتحف المصري" onerror="this.style.display='none'">
+      <div class="place-overlay">
+        <div class="place-cat lang-ar">القاهرة</div><div class="place-cat lang-en" style="display:none">Cairo</div>
+        <div class="place-name lang-ar">المتحف المصري الكبير</div><div class="place-name lang-en" style="display:none">Grand Egyptian Museum</div>
+        <div class="place-meta"><span>🏺 100,000+ قطعة</span><span>⭐ 5.0</span></div>
+      </div>
+    </div>
+
+    <!-- 🖼️ karnak.jpg -->
+    <div class="place-card">
+      <img src="./images/karnak.jpg" alt="معبد الكرنك" onerror="this.style.display='none'">
+      <div class="place-overlay">
+        <div class="place-cat lang-ar">الأقصر</div><div class="place-cat lang-en" style="display:none">Luxor</div>
+        <div class="place-name lang-ar">معبد الكرنك</div><div class="place-name lang-en" style="display:none">Karnak Temple</div>
+        <div class="place-meta"><span>📍 الأقصر</span><span>⭐ 4.8</span></div>
+      </div>
+    </div>
+
+    <!-- 🖼️ abu-simbel.jpg -->
+    <div class="place-card">
+      <img src="./images/abu-simbel.jpg" alt="أبو سمبل" onerror="this.style.display='none'">
+      <div class="place-badge">UNESCO</div>
+      <div class="place-overlay">
+        <div class="place-cat lang-ar">أسوان</div><div class="place-cat lang-en" style="display:none">Aswan</div>
+        <div class="place-name lang-ar">معابد أبو سمبل</div><div class="place-name lang-en" style="display:none">Abu Simbel Temples</div>
+        <div class="place-meta"><span>📍 أسوان</span><span>⭐ 4.9</span></div>
+      </div>
+    </div>
+
+    <!-- 🖼️ redsea.jpg -->
+    <div class="place-card">
+      <img src="./images/redsea.jpg" alt="البحر الأحمر" onerror="this.style.display='none'">
+      <div class="place-overlay">
+        <div class="place-cat lang-ar">البحر الأحمر</div><div class="place-cat lang-en" style="display:none">Red Sea</div>
+        <div class="place-name lang-ar"> شرم الشيخ</div><div class="place-name lang-en" style="display:none">Hurghada & Sharm El-Sheikh</div>
+        <div class="place-meta"><span>🤿 غوص</span><span>⭐ 4.7</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="hiero">𓆑 𓈖 𓇯 𓅓 𓃀 𓆣 𓅱 𓂀 𓆑</div>
+
+<!-- ════ SPHINX - 🎬 sphinx-video.mp4 ════ -->
+<div class="sphinx-sec">
+  <video class="sphinx-video" autoplay muted loop playsinline poster="sphinx.jpg">
+    <source src="./images/video_2.mp4" type="video/mp4">
+  </video>
+  <div class="sphinx-ov"></div>
+  <div class="sphinx-content reveal-l">
+    <div class="s-tag lang-ar">سر الأبدية</div><div class="s-tag lang-en" style="display:none">Secret of Eternity</div>
+    <h2 class="s-title lang-ar">أبو الهول<br>حارس الفراعنة</h2>
+    <h2 class="s-title lang-en" style="display:none">The Great Sphinx<br>Guardian of the Pharaohs</h2>
+    <p class="sphinx-quote lang-ar">"الوقت يخشى من الأهرامات، والأهرامات تخشى من العلماء"</p>
+    <p class="sphinx-quote lang-en" style="display:none">"Time fears the Pyramids, and the Pyramids fear scholars"</p>
+    <p class="sphinx-attr lang-ar">— مثل عربي قديم</p>
+    <p class="sphinx-attr lang-en" style="display:none">— Ancient Arabic Proverb</p>
+    <br><br>
+    <p class="s-sub lang-ar">منحوت من صخرة واحدة قبل أكثر من 4500 عام، يقف أبو الهول شاهداً على عظمة حضارة لم تُضاهَ في التاريخ.</p>
+    <p class="s-sub lang-en" style="display:none">Carved from a single rock over 4,500 years ago, the Great Sphinx stands as a witness to an unrivaled civilization in history.</p>
+    <br>
+    <a href="#experiences" class="btn-gold lang-ar" style="margin-top:1.5rem">احجز جولة ليلية 🌙</a>
+    <a href="#experiences" class="btn-gold lang-en" style="display:none;margin-top:1.5rem">Book Night Tour 🌙</a>
+  </div>
+</div>
+
+<!-- ════ HISTORY ════ -->
+<section class="timeline-sec" id="history">
+  <div class="s-tag lang-ar">عبر الزمن</div><div class="s-tag lang-en" style="display:none">Through Time</div>
+  <h2 class="s-title reveal lang-ar">التاريخ الفرعوني المجيد</h2>
+  <h2 class="s-title reveal lang-en" style="display:none">The Glorious Pharaonic History</h2>
+  <div class="tl-wrap">
+    <div class="tl-col">
+      <div class="ti reveal"><span class="ti-sym">𓁹</span><div class="ti-yr lang-ar">3100 ق.م — الأسرة الأولى</div><div class="ti-yr lang-en" style="display:none">3100 BC — First Dynasty</div><div class="ti-ttl lang-ar">توحيد مصر العليا والسفلى</div><div class="ti-ttl lang-en" style="display:none">Unification of Egypt</div><p class="ti-desc lang-ar">الملك مينا يوحد مصر لأول مرة ويؤسس الدولة الفرعونية التي حكمت ثلاثة آلاف عام.</p><p class="ti-desc lang-en" style="display:none">King Menes unified Egypt for the first time, establishing the Pharaonic state that ruled for three thousand years.</p></div>
+      <div class="ti reveal"><span class="ti-sym">𓇯</span><div class="ti-yr lang-ar">2560 ق.م — الدولة القديمة</div><div class="ti-yr lang-en" style="display:none">2560 BC — Old Kingdom</div><div class="ti-ttl lang-ar">بناء أهرامات الجيزة</div><div class="ti-ttl lang-en" style="display:none">Construction of the Giza Pyramids</div><p class="ti-desc lang-ar">خوفو يأمر ببناء الهرم الأكبر، أعظم عجائب الدنيا، الذي ظل أطول بناء لـ 3800 عام.</p><p class="ti-desc lang-en" style="display:none">Khufu orders the Great Pyramid's construction, the greatest wonder, tallest structure for 3,800 years.</p></div>
+      <div class="ti reveal"><span class="ti-sym">𓅓</span><div class="ti-yr lang-ar">1350 ق.م — الدولة الحديثة</div><div class="ti-yr lang-en" style="display:none">1350 BC — New Kingdom</div><div class="ti-ttl lang-ar">عصر توت عنخ آمون</div><div class="ti-ttl lang-en" style="display:none">Age of Tutankhamun</div><p class="ti-desc lang-ar">اكتشاف مقبرة الفرعون الشاب في وادي الملوك يكشف كنوزاً أبهرت العالم عام 1922.</p><p class="ti-desc lang-en" style="display:none">Discovery of the young Pharaoh's tomb in the Valley of the Kings reveals treasures that amazed the world in 1922.</p></div>
+    </div>
+    <div class="tl-line"></div>
+    <div class="tl-col right">
+      <div class="ti reveal"><span class="ti-sym">𓆣</span><div class="ti-yr lang-ar">1279 ق.م — رمسيس الثاني</div><div class="ti-yr lang-en" style="display:none">1279 BC — Ramesses II</div><div class="ti-ttl lang-ar">رمسيس العظيم يبني أبو سمبل</div><div class="ti-ttl lang-en" style="display:none">Ramesses Builds Abu Simbel</div><p class="ti-desc lang-ar">رمسيس يحكم 66 عاماً ويبني معابد أبو سمبل الخالدة ويخوض معركة قادش الشهيرة.</p><p class="ti-desc lang-en" style="display:none">Ramesses rules 66 years, builds immortal Abu Simbel, and fights the famous Battle of Qadesh.</p></div>
+      <div class="ti reveal"><span class="ti-sym">𓇋</span><div class="ti-yr lang-ar">331 ق.م — الفتح اليوناني</div><div class="ti-yr lang-en" style="display:none">331 BC — Greek Conquest</div><div class="ti-ttl lang-ar">الإسكندر يؤسس الإسكندرية</div><div class="ti-ttl lang-en" style="display:none">Alexander Founds Alexandria</div><p class="ti-desc lang-ar">الإسكندر الأكبر يؤسس الإسكندرية، مركز العلوم والفلسفة وموطن المكتبة العظيمة.</p><p class="ti-desc lang-en" style="display:none">Alexander the Great founds Alexandria, center of science and home to the great Library.</p></div>
+      <div class="ti reveal"><span class="ti-sym">𓂀</span><div class="ti-yr lang-ar">51 ق.م — كليوباترا السابعة</div><div class="ti-yr lang-en" style="display:none">51 BC — Cleopatra VII</div><div class="ti-ttl lang-ar">آخر ملوك الفراعنة</div><div class="ti-ttl lang-en" style="display:none">Last of the Pharaohs</div><p class="ti-desc lang-ar">كليوباترا آخر ملوك البطالمة، حكمت بذكاء فائق وأتقنت 9 لغات.</p><p class="ti-desc lang-en" style="display:none">Cleopatra, last of the Ptolemies, ruled with extraordinary intelligence and mastered 9 languages.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ NILE - 🎬 nile-video.mp4 ════ -->
+<div class="nile-sec">
+  <video class="nile-video" autoplay muted loop playsinline poster="nile.jpg">
+    <source src="./images/video_3.mp4" type="video/mp4">
+  </video>
+  <div class="nile-ov"></div>
+  <div class="nile-content reveal">
+    <div class="s-tag" style="justify-content:center"><span class="lang-ar">شريان الحياة</span><span class="lang-en" style="display:none">Lifeblood</span></div>
+    <h2 class="nile-title lang-ar">نهر النيل الخالد</h2>
+    <h2 class="nile-title lang-en" style="display:none">The Eternal Nile</h2>
+    <p class="nile-sub lang-ar">أطول أنهار العالم، هبة الله لمصر، مهد الحضارة الإنسانية الأولى منذ آلاف السنين.</p>
+    <p class="nile-sub lang-en" style="display:none">The world's longest river, Egypt's gift, the cradle of the first human civilization for thousands of years.</p>
+    <a href="#experiences" class="btn-gold lang-ar">احجز رحلة نيلية 🚢</a>
+    <a href="#experiences" class="btn-gold lang-en" style="display:none">Book a Nile Cruise 🚢</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats-sec reveal">
+  <div class="stats-grid">
+    <div><span class="stat-num" data-to="5000">0</span><div class="stat-label lang-ar">عام من التاريخ الموثّق</div><div class="stat-label lang-en" style="display:none">Years of Documented History</div></div>
+    <div><span class="stat-num" data-to="138">0</span><div class="stat-label lang-ar">هرم فرعوني مكتشف</div><div class="stat-label lang-en" style="display:none">Pharaonic Pyramids Discovered</div></div>
+    <div><span class="stat-num" data-to="100">0</span><div class="stat-label lang-ar">ألف قطعة أثرية في المتحف</div><div class="stat-label lang-en" style="display:none">Thousand Artifacts in the Museum</div></div>
+    <div><span class="stat-num" data-to="7">0</span><div class="stat-label lang-ar">مواقع يونسكو</div><div class="stat-label lang-en" style="display:none">UNESCO World Heritage Sites</div></div>
+  </div>
+</section>
+
+<!-- ════ GALLERY - 🖼️ gallery-1 to 6 ════ -->
+<section class="gallery-sec" id="gallery">
+  <div class="gallery-intro">
+    <div>
+      <div class="s-tag lang-ar">من عدسة الزمن</div><div class="s-tag lang-en" style="display:none">Through Time's Lens</div>
+      <h2 class="s-title reveal-l lang-ar">معرض الروائع الأثرية</h2>
+      <h2 class="s-title reveal-l lang-en" style="display:none">Gallery of Archaeological Wonders</h2>
+    </div>
+    <p class="s-sub reveal-r lang-ar">كل صورة تحكي قصة حضارة امتدت لآلاف السنين. اكتشف جمال الفن الفرعوني والمعمار الخالد.</p>
+    <p class="s-sub reveal-r lang-en" style="display:none">Every image tells the story of a civilization spanning thousands of years. Discover the beauty of Pharaonic art and timeless architecture.</p>
+  </div>
+  <div class="gallery-grid reveal">
+    <!-- 🖼️ gallery-1.jpg - عريض -->
+    <div class="g-item"><img src="./images/gallery-1.jpg" alt="الأهرامات" onerror="this.style.display='none'"><div class="g-ov"><span class="g-label lang-ar">أهرامات الجيزة</span><span class="g-label lang-en" style="display:none">Giza Pyramids</span></div></div>
+    <!-- 🖼️ gallery-2.jpg -->
+    <div class="g-item"><img src="./images/gallery-2.png" alt="هيروغليفية" onerror="this.style.display='none'"><div class="g-ov"><span class="g-label lang-ar">الهيروغليفية</span><span class="g-label lang-en" style="display:none">Hieroglyphics</span></div></div>
+    <!-- 🖼️ gallery-3.jpg -->
+    <div class="g-item"><img src="./images/gallery-3.jpg" alt="تماثيل" onerror="this.style.display='none'"><div class="g-ov"><span class="g-label lang-ar">التماثيل الفرعونية</span><span class="g-label lang-en" style="display:none">Pharaonic Statues</span></div></div>
+    <!-- 🖼️ gallery-4.jpg - عريض -->
+    <div class="g-item"><img src="./images/gallery-4.jpg" alt="النيل" onerror="this.style.display='none'"><div class="g-ov"><span class="g-label lang-ar">نهر النيل</span><span class="g-label lang-en" style="display:none">The Nile River</span></div></div>
+    <!-- 🖼️ gallery-5.jpg -->
+    <div class="g-item"><img src="./images/gallery-5.jpg" alt="معابد" onerror="this.style.display='none'"><div class="g-ov"><span class="g-label lang-ar">معابد مصر</span><span class="g-label lang-en" style="display:none">Temples of Egypt</span></div></div>
+    <!-- 🖼️ gallery-6.jpg -->
+    <div class="g-item"><img src="./images/gallery-6.jpg" alt="البحر الأحمر" onerror="this.style.display='none'"><div class="g-ov"><span class="g-label lang-ar">البحر الأحمر</span><span class="g-label lang-en" style="display:none">Red Sea</span></div></div>
+    <div class="g-item"><img src="./images/gallery-7.jpg" alt="البحر الأحمر" onerror="this.style.display='none'"><div class="g-ov"><span class="g-label lang-ar">البحر الأحمر</span><span class="g-label lang-en" style="display:none">Red Sea</span></div></div>
+  </div>
+</section>
+
+<!-- ════ EXPERIENCES - 🖼️ صور التجارب ════ -->
+<section id="experiences">
+  <div class="s-tag lang-ar">التجارب السياحية</div><div class="s-tag lang-en" style="display:none">Tourist Experiences</div>
+  <h2 class="s-title reveal lang-ar">اكتشف مصر بطريقتك</h2>
+  <h2 class="s-title reveal lang-en" style="display:none">Discover Egypt Your Way</h2>
+  <div class="exp-grid reveal">
+    <div class="exp-card">
+      <!-- 🖼️ pyramids.jpg -->
+      <img class="exp-img" src="./images/pyramids.jpg" alt="جولة الأهرامات" onerror="this.style.background='var(--surface2)'">
+      <div class="exp-body">
+        <div class="exp-title lang-ar">جولة الأهرامات الشاملة</div><div class="exp-title lang-en" style="display:none">Complete Pyramids Tour</div>
+        <p class="exp-desc lang-ar">جولة احترافية مع مرشد متخصص إلى أهرامات الجيزة والأبو الهول والمتحف المصري في يوم واحد.</p>
+        <p class="exp-desc lang-en" style="display:none">Professional guided tour to the Giza Pyramids, Sphinx, and Egyptian Museum in one unforgettable day.</p>
+        <span class="exp-price lang-ar">من 350 ج.م / شخص</span><span class="exp-price lang-en" style="display:none">From EGP 350 / person</span>
+      </div>
+    </div>
+    <div class="exp-card">
+      <!-- 🖼️ nile.jpg -->
+      <img class="exp-img" src="./images/nile.jpg" alt="رحلة النيل" onerror="this.style.background='var(--surface2)'">
+      <div class="exp-body">
+        <div class="exp-title lang-ar">رحلة نيلية فاخرة</div><div class="exp-title lang-en" style="display:none">Luxury Nile Cruise</div>
+        <p class="exp-desc lang-ar">أسبوع على متن كروز فاخر من الأقصر إلى أسوان مع زيارة أهم المعابد الفرعونية.</p>
+        <p class="exp-desc lang-en" style="display:none">A week aboard a luxury cruise from Luxor to Aswan visiting the most important Pharaonic temples.</p>
+        <span class="exp-price lang-ar">من 1200 $ / شخص</span><span class="exp-price lang-en" style="display:none">From $1,200 / person</span>
+      </div>
+    </div>
+    <div class="exp-card">
+      <!-- 🖼️ redsea.jpg -->
+      <img class="exp-img" src="./images/redsea.jpg" alt="غوص" onerror="this.style.background='var(--surface2)'">
+      <div class="exp-body">
+        <div class="exp-title lang-ar">غوص في البحر الأحمر</div><div class="exp-title lang-en" style="display:none">Red Sea Diving</div>
+        <p class="exp-desc lang-ar">استكشف أجمل الشعاب المرجانية في الغردقة وشرم الشيخ مع مدربين محترفين.</p>
+        <p class="exp-desc lang-en" style="display:none">Explore the world's most beautiful coral reefs in Hurghada and Sharm El-Sheikh.</p>
+        <span class="exp-price lang-ar">من 450 ج.م / شخص</span><span class="exp-price lang-en" style="display:none">From EGP 450 / person</span>
+      </div>
+    </div>
+    <div class="exp-card">
+      <!-- 🖼️ desert.jpg -->
+      <img class="exp-img" src="./images/desert.jpg" alt="سفاري" onerror="this.style.background='var(--surface2)'">
+      <div class="exp-body">
+        <div class="exp-title lang-ar">مغامرة الصحراء</div><div class="exp-title lang-en" style="display:none">Desert Adventure</div>
+        <p class="exp-desc lang-ar">رحلة سفاري ليلية في الصحراء الغربية مع مشاهدة النجوم والنوم تحت السماء المفتوحة.</p>
+        <p class="exp-desc lang-en" style="display:none">Overnight safari in the Western Desert with stargazing and sleeping under the open sky.</p>
+        <span class="exp-price lang-ar">من 650 ج.م / شخص</span><span class="exp-price lang-en" style="display:none">From EGP 650 / person</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="t-sec">
+  <div class="s-tag lang-ar">أصوات الزوار</div><div class="s-tag lang-en" style="display:none">Visitor Voices</div>
+  <h2 class="s-title reveal lang-ar">ماذا يقول زوارنا</h2>
+  <h2 class="s-title reveal lang-en" style="display:none">What Our Visitors Say</h2>
+  <div class="t-grid reveal">
+    <div class="t-card"><div class="t-qmark">"</div><div class="t-stars">★★★★★</div><p class="t-text lang-ar">تجربة لا تُنسى في حياتي. الوقوف أمام الأهرامات شعور يصعب وصفه. مصر تستحق أن تُزار مرات ومرات!</p><p class="t-text lang-en" style="display:none">An unforgettable experience. Standing before the Pyramids is a feeling hard to describe. Egypt deserves to be visited again and again!</p><div class="t-author"><div class="t-avatar">ع</div><div><div class="t-name lang-ar">عبدالله الأحمدي</div><div class="t-name lang-en" style="display:none">Abdullah Al-Ahmadi</div><div class="t-origin lang-ar">السعودية 🇸🇦</div><div class="t-origin lang-en" style="display:none">Saudi Arabia 🇸🇦</div></div></div></div>
+    <div class="t-card"><div class="t-qmark">"</div><div class="t-stars">★★★★★</div><p class="t-text lang-ar">رحلة النيل كانت حلماً حقيقياً. مشاهدة معابد الأقصر عند الغروب من الكروز أجمل ما رأيت في حياتي.</p><p class="t-text lang-en" style="display:none">The Nile cruise was a real dream. Watching Luxor temples at sunset from the cruise is the most beautiful thing I've ever seen.</p><div class="t-author"><div class="t-avatar">S</div><div><div class="t-name">Sophie Martin</div><div class="t-origin lang-ar">فرنسا 🇫🇷</div><div class="t-origin lang-en" style="display:none">France 🇫🇷</div></div></div></div>
+    <div class="t-card"><div class="t-qmark">"</div><div class="t-stars">★★★★★</div><p class="t-text lang-ar">المتحف المصري الكبير يستحق وحده رحلة خاصة. الحضارة الفرعونية مُبهرة وتفاصيل المعروضات لا تُصدَّق.</p><p class="t-text lang-en" style="display:none">The Grand Egyptian Museum alone is worth a special trip. The Pharaonic civilization is breathtaking and the exhibit details are unbelievable.</p><div class="t-author"><div class="t-avatar">ر</div><div><div class="t-name lang-ar">ريم الكويتي</div><div class="t-name lang-en" style="display:none">Reem Al-Kuwaiti</div><div class="t-origin lang-ar">الكويت 🇰🇼</div><div class="t-origin lang-en" style="display:none">Kuwait 🇰🇼</div></div></div></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <!-- 🖼️ pyramids.jpg كخلفية مع تأثير داكن -->
+  <img class="cta-bg" src="pyramids.jpg" alt="الأهرامات" onerror="this.style.display='none'">
+  <div class="cta-ov"></div>
+  <div class="cta-content reveal">
+    <div class="s-tag" style="justify-content:center;margin-bottom:1.5rem"><span class="lang-ar">ابدأ رحلتك</span><span class="lang-en" style="display:none">Start Your Journey</span></div>
+    <h2 class="cta-title lang-ar">مصر تنتظرك</h2>
+    <h2 class="cta-title lang-en" style="display:none">Egypt Awaits You</h2>
+    <p class="cta-sub lang-ar">لا تنتظر أكثر. احجز رحلتك إلى أرض الفراعنة واكتشف أسرار حضارة خلّدها التاريخ.</p>
+    <p class="cta-sub lang-en" style="display:none">Don't wait any longer. Book your trip to the land of the Pharaohs and discover the secrets of history's greatest civilization.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="#experiences" class="btn-gold lang-ar">احجز تجربتك الآن ✈</a>
+      <a href="#experiences" class="btn-gold lang-en" style="display:none">Book Your Experience ✈</a>
+      <a href="#places" class="btn-outline lang-ar">استكشف المزيد</a>
+      <a href="#places" class="btn-outline lang-en" style="display:none">Explore More</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div><span class="footer-logo">𓂀 مصر الأبدية</span><p class="footer-desc lang-ar">دليلك الشامل لاكتشاف كنوز مصر الأثرية. نقدم أفضل المعلومات والتجارب السياحية.</p><p class="footer-desc lang-en" style="display:none">Your comprehensive guide to discovering Egypt's archaeological treasures and the best tourist experiences.</p></div>
+    <div class="footer-col"><h4 class="lang-ar">الوجهات</h4><h4 class="lang-en" style="display:none">Destinations</h4><a href="#" class="lang-ar">القاهرة والجيزة</a><a href="#" class="lang-en" style="display:none">Cairo & Giza</a><a href="#" class="lang-ar">الأقصر</a><a href="#" class="lang-en" style="display:none">Luxor</a><a href="#" class="lang-ar">أسوان وأبو سمبل</a><a href="#" class="lang-en" style="display:none">Aswan & Abu Simbel</a><a href="#" class="lang-ar">البحر الأحمر</a><a href="#" class="lang-en" style="display:none">Red Sea</a></div>
+    <div class="footer-col"><h4 class="lang-ar">التجارب</h4><h4 class="lang-en" style="display:none">Experiences</h4><a href="#" class="lang-ar">جولات الأهرامات</a><a href="#" class="lang-en" style="display:none">Pyramid Tours</a><a href="#" class="lang-ar">رحلات نيلية</a><a href="#" class="lang-en" style="display:none">Nile Cruises</a><a href="#" class="lang-ar">غوص البحر الأحمر</a><a href="#" class="lang-en" style="display:none">Red Sea Diving</a><a href="#" class="lang-ar">سفاري الصحراء</a><a href="#" class="lang-en" style="display:none">Desert Safari</a></div>
+    <div class="footer-col"><h4 class="lang-ar">تواصل</h4><h4 class="lang-en" style="display:none">Contact</h4><a href="#">📞 +20 2 000 0000</a><a href="#">✉️ info@eternal-egypt.com</a><a href="#" class="lang-ar">📍 القاهرة، مصر</a><a href="#" class="lang-en" style="display:none">📍 Cairo, Egypt</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 مصر الأبدية | Eternal Egypt</span>
+    <span class="ftr-hiero">𓂀 𓆣 𓅓 𓇯 𓁹</span>
+    <span class="lang-ar">صُنع بـ ❤️ في مصر</span><span class="lang-en" style="display:none">Made with ❤️ in Egypt</span>
+  </div>
+</footer>
+
+<script>
+/* STARS */
+const sw=document.getElementById('stars-wrap');
+for(let i=0;i<100;i++){const s=document.createElement('div');s.className='star';const z=Math.random()*2+.4;s.style.cssText=`width:${z}px;height:${z}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${2+Math.random()*4}s;--dl:${Math.random()*5}s;`;sw.appendChild(s);}
+
+/* NAV SCROLL */
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);});
+
+/* REVEAL */
+const obs=new IntersectionObserver((en)=>{en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>obs.observe(el));
+
+/* COUNTER */
+function counter(el,target){
+  let v=0;const step=target/80;
+  const t=setInterval(()=>{v+=step;if(v>=target){v=target;clearInterval(t);}el.textContent=Math.floor(v).toLocaleString('ar-EG');},20);
+}
+const cObs=new IntersectionObserver((en)=>{
+  en.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.stat-num[data-to]').forEach(el=>{counter(el,+el.getAttribute('data-to'));el.removeAttribute('data-to');});cObs.disconnect();}});
+},{threshold:.5});
+const ss=document.querySelector('.stats-sec');if(ss)cObs.observe(ss);
+
+/* LANG */
+function toggleLang(){
+  const h=document.documentElement;
+  const l=h.getAttribute('data-lang')==='ar'?'en':'ar';
+  h.setAttribute('data-lang',l);h.setAttribute('dir',l==='ar'?'rtl':'ltr');
+  document.querySelectorAll('.lang-ar').forEach(el=>el.style.display=l==='ar'?'':'none');
+  document.querySelectorAll('.lang-en').forEach(el=>el.style.display=l==='en'?'':'none');
+}
+</script>
+</body>
+</html>
