@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarek's Portfolio | Projects</title>
+    <style>
+        /* إعدادات عامة */
+        body {
+            font-family: 'Plus Jakarta Sans', 'Segoe UI', Roboto, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        h1 {
+            margin-bottom: 3rem;
+            font-size: 3rem;
+            text-align: center;
+            background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        /* حاوية الروابط - Grid متجاوب */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        /* تنسيق الكارت */
+        .card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 40px 20px;
+            border-radius: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #e2e8f0;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(51, 65, 85, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* تأثير الـ Hover */
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            background-color: #1e293b;
+            border-color: #38bdf8;
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5), 
+                        0 0 15px rgba(56, 189, 248, 0.3);
+            color: #38bdf8;
+        }
+
+        /* تنسيق الأيقونات */
+        .card span {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover span {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        /* تحسين العرض على الموبايل */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Project Showcase</h1>
+
+    <div class="container">
+        <a href="./e-com/index.html" class="card">
+            <span>🛒</span>
+            E-Commerce
+        </a>
+        
+        <a href="./egypt/index.html" class="card">
+            <span>🏛️</span>
+            Ancient Egypt
+        </a>
+        
+        <a href="./markting/index.html" class="card">
+            <span>🚀</span>
+            Marketing Agency
+        </a>
+        
+        <a href="./s_cars/index.html" class="card">
+            <span>🏎️</span>
+            Sports Cars
+        </a>
+
+        <a href="./restaurant/03-restaurant-landing.html" class="card">
+            <span>🍔</span>
+            Restaurant Landing
+        </a>
+
+        <a href="./web_ai/04-conference-landing.html" class="card">
+            <span>🎤</span>
+            Tech Conference
+        </a>
+
+        <a href="./swift/01-swift-delivery-landing.html" class="card">
+            <span>📦</span>
+            Swift Delivery
+        </a>
+
+        <a href="./store/02-product-store-landing.html" class="card">
+            <span>⌚</span>
+            Premium Store
+        </a>
+    </div>
+
+</body>
+</html>

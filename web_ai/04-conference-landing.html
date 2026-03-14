@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Summit 2025 — المؤتمر التقني</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ── DARK ── */
+:root{
+  --bg:#050609;--bg2:#080B10;--bg3:#0C1018;
+  --surface:#101520;--border:rgba(0,212,255,0.08);--border2:rgba(0,212,255,0.18);
+  --cyan:#00D4FF;--purple:#7B2FFF;--magenta:#FF0080;
+  --text:#E8F4FF;--text2:#6A82A0;--text3:#354050;
+  --glow:rgba(0,212,255,0.16);--glowM:rgba(255,0,128,0.12);
+  --nav-bg:rgba(5,6,9,0.92);
+  --card:#101520;
+}
+/* ── LIGHT ── */
+[data-theme="light"]{
+  --bg:#F0F5FF;--bg2:#FFFFFF;--bg3:#E4EDF8;
+  --surface:#FFFFFF;--border:rgba(0,100,200,0.08);--border2:rgba(0,100,200,0.18);
+  --cyan:#0072CC;--purple:#5C1FDB;--magenta:#CC0066;
+  --text:#08101A;--text2:#445568;--text3:#8899AA;
+  --glow:rgba(0,114,204,0.12);--glowM:rgba(204,0,102,0.1);
+  --nav-bg:rgba(240,245,255,0.93);
+  --card:#FFFFFF;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'IBM Plex Sans Arabic',sans-serif;
+  overflow-x:hidden;transition:background .3s,color .3s;
+}
+body.en{font-family:'Syne',sans-serif;direction:ltr}
+
+/* scanlines */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,212,255,0.012) 2px,rgba(0,212,255,0.012) 4px);
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5vw;height:66px;
+  background:var(--nav-bg);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'JetBrains Mono',monospace;font-size:.98rem;font-weight:700;
+  color:var(--cyan);letter-spacing:.15em;
+  display:flex;align-items:center;gap:9px;
+}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+.nav-r{display:flex;align-items:center;gap:8px}
+.btn-c{
+  height:34px;padding:0 13px;border-radius:6px;cursor:pointer;
+  background:transparent;border:1px solid var(--border2);color:var(--text2);
+  font-size:.74rem;font-family:'JetBrains Mono',monospace;transition:all .2s;
+}
+.btn-c:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn-reg{
+  height:34px;padding:0 20px;border-radius:6px;cursor:pointer;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));color:#000;
+  border:none;font-size:.82rem;font-weight:700;font-family:inherit;transition:all .2s;
+}
+.btn-reg:hover{transform:translateY(-1px);box-shadow:0 6px 20px var(--glow)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes gridMove{from{background-position:0 0}to{background-position:80px 80px}}
+@keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+@keyframes scanH{from{left:-60%}to{left:110%}}
+@keyframes orbit{from{transform:rotate(0deg) translateX(90px) rotate(0deg)}to{transform:rotate(360deg) translateX(90px) rotate(-360deg)}}
+@keyframes orbitRev{from{transform:rotate(0deg) translateX(130px) rotate(0deg)}to{transform:rotate(-360deg) translateX(130px) rotate(360deg)}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:88px 5vw 60px;
+}
+.hero-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 65% 55% at 50% 35%,rgba(0,212,255,0.06) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 80%,rgba(123,47,255,0.05) 0%,transparent 55%),
+    radial-gradient(ellipse 30% 30% at 10% 60%,rgba(255,0,128,0.04) 0%,transparent 50%);
+}
+[data-theme="light"] .hero-bg{
+  background:
+    radial-gradient(ellipse 65% 55% at 50% 35%,rgba(0,114,204,0.06) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 80%,rgba(92,31,219,0.04) 0%,transparent 55%);
+}
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:80px 80px;
+  animation:gridMove 22s linear infinite;
+  opacity:.7;
+}
+.htag{
+  position:relative;z-index:2;
+  font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--cyan);
+  letter-spacing:.22em;text-transform:uppercase;margin-bottom:22px;
+  animation:fadeUp .6s ease both;
+}
+h1.ctitle{
+  position:relative;z-index:2;
+  font-family:'Syne',sans-serif;
+  font-size:clamp(3.2rem,11vw,8rem);
+  font-weight:800;letter-spacing:-.04em;line-height:.88;
+  animation:fadeUp .7s .1s ease both;margin-bottom:10px;
+}
+.tai{
+  background:linear-gradient(135deg,var(--cyan) 0%,var(--purple) 50%,var(--magenta) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.tsub{font-size:clamp(1.6rem,5vw,3.8rem);font-weight:400;color:var(--text2)}
+.cdate{
+  position:relative;z-index:2;
+  font-family:'JetBrains Mono',monospace;font-size:.88rem;color:var(--text2);
+  margin:22px 0 40px;letter-spacing:.12em;animation:fadeUp .7s .2s ease both;
+}
+.cdate span{color:var(--cyan)}
+
+/* countdown */
+.cdwrap{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  flex-wrap:wrap;margin-bottom:46px;animation:fadeUp .7s .3s ease both;
+}
+.cblock{
+  min-width:82px;padding:18px 14px;
+  background:var(--surface);border:1px solid var(--border2);border-radius:10px;
+  text-align:center;position:relative;overflow:hidden;transition:background .3s;
+}
+.cblock::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+}
+.cnum{
+  font-family:'JetBrains Mono',monospace;font-size:2.3rem;font-weight:700;
+  color:var(--cyan);line-height:1;display:block;
+}
+.clbl{font-size:.63rem;color:var(--text3);letter-spacing:.14em;text-transform:uppercase;margin-top:5px;font-family:'JetBrains Mono',monospace}
+.csep{font-family:'JetBrains Mono',monospace;font-size:1.6rem;color:var(--border2);margin-top:-12px}
+
+.hbtns{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+  animation:fadeUp .7s .4s ease both;
+}
+.bm1{
+  padding:14px 34px;border-radius:8px;font-size:.95rem;font-weight:700;
+  font-family:inherit;cursor:pointer;display:flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));color:#000;border:none;
+  transition:all .25s;
+}
+.bm1:hover{transform:translateY(-2px);box-shadow:0 14px 36px var(--glow)}
+.bm2{
+  padding:14px 34px;border-radius:8px;font-size:.95rem;font-family:inherit;cursor:pointer;
+  background:transparent;border:1px solid var(--border2);color:var(--text);transition:all .25s;
+}
+.bm2:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* HERO STATS */
+.hstats{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;gap:44px;flex-wrap:wrap;
+  margin-top:50px;animation:fadeUp .7s .5s ease both;
+}
+.hstat{text-align:center}
+.hstat-n{font-family:'JetBrains Mono',monospace;font-size:1.85rem;font-weight:700;color:var(--cyan)}
+.hstat-l{font-size:.76rem;color:var(--text2);margin-top:4px}
+
+/* ── MARQUEE STRIP ── */
+.marquee-strip{
+  position:relative;z-index:2;
+  overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:var(--bg2);padding:16px 0;margin-top:60px;
+  transition:background .3s;
+}
+.marquee-inner{
+  display:flex;gap:0;width:max-content;
+  animation:marquee 28s linear infinite;
+}
+.marquee-item{
+  display:flex;align-items:center;gap:10px;
+  padding:0 40px;font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;color:var(--text2);white-space:nowrap;letter-spacing:.08em;
+}
+.marquee-item span{color:var(--cyan)}
+.marquee-dot{width:4px;height:4px;border-radius:50%;background:var(--border2);flex-shrink:0}
+
+/* ── VISUAL SECTION: AI GRAPHIC ── */
+.visual-section{
+  padding:100px 5vw;position:relative;z-index:1;
+  background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  transition:background .3s;
+}
+.vs-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
+  max-width:1100px;margin:0 auto;
+}
+@media(max-width:768px){.vs-grid{grid-template-columns:1fr;gap:40px}}
+.vs-text{}
+.vs-eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--cyan);
+  letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px;
+}
+.vs-eyebrow::before{content:'// '}
+.vs-title{font-size:clamp(1.7rem,3.5vw,2.6rem);font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:16px}
+.vs-desc{font-size:.96rem;color:var(--text2);line-height:1.75;margin-bottom:28px}
+.vs-pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{
+  padding:6px 14px;border-radius:6px;font-size:.76rem;font-weight:600;
+  font-family:'JetBrains Mono',monospace;letter-spacing:.06em;
+  border:1px solid var(--border2);color:var(--text2);background:var(--bg3);
+  transition:all .2s;
+}
+.pill:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* SVG illustration for conference */
+.conf-illustration{
+  position:relative;width:100%;max-width:460px;margin:0 auto;
+  animation:float 5s ease-in-out infinite;
+}
+
+/* ── PHOTO GRID ── */
+.photo-section{padding:100px 5vw;position:relative;z-index:1}
+.photo-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  grid-template-rows:220px 220px;
+  gap:12px;max-width:1000px;margin:48px auto 0;
+}
+@media(max-width:700px){.photo-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}}
+.photo-cell{
+  border-radius:14px;overflow:hidden;position:relative;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s;cursor:pointer;
+}
+.photo-cell:hover{border-color:var(--border2);transform:scale(1.02)}
+.photo-cell.tall{grid-row:span 2}
+.photo-placeholder{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;width:100%;height:100%;padding:20px;
+  position:relative;overflow:hidden;
+}
+/* subtle inner glow for placeholders */
+.photo-placeholder::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,212,255,0.05) 0%,transparent 70%);
+}
+[data-theme="light"] .photo-placeholder::before{
+  background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,114,204,0.05) 0%,transparent 70%);
+}
+.ph-icon{font-size:2.4rem;opacity:.5}
+.ph-label{
+  font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text3);
+  letter-spacing:.12em;text-transform:uppercase;
+}
+.ph-badge{
+  position:absolute;top:12px;
+  background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);
+  color:var(--cyan);padding:3px 10px;border-radius:4px;
+  font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;
+}
+:not(body.en) .ph-badge{right:12px}
+body.en .ph-badge{left:12px}
+[data-theme="light"] .ph-badge{background:rgba(0,114,204,.08);border-color:rgba(0,114,204,.2)}
+
+/* upload hint */
+.upload-hint{
+  text-align:center;margin-top:20px;
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text3);letter-spacing:.08em;
+}
+.upload-hint span{color:var(--cyan)}
+
+/* ── SPEAKERS (3 only) ── */
+.speakers-section{
+  background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:100px 5vw;position:relative;z-index:1;transition:background .3s;
+}
+.sp-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  max-width:900px;margin:48px auto 0;
+}
+@media(max-width:640px){.sp-grid{grid-template-columns:1fr}}
+.sp-card{
+  padding:32px 24px;background:var(--bg3);border:1px solid var(--border);
+  border-radius:18px;text-align:center;transition:all .35s;position:relative;overflow:hidden;
+}
+.sp-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(0,212,255,0.06) 0%,transparent 60%);
+  opacity:0;transition:opacity .35s;
+}
+[data-theme="light"] .sp-card::before{
+  background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(0,114,204,0.06) 0%,transparent 60%);
+}
+.sp-card:hover{transform:translateY(-6px);border-color:var(--border2)}
+.sp-card:hover::before{opacity:1}
+/* photo frame */
+.sp-photo{
+  width:110px;height:110px;border-radius:50%;margin:0 auto 18px;
+  background:linear-gradient(135deg,var(--bg),var(--surface));
+  border:2px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.8rem;position:relative;overflow:hidden;
+  transition:border-color .35s;
+}
+.sp-card:hover .sp-photo{border-color:var(--cyan)}
+.sp-photo-label{
+  position:absolute;bottom:0;left:0;right:0;
+  background:rgba(0,0,0,.55);
+  font-family:'JetBrains Mono',monospace;font-size:.52rem;
+  color:rgba(255,255,255,.6);text-align:center;padding:3px 0;letter-spacing:.05em;
+}
+[data-theme="light"] .sp-photo-label{background:rgba(255,255,255,.65);color:rgba(0,0,0,.5)}
+.sp-name{font-size:1.05rem;font-weight:700;margin-bottom:5px}
+.sp-role{font-size:.8rem;color:var(--text2);margin-bottom:10px;line-height:1.45}
+.sp-co{
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--cyan);letter-spacing:.08em;
+}
+.sp-social{
+  display:inline-flex;align-items:center;gap:5px;margin-top:12px;
+  font-size:.7rem;color:var(--text3);background:none;border:none;cursor:pointer;
+  font-family:'JetBrains Mono',monospace;transition:color .2s;
+}
+.sp-social:hover{color:var(--cyan)}
+
+/* ── TIMELINE ── */
+.tl-section{padding:100px 5vw;position:relative;z-index:1}
+.day-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:32px}
+.dtab{
+  background:var(--surface);border:1px solid var(--border2);color:var(--text2);
+  cursor:pointer;padding:8px 22px;border-radius:8px;
+  font-size:.8rem;font-family:'JetBrains Mono',monospace;transition:all .2s;
+}
+.dtab.active{background:rgba(0,212,255,.1);border-color:var(--cyan);color:var(--cyan)}
+.dtab:hover:not(.active){color:var(--text)}
+.tl-track{display:flex;flex-direction:column}
+.tl-item{display:flex;gap:22px;position:relative}
+.tl-item::before{
+  content:'';position:absolute;
+  top:32px;bottom:0;width:1px;
+  background:linear-gradient(180deg,var(--cyan),transparent);opacity:.2;
+}
+:not(body.en) .tl-item::before{right:86px}
+body.en .tl-item::before{left:86px}
+.tl-t{
+  min-width:74px;font-family:'JetBrains Mono',monospace;font-size:.76rem;
+  color:var(--text2);padding-top:20px;text-align:center;flex-shrink:0;
+}
+.tl-dot{
+  width:15px;height:15px;border-radius:50%;margin-top:22px;flex-shrink:0;
+  background:var(--cyan);box-shadow:0 0 10px rgba(0,212,255,.5);z-index:1;
+}
+.tl-dot.m{background:var(--magenta);box-shadow:0 0 10px rgba(255,0,128,.5)}
+.tl-dot.p{background:var(--purple);box-shadow:0 0 10px rgba(123,47,255,.5)}
+.tl-c{
+  flex:1;padding:15px 18px;margin-bottom:14px;
+  background:var(--surface);border:1px solid var(--border);border-radius:11px;
+  transition:all .3s;
+}
+.tl-c:hover{border-color:var(--border2)}
+.tl-type{font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:5px}
+.t-k{color:var(--cyan)}.t-w{color:var(--magenta)}.t-p{color:var(--purple)}.t-b{color:var(--text3)}
+.tl-ttl{font-size:.93rem;font-weight:700;margin-bottom:4px}
+.tl-sp{font-size:.78rem;color:var(--text2)}
+.tl-tr{
+  display:inline-flex;align-items:center;gap:4px;margin-top:7px;
+  font-family:'JetBrains Mono',monospace;font-size:.63rem;
+  padding:3px 8px;border-radius:4px;
+  background:rgba(0,212,255,.07);color:var(--cyan);border:1px solid rgba(0,212,255,.14);
+}
+[data-theme="light"] .tl-tr{background:rgba(0,114,204,.07);border-color:rgba(0,114,204,.14)}
+
+/* ── FEATURES STRIP ── */
+.feat-strip{
+  padding:80px 5vw;position:relative;z-index:1;
+  background:var(--bg2);border-top:1px solid var(--border);
+  transition:background .3s;
+}
+.feat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:2px;background:var(--border);border-radius:18px;overflow:hidden;margin-top:46px;
+}
+.feat-item{
+  background:var(--bg);padding:30px 24px;transition:background .3s;
+}
+[data-theme="light"] .feat-item{background:var(--bg3)}
+.feat-item:hover{background:var(--bg3)}
+[data-theme="light"] .feat-item:hover{background:#D8E8F8}
+.fi-n{font-family:'JetBrains Mono',monospace;font-size:2.5rem;font-weight:700;color:var(--cyan);opacity:.15;margin-bottom:4px}
+.fi-i{font-size:1.7rem;margin-bottom:12px}
+.fi-t{font-size:.97rem;font-weight:700;margin-bottom:7px}
+.fi-d{font-size:.83rem;color:var(--text2);line-height:1.6}
+
+/* ── REGISTER ── */
+.reg-section{
+  padding:100px 5vw;background:var(--bg2);border-top:1px solid var(--border);
+  text-align:center;position:relative;z-index:1;transition:background .3s;
+}
+.reg-wrap{max-width:580px;margin:0 auto}
+.reg-price{
+  font-family:'JetBrains Mono',monospace;font-size:3rem;font-weight:700;color:var(--cyan);
+  margin:22px 0 6px;
+}
+.reg-price s{font-size:1rem;color:var(--text3);margin-inline-start:12px;font-weight:400;text-decoration:line-through}
+.reg-per{font-size:.84rem;color:var(--text2);margin-bottom:30px}
+.reg-form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}
+.reg-in{
+  flex:1;min-width:210px;padding:12px 16px;border-radius:8px;
+  background:var(--surface);border:1px solid var(--border2);
+  color:var(--text);font-size:.9rem;font-family:inherit;
+  outline:none;transition:border-color .2s;
+}
+.reg-in:focus{border-color:var(--cyan)}
+.reg-in::placeholder{color:var(--text3)}
+.reg-btn{
+  padding:12px 30px;border-radius:8px;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));color:#000;
+  border:none;font-size:.93rem;font-weight:700;font-family:inherit;cursor:pointer;
+  transition:all .25s;
+}
+.reg-btn:hover{transform:translateY(-1px);box-shadow:0 10px 28px var(--glow)}
+.reg-note{font-size:.75rem;color:var(--text3);font-family:'JetBrains Mono',monospace;margin-top:14px}
+
+/* ── SECTION LABEL ── */
+.sec-lbl{
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--cyan);
+  letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.sec-lbl::before{content:'//';color:var(--text3)}
+.sec-title{font-size:clamp(1.8rem,4vw,2.7rem);font-weight:800;letter-spacing:-.02em}
+.sec-tc{text-align:center}
+.sec-tc .sec-lbl{justify-content:center}
+
+footer{
+  padding:38px 5vw;text-align:center;border-top:1px solid var(--border);
+  color:var(--text3);font-size:.78rem;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;
+  position:relative;z-index:1;
+}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:580px){
+  h1.ctitle{font-size:3rem}
+  .cnum{font-size:1.55rem}
+  .cblock{min-width:58px;padding:12px 8px}
+  .hbtns{flex-direction:column;align-items:stretch}
+  .bm1,.bm2{justify-content:center}
+  .photo-grid{grid-template-columns:1fr;grid-template-rows:auto}
+  .photo-cell.tall{grid-row:span 1}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><div class="logo-dot"></div><span>AI SUMMIT</span></div>
+  <div class="nav-r">
+    <button class="btn-c" id="btnLang" onclick="toggleLang()">EN</button>
+    <button class="btn-c" id="btnTheme" onclick="toggleTheme()">🌙</button>
+    <button class="btn-reg" id="navReg" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">سجّل الآن</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="htag" id="heroTag">// مؤتمر الذكاء الاصطناعي والبرمجة 2025</div>
+  <h1 class="ctitle">
+    <span class="tai">AI</span><br>
+    <span class="tsub" id="heroSummit">SUMMIT</span>
+  </h1>
+  <div class="cdate"><span id="cdCity">القاهرة، مصر</span> · <span id="cdDate">15–17 نوفمبر 2025</span></div>
+
+  <div class="cdwrap">
+    <div class="cblock"><span class="cnum" id="cdD">00</span><div class="clbl" id="cdDL">يوم</div></div>
+    <div class="csep">:</div>
+    <div class="cblock"><span class="cnum" id="cdH">00</span><div class="clbl" id="cdHL">ساعة</div></div>
+    <div class="csep">:</div>
+    <div class="cblock"><span class="cnum" id="cdM">00</span><div class="clbl" id="cdML">دقيقة</div></div>
+    <div class="csep">:</div>
+    <div class="cblock"><span class="cnum" id="cdS">00</span><div class="clbl" id="cdSL">ثانية</div></div>
+  </div>
+
+  <div class="hbtns">
+    <button class="bm1" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})" id="hb1">✦ سجّل مكانك</button>
+    <button class="bm2" onclick="document.getElementById('speakers').scrollIntoView({behavior:'smooth'})" id="hb2">تصفح المتحدثين</button>
+  </div>
+
+  <div class="hstats">
+    <div class="hstat"><div class="hstat-n">1200+</div><div class="hstat-l" id="hs1">مشارك</div></div>
+    <div class="hstat"><div class="hstat-n">48</div><div class="hstat-l" id="hs2">متحدث دولي</div></div>
+    <div class="hstat"><div class="hstat-n">3</div><div class="hstat-l" id="hs3">أيام مليئة</div></div>
+    <div class="hstat"><div class="hstat-n">30+</div><div class="hstat-l" id="hs4">ورشة عمل</div></div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner" id="marqueeInner">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- VISUAL / ABOUT -->
+<section class="visual-section">
+  <div class="vs-grid reveal">
+    <div class="vs-text">
+      <div class="vs-eyebrow" id="vsEye">عن المؤتمر</div>
+      <h2 class="vs-title" id="vsTitle">حيث تلتقي أعظم عقول الـ AI</h2>
+      <p class="vs-desc" id="vsDesc">AI Summit 2025 هو أضخم تجمع تقني في المنطقة العربية — ثلاثة أيام من الجلسات العميقة، ورش العمل التطبيقية، وفرص التواصل مع صانعي المستقبل الرقمي.</p>
+      <div class="vs-pills" id="vsPills">
+        <span class="pill">Large Language Models</span>
+        <span class="pill">Computer Vision</span>
+        <span class="pill">MLOps</span>
+        <span class="pill">Robotics</span>
+        <span class="pill">AI Ethics</span>
+        <span class="pill">Generative AI</span>
+      </div>
+    </div>
+    <!-- SVG Conference Illustration -->
+    <div class="conf-illustration">
+      <svg viewBox="0 0 420 380" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+        <defs>
+          <radialGradient id="gCenter" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#00D4FF" stop-opacity=".12"/>
+            <stop offset="100%" stop-color="#00D4FF" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="gNode" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#00D4FF" stop-opacity=".3"/>
+            <stop offset="100%" stop-color="#7B2FFF" stop-opacity=".1"/>
+          </radialGradient>
+        </defs>
+
+        <!-- bg glow -->
+        <circle cx="210" cy="190" r="140" fill="url(#gCenter)"/>
+
+        <!-- orbit rings -->
+        <circle cx="210" cy="190" r="90" stroke="#00D4FF" stroke-opacity=".12" stroke-width="1" stroke-dasharray="4 6"/>
+        <circle cx="210" cy="190" r="130" stroke="#7B2FFF" stroke-opacity=".1" stroke-width="1" stroke-dasharray="3 9"/>
+        <circle cx="210" cy="190" r="168" stroke="#FF0080" stroke-opacity=".07" stroke-width="1" stroke-dasharray="2 12"/>
+
+        <!-- center node — main stage -->
+        <circle cx="210" cy="190" r="38" fill="#101520" stroke="#00D4FF" stroke-width="1.5" stroke-opacity=".6"/>
+        <text x="210" y="184" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#00D4FF" letter-spacing="1">MAIN</text>
+        <text x="210" y="197" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#00D4FF" letter-spacing="1">STAGE</text>
+        <!-- center pulse -->
+        <circle cx="210" cy="190" r="44" stroke="#00D4FF" stroke-width="1" stroke-opacity=".25">
+          <animate attributeName="r" values="44;52;44" dur="3s" repeatCount="indefinite"/>
+          <animate attributeName="stroke-opacity" values=".25;0;.25" dur="3s" repeatCount="indefinite"/>
+        </circle>
+
+        <!-- orbit nodes -->
+        <!-- node 1: Workshop A — top -->
+        <g transform="translate(210,100)">
+          <circle r="24" fill="#101520" stroke="#7B2FFF" stroke-width="1.2" stroke-opacity=".7"/>
+          <text text-anchor="middle" y="-5" font-family="JetBrains Mono" font-size="7.5" fill="#7B2FFF">WORK</text>
+          <text text-anchor="middle" y="7" font-family="JetBrains Mono" font-size="7.5" fill="#7B2FFF">SHOP</text>
+          <animateTransform attributeName="transform" type="rotate" from="0 210 190" to="360 210 190" dur="18s" repeatCount="indefinite" additive="sum"/>
+        </g>
+
+        <!-- node 2: Keynote — right -->
+        <g transform="translate(300,190)">
+          <circle r="22" fill="#101520" stroke="#00D4FF" stroke-width="1.2" stroke-opacity=".7"/>
+          <text text-anchor="middle" y="-4" font-family="JetBrains Mono" font-size="7" fill="#00D4FF">KEY</text>
+          <text text-anchor="middle" y="7" font-family="JetBrains Mono" font-size="7" fill="#00D4FF">NOTE</text>
+          <animateTransform attributeName="transform" type="rotate" from="0 210 190" to="360 210 190" dur="18s" repeatCount="indefinite" additive="sum"/>
+        </g>
+
+        <!-- node 3: Hackathon — bottom -->
+        <g transform="translate(210,280)">
+          <circle r="24" fill="#101520" stroke="#FF0080" stroke-width="1.2" stroke-opacity=".7"/>
+          <text text-anchor="middle" y="-4" font-family="JetBrains Mono" font-size="7" fill="#FF0080">HACK</text>
+          <text text-anchor="middle" y="7" font-family="JetBrains Mono" font-size="7" fill="#FF0080">ATHON</text>
+          <animateTransform attributeName="transform" type="rotate" from="0 210 190" to="360 210 190" dur="18s" repeatCount="indefinite" additive="sum"/>
+        </g>
+
+        <!-- node 4: Networking — left -->
+        <g transform="translate(120,190)">
+          <circle r="22" fill="#101520" stroke="#00D4FF" stroke-width="1.2" stroke-opacity=".6"/>
+          <text text-anchor="middle" y="-4" font-family="JetBrains Mono" font-size="6.5" fill="#00D4FF">NET</text>
+          <text text-anchor="middle" y="6" font-family="JetBrains Mono" font-size="6.5" fill="#00D4FF">WORK</text>
+          <animateTransform attributeName="transform" type="rotate" from="0 210 190" to="360 210 190" dur="18s" repeatCount="indefinite" additive="sum"/>
+        </g>
+
+        <!-- outer orbit: small dots -->
+        <g>
+          <circle cx="210" cy="22" r="5" fill="#FF0080" fill-opacity=".5">
+            <animateTransform attributeName="transform" type="rotate" from="0 210 190" to="360 210 190" dur="26s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="210" cy="22" r="5" fill="#7B2FFF" fill-opacity=".4">
+            <animateTransform attributeName="transform" type="rotate" from="120 210 190" to="480 210 190" dur="26s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="210" cy="22" r="5" fill="#00D4FF" fill-opacity=".4">
+            <animateTransform attributeName="transform" type="rotate" from="240 210 190" to="600 210 190" dur="26s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+
+        <!-- connector lines from center to nodes -->
+        <line x1="210" y1="152" x2="210" y2="124" stroke="#7B2FFF" stroke-opacity=".25" stroke-width="1" stroke-dasharray="3 4"/>
+        <line x1="248" y1="190" x2="278" y2="190" stroke="#00D4FF" stroke-opacity=".25" stroke-width="1" stroke-dasharray="3 4"/>
+        <line x1="210" y1="228" x2="210" y2="256" stroke="#FF0080" stroke-opacity=".25" stroke-width="1" stroke-dasharray="3 4"/>
+        <line x1="172" y1="190" x2="142" y2="190" stroke="#00D4FF" stroke-opacity=".2" stroke-width="1" stroke-dasharray="3 4"/>
+
+        <!-- date badge -->
+        <rect x="140" y="344" width="140" height="26" rx="5" fill="#101520" stroke="#00D4FF" stroke-opacity=".3" stroke-width="1"/>
+        <text x="210" y="361" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#00D4FF" letter-spacing="1.5">NOV 15–17 · 2025</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY / PLACEHOLDERS -->
+<section class="photo-section">
+  <div class="sec-lbl" id="galLbl">معرض المؤتمر</div>
+  <h2 class="sec-title" id="galTitle">صور من المؤتمرات السابقة</h2>
+  <div class="upload-hint" id="uploadHint">// <span>يمكنك استبدال هذه الحاويات بصورك الحقيقية</span></div>
+
+  <div class="photo-grid reveal">
+    <!-- big cell -->
+    <div class="photo-cell tall">
+      <div class="photo-placeholder">
+        <div class="ph-badge" id="ph1badge">Keynote Stage</div>
+        <!-- inline SVG: stage illustration -->
+        <svg viewBox="0 0 240 200" style="width:85%;opacity:.55" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="130" width="200" height="50" rx="4" fill="#0C1018"/>
+          <rect x="20" y="130" width="200" height="4" fill="#00D4FF" fill-opacity=".4"/>
+          <!-- screen -->
+          <rect x="60" y="20" width="120" height="80" rx="6" fill="#080B10" stroke="#00D4FF" stroke-opacity=".3" stroke-width="1"/>
+          <text x="120" y="56" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#00D4FF" fill-opacity=".6">AI SUMMIT</text>
+          <text x="120" y="72" text-anchor="middle" font-family="JetBrains Mono" font-size="7" fill="#6A82A0">2025</text>
+          <!-- podium -->
+          <rect x="100" y="108" width="40" height="24" rx="3" fill="#101520" stroke="#00D4FF" stroke-opacity=".3" stroke-width="1"/>
+          <!-- audience dots -->
+          <circle cx="50" cy="152" r="5" fill="#00D4FF" fill-opacity=".25"/>
+          <circle cx="70" cy="148" r="5" fill="#7B2FFF" fill-opacity=".2"/>
+          <circle cx="90" cy="152" r="4" fill="#00D4FF" fill-opacity=".2"/>
+          <circle cx="150" cy="148" r="5" fill="#00D4FF" fill-opacity=".25"/>
+          <circle cx="170" cy="152" r="5" fill="#FF0080" fill-opacity=".2"/>
+          <circle cx="190" cy="148" r="4" fill="#7B2FFF" fill-opacity=".2"/>
+          <!-- lights -->
+          <line x1="80" y1="20" x2="110" y2="108" stroke="#00D4FF" stroke-opacity=".08" stroke-width="8"/>
+          <line x1="160" y1="20" x2="130" y2="108" stroke="#00D4FF" stroke-opacity=".08" stroke-width="8"/>
+        </svg>
+        <span class="ph-label" id="ph1lbl">صورة القاعة الرئيسية</span>
+      </div>
+    </div>
+
+    <!-- top right -->
+    <div class="photo-cell">
+      <div class="photo-placeholder">
+        <div class="ph-badge" id="ph2badge">Workshop</div>
+        <svg viewBox="0 0 160 130" style="width:78%;opacity:.55" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- laptops row -->
+          <rect x="10" y="60" width="44" height="32" rx="4" fill="#080B10" stroke="#7B2FFF" stroke-opacity=".5" stroke-width="1"/>
+          <rect x="10" y="60" width="44" height="26" rx="4" fill="#0C1018"/>
+          <rect x="14" y="64" width="36" height="20" fill="#101520"/>
+          <text x="32" y="77" text-anchor="middle" font-size="5" fill="#7B2FFF" fill-opacity=".8" font-family="JetBrains Mono">&gt;_</text>
+
+          <rect x="60" y="55" width="44" height="32" rx="4" fill="#080B10" stroke="#00D4FF" stroke-opacity=".5" stroke-width="1"/>
+          <rect x="60" y="55" width="44" height="26" rx="4" fill="#0C1018"/>
+          <rect x="64" y="59" width="36" height="20" fill="#101520"/>
+          <text x="82" y="72" text-anchor="middle" font-size="5" fill="#00D4FF" fill-opacity=".8" font-family="JetBrains Mono">&gt;_</text>
+
+          <rect x="110" y="60" width="44" height="32" rx="4" fill="#080B10" stroke="#FF0080" stroke-opacity=".4" stroke-width="1"/>
+          <rect x="110" y="60" width="44" height="26" rx="4" fill="#0C1018"/>
+          <rect x="114" y="64" width="36" height="20" fill="#101520"/>
+          <text x="132" y="77" text-anchor="middle" font-size="5" fill="#FF0080" fill-opacity=".7" font-family="JetBrains Mono">&gt;_</text>
+
+          <!-- people heads -->
+          <circle cx="32" cy="48" r="8" fill="#101520" stroke="#7B2FFF" stroke-opacity=".5" stroke-width="1"/>
+          <circle cx="82" cy="43" r="8" fill="#101520" stroke="#00D4FF" stroke-opacity=".5" stroke-width="1"/>
+          <circle cx="132" cy="48" r="8" fill="#101520" stroke="#FF0080" stroke-opacity=".4" stroke-width="1"/>
+          <!-- table -->
+          <rect x="5" y="92" width="150" height="4" rx="2" fill="#1A2030"/>
+        </svg>
+        <span class="ph-label" id="ph2lbl">صورة ورشة عمل</span>
+      </div>
+    </div>
+
+    <!-- middle right -->
+    <div class="photo-cell">
+      <div class="photo-placeholder">
+        <div class="ph-badge" id="ph3badge">Networking</div>
+        <svg viewBox="0 0 160 130" style="width:78%;opacity:.55" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- connection network -->
+          <circle cx="80" cy="65" r="10" fill="#101520" stroke="#00D4FF" stroke-opacity=".6" stroke-width="1.5"/>
+          <circle cx="80" cy="65" r="5" fill="#00D4FF" fill-opacity=".4"/>
+
+          <circle cx="35" cy="35" r="8" fill="#101520" stroke="#7B2FFF" stroke-opacity=".6" stroke-width="1.2"/>
+          <circle cx="125" cy="35" r="8" fill="#101520" stroke="#FF0080" stroke-opacity=".6" stroke-width="1.2"/>
+          <circle cx="30" cy="95" r="8" fill="#101520" stroke="#00D4FF" stroke-opacity=".5" stroke-width="1.2"/>
+          <circle cx="130" cy="95" r="8" fill="#101520" stroke="#7B2FFF" stroke-opacity=".5" stroke-width="1.2"/>
+          <circle cx="80" cy="18" r="7" fill="#101520" stroke="#00D4FF" stroke-opacity=".4" stroke-width="1"/>
+          <circle cx="80" cy="112" r="7" fill="#101520" stroke="#FF0080" stroke-opacity=".4" stroke-width="1"/>
+
+          <line x1="80" y1="55" x2="35" y2="43" stroke="#7B2FFF" stroke-opacity=".3" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="80" y1="55" x2="125" y2="43" stroke="#FF0080" stroke-opacity=".3" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="80" y1="75" x2="30" y2="87" stroke="#00D4FF" stroke-opacity=".3" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="80" y1="75" x2="130" y2="87" stroke="#7B2FFF" stroke-opacity=".3" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="80" y1="55" x2="80" y2="25" stroke="#00D4FF" stroke-opacity=".25" stroke-width="1" stroke-dasharray="3 3"/>
+          <line x1="80" y1="75" x2="80" y2="105" stroke="#FF0080" stroke-opacity=".25" stroke-width="1" stroke-dasharray="3 3"/>
+        </svg>
+        <span class="ph-label" id="ph3lbl">صورة التواصل</span>
+      </div>
+    </div>
+
+    <!-- bottom row: two cells -->
+    <div class="photo-cell">
+      <div class="photo-placeholder">
+        <div class="ph-badge" id="ph4badge">Hackathon</div>
+        <svg viewBox="0 0 160 120" style="width:80%;opacity:.55" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- trophy -->
+          <rect x="64" y="92" width="32" height="8" rx="2" fill="#101520" stroke="#F0C870" stroke-opacity=".4" stroke-width="1"/>
+          <rect x="72" y="84" width="16" height="10" rx="1" fill="#101520" stroke="#F0C870" stroke-opacity=".4" stroke-width="1"/>
+          <path d="M55 30 Q55 70 80 72 Q105 70 105 30 Z" fill="#101520" stroke="#F0C870" stroke-opacity=".5" stroke-width="1.5"/>
+          <path d="M55 38 Q42 38 42 52 Q42 64 55 66" fill="none" stroke="#F0C870" stroke-opacity=".35" stroke-width="1.5"/>
+          <path d="M105 38 Q118 38 118 52 Q118 64 105 66" fill="none" stroke="#F0C870" stroke-opacity=".35" stroke-width="1.5"/>
+          <text x="80" y="55" text-anchor="middle" font-size="16" fill="#F0C870" fill-opacity=".5">1</text>
+          <!-- sparkles -->
+          <circle cx="38" cy="26" r="3" fill="#F0C870" fill-opacity=".4"/>
+          <circle cx="122" cy="30" r="2" fill="#FF0080" fill-opacity=".4"/>
+          <circle cx="50" cy="18" r="2" fill="#00D4FF" fill-opacity=".4"/>
+          <circle cx="110" cy="18" r="2.5" fill="#7B2FFF" fill-opacity=".4"/>
+        </svg>
+        <span class="ph-label" id="ph4lbl">صورة الهاكاثون</span>
+      </div>
+    </div>
+
+    <div class="photo-cell">
+      <div class="photo-placeholder">
+        <div class="ph-badge" id="ph5badge">Speakers</div>
+        <svg viewBox="0 0 160 120" style="width:80%;opacity:.55" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 3 speaker silhouettes -->
+          <circle cx="42" cy="42" r="14" fill="#101520" stroke="#00D4FF" stroke-opacity=".5" stroke-width="1.5"/>
+          <path d="M20 82 Q20 62 42 62 Q64 62 64 82" fill="#101520" stroke="#00D4FF" stroke-opacity=".4" stroke-width="1.5"/>
+
+          <circle cx="80" cy="36" r="16" fill="#101520" stroke="#7B2FFF" stroke-opacity=".6" stroke-width="1.5"/>
+          <path d="M56 84 Q56 62 80 62 Q104 62 104 84" fill="#101520" stroke="#7B2FFF" stroke-opacity=".4" stroke-width="1.5"/>
+
+          <circle cx="118" cy="42" r="14" fill="#101520" stroke="#FF0080" stroke-opacity=".5" stroke-width="1.5"/>
+          <path d="M96 82 Q96 62 118 62 Q140 62 140 82" fill="#101520" stroke="#FF0080" stroke-opacity=".4" stroke-width="1.5"/>
+
+          <!-- mic indicator -->
+          <rect x="75" y="90" width="10" height="20" rx="5" fill="#7B2FFF" fill-opacity=".3" stroke="#7B2FFF" stroke-opacity=".5" stroke-width="1"/>
+        </svg>
+        <span class="ph-label" id="ph5lbl">صورة المتحدثين</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKERS (3 only) -->
+<section class="speakers-section" id="speakers">
+  <div class="sec-tc">
+    <div class="sec-lbl" id="spLbl">المتحدثون</div>
+    <h2 class="sec-title" id="spTitle">عقول تشكّل المستقبل</h2>
+  </div>
+  <div class="sp-grid reveal" id="spGrid"></div>
+</section>
+
+<!-- TIMELINE -->
+<section class="tl-section" id="timeline">
+  <div class="sec-lbl" id="tlLbl">الجدول الزمني</div>
+  <h2 class="sec-title" id="tlTitle">أجندة المؤتمر</h2>
+  <div class="day-tabs" style="margin-top:28px">
+    <button class="dtab active" onclick="switchDay(0,this)" id="d0">اليوم الأول</button>
+    <button class="dtab" onclick="switchDay(1,this)" id="d1">اليوم الثاني</button>
+    <button class="dtab" onclick="switchDay(2,this)" id="d2">اليوم الثالث</button>
+  </div>
+  <div class="tl-track reveal" id="tlTrack"></div>
+</section>
+
+<!-- FEATURES -->
+<section class="feat-strip">
+  <div class="sec-tc reveal">
+    <div class="sec-lbl" id="ftLbl">ماذا ستجد</div>
+    <h2 class="sec-title" id="ftTitle">تجربة لا تُنسى</h2>
+  </div>
+  <div class="feat-grid reveal">
+    <div class="feat-item"><div class="fi-n">01</div><div class="fi-i">🎤</div><div class="fi-t" id="ft1t">جلسات رئيسية</div><p class="fi-d" id="ft1d">متحدثون عالميون يشاركون أعمق رؤاهم عن مستقبل الذكاء الاصطناعي.</p></div>
+    <div class="feat-item"><div class="fi-n">02</div><div class="fi-i">💻</div><div class="fi-t" id="ft2t">ورش عمل تطبيقية</div><p class="fi-d" id="ft2d">تدريب عملي مع خبراء على أحدث أدوات وتقنيات الـ AI.</p></div>
+    <div class="feat-item"><div class="fi-n">03</div><div class="fi-i">🏆</div><div class="fi-t" id="ft3t">هاكاثون 24 ساعة</div><p class="fi-d" id="ft3d">نافس على جوائز بقيمة $50,000 وابنِ مشروع AI حقيقي في يوم واحد.</p></div>
+    <div class="feat-item"><div class="fi-n">04</div><div class="fi-i">🤝</div><div class="fi-t" id="ft4t">شبكة تواصل</div><p class="fi-d" id="ft4d">التقِ بـ 1200+ مهندس ومؤسس وباحث من كل أنحاء العالم العربي.</p></div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section class="reg-section" id="register">
+  <div class="reg-wrap">
+    <div class="sec-lbl" style="justify-content:center" id="regLbl">التسجيل</div>
+    <h2 class="sec-title sec-tc" id="regTitle">احجز مكانك الآن</h2>
+    <p style="font-size:.9rem;color:var(--text2);margin-top:10px" id="regSub">الأماكن محدودة — لا تفوّت الفرصة</p>
+    <div class="reg-price">$299 <s>$499</s></div>
+    <div class="reg-per" id="regPer">Early Bird — ينتهي 1 أكتوبر 2025</div>
+    <div class="reg-form">
+      <input class="reg-in" type="text" id="regName" placeholder="اسمك الكامل">
+      <input class="reg-in" type="email" id="regEmail" placeholder="بريدك الإلكتروني">
+    </div>
+    <button class="reg-btn" id="regBtn" onclick="doRegister()">🚀 سجّل الآن</button>
+    <p class="reg-note" id="regNote">// استرداد كامل خلال 14 يوماً · دخول كامل لجميع الجلسات</p>
+  </div>
+</section>
+
+<footer><p id="footerTxt">// AI SUMMIT 2025 · القاهرة · جميع الحقوق محفوظة</p></footer>
+
+<script>
+/* ── COUNTDOWN ── */
+const EVT = new Date('2025-11-15T09:00:00');
+function tick(){
+  const diff=EVT-new Date();
+  if(diff<=0) return;
+  const vals=[Math.floor(diff/86400000),Math.floor((diff%86400000)/3600000),Math.floor((diff%3600000)/60000),Math.floor((diff%60000)/1000)];
+  ['D','H','M','S'].forEach((id,i)=>{const el=document.getElementById('cd'+id);if(el)el.textContent=String(vals[i]).padStart(2,'0')});
+}
+tick();setInterval(tick,1000);
+
+/* ── DATA ── */
+const speakers={
+  ar:[
+    {e:'👨‍💻',n:'د. أحمد حسن',r:'قائد أبحاث الذكاء الاصطناعي',c:'OpenMind Labs'},
+    {e:'👩‍🔬',n:'سارة الشيخ',r:'مؤسسة ومديرة تنفيذية',c:'NeuralArab'},
+    {e:'👨‍🏫',n:'خالد العمري',r:'باحث LLM متقدم',c:'DeepResearch'},
+  ],
+  en:[
+    {e:'👨‍💻',n:'Dr. Ahmed Hassan',r:'AI Research Lead',c:'OpenMind Labs'},
+    {e:'👩‍🔬',n:'Sara Al-Sheikh',r:'Founder & CEO',c:'NeuralArab'},
+    {e:'👨‍🏫',n:'Khalid Al-Omari',r:'Advanced LLM Researcher',c:'DeepResearch'},
+  ]
+};
+
+const tl={
+  ar:[[
+    {t:'09:00',type:'keynote',tl:'الجلسة الرئيسية',ti:'افتتاح: مستقبل الذكاء الاصطناعي العربي',sp:'د. أحمد حسن',tr:'القاعة الرئيسية',d:''},
+    {t:'10:30',type:'workshop',tl:'ورشة عمل',ti:'بناء وكلاء LLM من الصفر',sp:'خالد العمري',tr:'قاعة A',d:'m'},
+    {t:'12:00',type:'break',tl:'استراحة',ti:'غداء تواصل وعرض شركات ناشئة',sp:'',tr:'',d:''},
+    {t:'14:00',type:'panel',tl:'نقاش',ti:'AI في الشركات العربية: تحديات وفرص',sp:'نورة المطيري + 3 متحدثين',tr:'القاعة الرئيسية',d:'p'},
+    {t:'16:00',type:'workshop',tl:'ورشة عمل',ti:'Stable Diffusion والإبداع بالذكاء الاصطناعي',sp:'دينا إبراهيم',tr:'قاعة B',d:'m'},
+  ],[
+    {t:'09:00',type:'keynote',tl:'الجلسة الرئيسية',ti:'هندسة نماذج اللغة الكبيرة',sp:'سارة الشيخ',tr:'القاعة الرئيسية',d:''},
+    {t:'10:30',type:'workshop',tl:'ورشة عمل',ti:'Fine-tuning النماذج على البيانات العربية',sp:'مازن القحطاني',tr:'قاعة A',d:'m'},
+    {t:'13:00',type:'panel',tl:'نقاش',ti:'أخلاقيات الذكاء الاصطناعي في المنطقة',sp:'ريم الزهراني + 4 متحدثين',tr:'القاعة الرئيسية',d:'p'},
+    {t:'15:00',type:'workshop',tl:'ورشة عمل',ti:'RAG و Vector Databases عملياً',sp:'فارس العلوي',tr:'قاعة B',d:'m'},
+    {t:'18:00',type:'break',tl:'حفل',ti:'حفل الشبكات وعشاء المؤتمر',sp:'',tr:'الحديقة',d:''},
+  ],[
+    {t:'09:00',type:'keynote',tl:'الجلسة الرئيسية',ti:'AI في الصحة والطب: رؤية 2030',sp:'ريم الزهراني',tr:'القاعة الرئيسية',d:''},
+    {t:'10:30',type:'workshop',tl:'هاكاثون',ti:'بناء تطبيق AI في 4 ساعات',sp:'فريق التنظيم',tr:'قاعة الهاكاثون',d:'m'},
+    {t:'14:00',type:'panel',tl:'جلسة ختامية',ti:'الروبوتيكس والمستقبل العربي',sp:'فارس العلوي',tr:'القاعة الرئيسية',d:''},
+    {t:'16:00',type:'keynote',tl:'الختام',ti:'جوائز وختام: نحو مستقبل رقمي عربي',sp:'جميع المتحدثين',tr:'القاعة الرئيسية',d:'p'},
+  ]],
+  en:[[
+    {t:'09:00',type:'keynote',tl:'KEYNOTE',ti:'Opening: The Future of Arabic AI',sp:'Dr. Ahmed Hassan',tr:'Main Hall',d:''},
+    {t:'10:30',type:'workshop',tl:'WORKSHOP',ti:'Building LLM Agents from Scratch',sp:'Khalid Al-Omari',tr:'Hall A',d:'m'},
+    {t:'12:00',type:'break',tl:'BREAK',ti:'Networking Lunch & Startup Showcase',sp:'',tr:'',d:''},
+    {t:'14:00',type:'panel',tl:'PANEL',ti:'AI in Arab Companies: Challenges & Opportunities',sp:'Noura Al-Mutairi + 3 speakers',tr:'Main Hall',d:'p'},
+    {t:'16:00',type:'workshop',tl:'WORKSHOP',ti:'Stable Diffusion & AI Creativity',sp:'Dina Ibrahim',tr:'Hall B',d:'m'},
+  ],[
+    {t:'09:00',type:'keynote',tl:'KEYNOTE',ti:'Engineering Large Language Models',sp:'Sara Al-Sheikh',tr:'Main Hall',d:''},
+    {t:'10:30',type:'workshop',tl:'WORKSHOP',ti:'Fine-tuning Models on Arabic Data',sp:'Mazen Al-Qahtani',tr:'Hall A',d:'m'},
+    {t:'13:00',type:'panel',tl:'PANEL',ti:'AI Ethics in the Arab World',sp:'Reem Al-Zahrani + 4 speakers',tr:'Main Hall',d:'p'},
+    {t:'15:00',type:'workshop',tl:'WORKSHOP',ti:'RAG & Vector Databases in Practice',sp:'Faris Al-Alawi',tr:'Hall B',d:'m'},
+    {t:'18:00',type:'break',tl:'SOCIAL',ti:'Networking Dinner & Conference Gala',sp:'',tr:'Garden',d:''},
+  ],[
+    {t:'09:00',type:'keynote',tl:'KEYNOTE',ti:'AI in Health & Medicine: Vision 2030',sp:'Reem Al-Zahrani',tr:'Main Hall',d:''},
+    {t:'10:30',type:'workshop',tl:'HACKATHON',ti:'Build an AI App in 4 Hours',sp:'Organizing Team',tr:'Hackathon Hall',d:'m'},
+    {t:'14:00',type:'panel',tl:'PANEL',ti:'Robotics and the Arab Future',sp:'Faris Al-Alawi',tr:'Main Hall',d:''},
+    {t:'16:00',type:'keynote',tl:'CLOSING',ti:'Awards & Closing: Toward a Digital Arab Future',sp:'All Speakers',tr:'Main Hall',d:'p'},
+  ]]
+};
+
+const typeClass={keynote:'t-k',workshop:'t-w',panel:'t-p',break:'t-b'};
+let curDay=0,lang='ar',theme='dark';
+
+function renderSpeakers(){
+  document.getElementById('spGrid').innerHTML=speakers[lang].map(s=>`
+    <div class="sp-card">
+      <div class="sp-photo">${s.e}<span class="sp-photo-label">${lang==='ar'?'+ إضافة صورة':'+ Add Photo'}</span></div>
+      <div class="sp-name">${s.n}</div>
+      <div class="sp-role">${s.r}</div>
+      <div class="sp-co">${s.c}</div>
+      <button class="sp-social">LinkedIn ↗</button>
+    </div>`).join('');
+}
+renderSpeakers();
+
+function renderTL(){
+  document.getElementById('tlTrack').innerHTML=tl[lang][curDay].map(it=>`
+    <div class="tl-item">
+      <div class="tl-t">${it.t}</div>
+      <div class="tl-dot ${it.d}"></div>
+      <div class="tl-c">
+        <div class="tl-type ${typeClass[it.type]}">${it.tl}</div>
+        <div class="tl-ttl">${it.ti}</div>
+        ${it.sp?`<div class="tl-sp">👤 ${it.sp}</div>`:''}
+        ${it.tr?`<div class="tl-tr">📍 ${it.tr}</div>`:''}
+      </div>
+    </div>`).join('');
+}
+renderTL();
+
+function switchDay(i,btn){
+  curDay=i;
+  document.querySelectorAll('.dtab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderTL();
+}
+
+/* marquee */
+const marqueeTags={ar:['LLMs','Computer Vision','Robotics','MLOps','NLP','Generative AI','AI Ethics','RAG','Transformers','Fine-tuning'],
+  en:['LLMs','Computer Vision','Robotics','MLOps','NLP','Generative AI','AI Ethics','RAG','Transformers','Fine-tuning']};
+function buildMarquee(){
+  const items=marqueeTags[lang];
+  const html=([...items,...items]).map(t=>`<div class="marquee-item"><span>${t}</span><div class="marquee-dot"></div></div>`).join('');
+  document.getElementById('marqueeInner').innerHTML=html;
+}
+buildMarquee();
+
+/* translations */
+const T={
+  ar:{dir:'rtl',bc:'',lb:'EN',
+    navReg:'سجّل الآن',heroTag:'// مؤتمر الذكاء الاصطناعي والبرمجة 2025',heroSummit:'SUMMIT',
+    cdCity:'القاهرة، مصر',cdDate:'15–17 نوفمبر 2025',
+    cdDL:'يوم',cdHL:'ساعة',cdML:'دقيقة',cdSL:'ثانية',
+    hb1:'✦ سجّل مكانك',hb2:'تصفح المتحدثين',
+    hs1:'مشارك',hs2:'متحدث دولي',hs3:'أيام مليئة',hs4:'ورشة عمل',
+    vsEye:'عن المؤتمر',vsTitle:'حيث تلتقي أعظم عقول الـ AI',
+    vsDesc:'AI Summit 2025 هو أضخم تجمع تقني في المنطقة العربية — ثلاثة أيام من الجلسات العميقة، ورش العمل التطبيقية، وفرص التواصل مع صانعي المستقبل الرقمي.',
+    galLbl:'معرض المؤتمر',galTitle:'صور من المؤتمرات السابقة',
+    uploadHint:'يمكنك استبدال هذه الحاويات بصورك الحقيقية',
+    ph1badge:'Keynote Stage',ph1lbl:'صورة القاعة الرئيسية',
+    ph2badge:'Workshop',ph2lbl:'صورة ورشة عمل',
+    ph3badge:'Networking',ph3lbl:'صورة التواصل',
+    ph4badge:'Hackathon',ph4lbl:'صورة الهاكاثون',
+    ph5badge:'Speakers',ph5lbl:'صورة المتحدثين',
+    spLbl:'المتحدثون',spTitle:'عقول تشكّل المستقبل',
+    tlLbl:'الجدول الزمني',tlTitle:'أجندة المؤتمر',
+    d0:'اليوم الأول',d1:'اليوم الثاني',d2:'اليوم الثالث',
+    ftLbl:'ماذا ستجد',ftTitle:'تجربة لا تُنسى',
+    ft1t:'جلسات رئيسية',ft1d:'متحدثون عالميون يشاركون أعمق رؤاهم عن مستقبل الذكاء الاصطناعي.',
+    ft2t:'ورش عمل تطبيقية',ft2d:'تدريب عملي مع خبراء على أحدث أدوات وتقنيات الـ AI.',
+    ft3t:'هاكاثون 24 ساعة',ft3d:'نافس على جوائز بقيمة $50,000 وابنِ مشروع AI حقيقي في يوم واحد.',
+    ft4t:'شبكة تواصل',ft4d:'التقِ بـ 1200+ مهندس ومؤسس وباحث من كل أنحاء العالم العربي.',
+    regLbl:'التسجيل',regTitle:'احجز مكانك الآن',regSub:'الأماكن محدودة — لا تفوّت الفرصة',
+    regPer:'Early Bird — ينتهي 1 أكتوبر 2025',regBtn:'🚀 سجّل الآن',
+    regNote:'// استرداد كامل خلال 14 يوماً · دخول كامل لجميع الجلسات',
+    footerTxt:'// AI SUMMIT 2025 · القاهرة · جميع الحقوق محفوظة'},
+  en:{dir:'ltr',bc:'en',lb:'عربي',
+    navReg:'Register Now',heroTag:'// AI & Engineering Conference 2025',heroSummit:'SUMMIT',
+    cdCity:'Cairo, Egypt',cdDate:'Nov 15–17, 2025',
+    cdDL:'DAYS',cdHL:'HRS',cdML:'MIN',cdSL:'SEC',
+    hb1:'✦ Claim Your Spot',hb2:'Browse Speakers',
+    hs1:'Attendees',hs2:"Int'l Speakers",hs3:'Full Days',hs4:'Workshops',
+    vsEye:'ABOUT THE SUMMIT',vsTitle:'Where the Greatest AI Minds Converge',
+    vsDesc:'AI Summit 2025 is the largest tech gathering in the Arab world — three days of deep sessions, hands-on workshops, and networking with the builders of the digital future.',
+    galLbl:'GALLERY',galTitle:'Photos From Past Editions',
+    uploadHint:'You can replace these placeholders with your real photos',
+    ph1badge:'Keynote Stage',ph1lbl:'Main Stage Photo',
+    ph2badge:'Workshop',ph2lbl:'Workshop Photo',
+    ph3badge:'Networking',ph3lbl:'Networking Photo',
+    ph4badge:'Hackathon',ph4lbl:'Hackathon Photo',
+    ph5badge:'Speakers',ph5lbl:'Speakers Photo',
+    spLbl:'SPEAKERS',spTitle:'Minds Shaping the Future',
+    tlLbl:'TIMELINE',tlTitle:'Conference Agenda',
+    d0:'Day One',d1:'Day Two',d2:'Day Three',
+    ftLbl:'WHAT YOU GET',ftTitle:'An Unforgettable Experience',
+    ft1t:'Keynote Sessions',ft1d:'World-class speakers sharing their deepest insights about the future of AI.',
+    ft2t:'Hands-on Workshops',ft2d:'Practical training with experts on the latest AI tools and techniques.',
+    ft3t:'24-Hour Hackathon',ft3d:'Compete for $50,000 in prizes and build a real AI project in one day.',
+    ft4t:'Networking',ft4d:'Meet 1,200+ engineers, founders, and researchers from across the Arab world.',
+    regLbl:'REGISTRATION',regTitle:'Book Your Spot Now',regSub:"Limited seats — don't miss out",
+    regPer:'Early Bird — Ends Oct 1, 2025',regBtn:'🚀 Register Now',
+    regNote:'// 14-day full refund · All sessions access included',
+    footerTxt:'// AI SUMMIT 2025 · Cairo · All rights reserved'}
+};
+
+function applyLang(l){
+  lang=l;
+  const d=T[l];
+  document.documentElement.lang=l;document.documentElement.dir=d.dir;
+  document.body.className=d.bc;
+  document.getElementById('btnLang').textContent=d.lb;
+  const skip=['dir','bc','lb'];
+  Object.keys(d).forEach(k=>{
+    if(skip.includes(k)) return;
+    const el=document.getElementById(k);
+    if(el) el.textContent=d[k];
+  });
+  renderSpeakers();renderTL();buildMarquee();
+}
+function toggleLang(){applyLang(lang==='ar'?'en':'ar')}
+
+function applyTheme(t){
+  theme=t;
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('btnTheme').textContent=t==='dark'?'🌙':'☀️';
+}
+function toggleTheme(){applyTheme(theme==='dark'?'light':'dark')}
+
+function doRegister(){
+  const n=document.getElementById('regName').value;
+  const e=document.getElementById('regEmail').value;
+  if(!n||!e){alert(lang==='ar'?'الرجاء ملء جميع الحقول':'Please fill all fields');return}
+  alert(lang==='ar'?`✅ تم تسجيلك يا ${n}!\nتأكيد على: ${e}`:`✅ Registered, ${n}!\nConfirmation: ${e}`);
+}
+
+const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

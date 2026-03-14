@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light" data-lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMIÈRE | لومييه للتجميل الفاخر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Tajawal:wght@300;400;500;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fdf8f5;
+  --surface: #ffffff;
+  --surface2: #fef2ed;
+  --accent: #c8646e;
+  --accent2: #e8898f;
+  --gold: #c9a84c;
+  --blush: #f2c4c4;
+  --rose: #d4849a;
+  --text: #2d1b1e;
+  --text-muted: #9b7b84;
+  --border: rgba(200,100,110,0.15);
+  --font-display: 'DM Serif Display', serif;
+  --font-ar: 'Tajawal', sans-serif;
+  --font-en: 'Playfair Display', serif;
+}
+[data-theme="dark"] {
+  --bg: #1a0d0f;
+  --surface: #261416;
+  --surface2: #311a1c;
+  --text: #f5e6e8;
+  --text-muted: #b08890;
+  --border: rgba(200,100,110,0.2);
+  --blush: rgba(242,196,196,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-ar);
+  overflow-x:hidden;
+  transition:background .4s,color .4s;
+}
+
+/* DECORATIVE BG */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 40% 40% at 10% 20%, rgba(200,100,110,.06) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 30% at 90% 80%, rgba(201,168,76,.06) 0%, transparent 60%);
+  pointer-events:none;z-index:0;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.2rem 5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(253,248,245,.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:background .4s;
+}
+[data-theme="dark"] nav{background:rgba(26,13,15,.92);}
+.nav-logo{
+  font-family:var(--font-display);
+  font-size:1.8rem;
+  color:var(--text);
+  text-decoration:none;
+  letter-spacing:2px;
+}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:2.5rem;align-items:center;}
+.nav-links a{
+  color:var(--text-muted);
+  text-decoration:none;
+  font-size:.85rem;
+  letter-spacing:1px;
+  transition:color .3s;
+  position:relative;
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;bottom:-4px;left:0;right:0;height:1px;
+  background:var(--accent);
+  transform:scaleX(0);
+  transition:transform .3s;
+}
+.nav-links a:hover{color:var(--accent);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-actions{display:flex;gap:1rem;align-items:center;}
+.cart-btn{
+  background:var(--accent);
+  color:#fff;border:none;
+  padding:.5rem 1.2rem;
+  border-radius:50px;
+  font-size:.8rem;
+  cursor:pointer;
+  font-family:var(--font-ar);
+  transition:all .3s;
+  display:flex;align-items:center;gap:.5rem;
+}
+.cart-btn:hover{background:var(--accent2);transform:translateY(-1px);}
+.ctrl-btn{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text-muted);
+  padding:.4rem .8rem;
+  border-radius:50px;
+  cursor:pointer;
+  font-size:.75rem;
+  transition:all .3s;
+  font-family:var(--font-ar);
+}
+.ctrl-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  padding:9rem 5rem 5rem;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:center;
+  position:relative;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.6rem;
+  background:var(--blush);
+  color:var(--accent);
+  padding:.4rem 1.2rem;
+  border-radius:50px;
+  font-size:.78rem;
+  letter-spacing:1px;
+  margin-bottom:1.5rem;
+  animation:fadeUp .8s ease both;
+}
+.hero-title{
+  font-family:var(--font-display);
+  font-size:clamp(3rem,6vw,6.5rem);
+  line-height:1.05;
+  margin-bottom:1.5rem;
+  animation:fadeUp .8s .2s ease both;
+}
+.hero-title em{
+  font-style:italic;
+  color:var(--accent);
+  display:block;
+}
+.hero-sub{
+  font-size:1rem;
+  color:var(--text-muted);
+  line-height:1.9;
+  margin-bottom:2.5rem;
+  animation:fadeUp .8s .4s ease both;
+  max-width:420px;
+}
+.hero-btns{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  animation:fadeUp .8s .6s ease both;
+}
+.btn-primary{
+  background:var(--accent);
+  color:#fff;border:none;
+  padding:1rem 2.5rem;
+  border-radius:50px;
+  font-size:.9rem;
+  cursor:pointer;
+  font-family:var(--font-ar);
+  transition:all .4s;
+  text-decoration:none;
+  display:inline-block;
+  letter-spacing:.5px;
+}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-3px);box-shadow:0 15px 40px rgba(200,100,110,.3);}
+.btn-outline{
+  background:transparent;
+  color:var(--text);
+  border:1px solid rgba(45,27,30,.2);
+  padding:1rem 2.5rem;
+  border-radius:50px;
+  font-size:.9rem;
+  cursor:pointer;
+  font-family:var(--font-ar);
+  transition:all .3s;
+  text-decoration:none;
+  display:inline-block;
+}
+[data-theme="dark"] .btn-outline{border-color:rgba(245,230,232,.2);}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+
+/* HERO VISUAL */
+.hero-visual{
+  position:relative;
+  animation:fadeUp .8s .3s ease both;
+}
+.hero-img-wrap{
+  position:relative;
+  border-radius:40% 60% 70% 30% / 40% 50% 60% 50%;
+  overflow:hidden;
+  background:linear-gradient(135deg,var(--blush),var(--rose));
+  padding-bottom:110%;
+  animation:morphShape 8s ease-in-out infinite;
+}
+@keyframes morphShape{
+  0%,100%{border-radius:40% 60% 70% 30% / 40% 50% 60% 50%;}
+  33%{border-radius:70% 30% 50% 50% / 30% 30% 70% 70%;}
+  66%{border-radius:30% 60% 30% 70% / 50% 60% 40% 60%;}
+}
+.hero-img-wrap img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .4s;
+}
+.hero-badge-float{
+  position:absolute;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:1rem 1.5rem;
+  box-shadow:0 20px 60px rgba(200,100,110,.1);
+  animation:float 6s ease-in-out infinite;
+}
+.hero-badge-float.left{bottom:10%;left:-8%;animation-delay:-2s;}
+.hero-badge-float.top{top:15%;right:-5%;}
+.badge-num{font-family:var(--font-display);font-size:1.8rem;color:var(--accent);}
+.badge-label{font-size:.72rem;color:var(--text-muted);}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
+
+/* MARQUEE */
+.marquee-section{
+  overflow:hidden;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:var(--surface2);
+  padding:.8rem 0;
+}
+.marquee-track{
+  display:flex;gap:3rem;
+  animation:marquee 20s linear infinite;
+  white-space:nowrap;
+}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);};}
+.marquee-item{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.8rem;color:var(--text-muted);letter-spacing:1px;
+}
+.marquee-item span{color:var(--accent);}
+
+/* CATEGORIES */
+.categories{padding:6rem 5rem;}
+.section-header{margin-bottom:4rem;display:flex;justify-content:space-between;align-items:flex-end;}
+.section-tag{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;}
+.section-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.5rem);line-height:1.1;}
+.view-all{font-size:.82rem;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:2px;transition:opacity .3s;}
+.view-all:hover{opacity:.7;}
+.cats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;}
+.cat-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:2rem 1.5rem;
+  text-align:center;
+  cursor:pointer;
+  transition:all .4s;
+  text-decoration:none;color:inherit;
+}
+.cat-card:hover{transform:translateY(-8px);box-shadow:0 25px 60px rgba(200,100,110,.12);border-color:var(--accent);}
+.cat-emoji{font-size:2.5rem;margin-bottom:1rem;display:block;}
+.cat-name{font-size:.9rem;font-weight:600;margin-bottom:.3rem;}
+.cat-count{font-size:.75rem;color:var(--text-muted);}
+
+/* PRODUCTS */
+.products{padding:2rem 5rem 6rem;}
+.tabs{display:flex;gap:.5rem;margin-bottom:3rem;flex-wrap:wrap;}
+.tab{
+  background:transparent;border:1px solid var(--border);
+  color:var(--text-muted);padding:.6rem 1.5rem;
+  border-radius:50px;font-size:.82rem;
+  cursor:pointer;transition:all .3s;
+  font-family:var(--font-ar);
+}
+.tab.active,.tab:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;}
+.product-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:24px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:all .4s;
+  position:relative;
+}
+
+
+/* img card  */
+
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s;
+}
+.product-card:hover .product-img img { transform: scale(1.06); }
+/* end img card  */
+
+
+
+
+
+
+
+
+.product-card:hover{transform:translateY(-8px);box-shadow:0 30px 70px rgba(200,100,110,.12);}
+.product-badge{
+  position:absolute;top:1rem;right:1rem;
+  background:var(--accent);color:#fff;
+  padding:.25rem .7rem;border-radius:50px;
+  font-size:.7rem;z-index:2;
+}
+.product-badge.new{background:var(--gold);}
+.product-img{
+  width:100%;height:220px;
+  object-fit:cover;
+  background:linear-gradient(135deg,var(--blush),rgba(200,100,110,.1));
+  display:flex;align-items:center;justify-content:center;
+  font-size:5rem;
+  transition:transform .4s;
+}
+.product-card:hover .product-img{transform:scale(1.05);}
+.product-info{padding:1.5rem;}
+.product-brand{font-size:.7rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:.3rem;}
+.product-name{font-size:1rem;font-weight:600;margin-bottom:.5rem;line-height:1.3;}
+.product-stars{color:#f4c542;font-size:.8rem;margin-bottom:.8rem;}
+.product-stars span{color:var(--text-muted);margin-right:.3rem;font-size:.75rem;}
+.product-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);}
+.product-price{font-family:var(--font-display);font-size:1.3rem;color:var(--accent);}
+.product-price .old{font-size:.8rem;color:var(--text-muted);text-decoration:line-through;margin-right:.4rem;font-family:var(--font-ar);}
+.add-btn{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--accent);color:#fff;border:none;
+  font-size:1.2rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s;
+}
+.add-btn:hover{background:var(--accent2);transform:scale(1.1);}
+
+/* BANNER */
+.banner{
+  margin:0 5rem 6rem;
+  background:linear-gradient(135deg,var(--accent) 0%,#8b3542 100%);
+  border-radius:30px;
+  padding:4rem;
+  display:grid;grid-template-columns:1fr auto;
+  gap:3rem;align-items:center;
+  position:relative;overflow:hidden;
+}
+.banner::before{
+  content:'✦';
+  position:absolute;right:15%;top:50%;transform:translateY(-50%);
+  font-size:20rem;color:rgba(255,255,255,.05);
+  line-height:1;pointer-events:none;
+}
+.banner-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.5rem);color:#fff;margin-bottom:1rem;}
+.banner-sub{color:rgba(255,255,255,.75);font-size:.95rem;line-height:1.8;margin-bottom:1.5rem;}
+.btn-white{
+  background:#fff;color:var(--accent);
+  border:none;padding:1rem 2.5rem;
+  border-radius:50px;font-size:.9rem;
+  cursor:pointer;font-family:var(--font-ar);
+  transition:all .3s;text-decoration:none;display:inline-block;
+  font-weight:600;
+}
+.btn-white:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(0,0,0,.2);}
+.banner-visual{font-size:8rem;animation:float 4s ease-in-out infinite;}
+
+/* BESTSELLERS */
+.bestsellers{padding:0 5rem 6rem;}
+.bestsellers-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-top:3rem;}
+.bestseller-item{
+  background:var(--surface);
+  padding:1.5rem 2rem;
+  display:flex;align-items:center;gap:2rem;
+  transition:background .3s;cursor:pointer;
+}
+.bestseller-item:hover{background:var(--surface2);}
+.bs-rank{
+  font-family:var(--font-display);font-size:2.5rem;
+  color:var(--blush);width:50px;text-align:center;flex-shrink:0;
+}
+.bs-img{
+  width:70px;height:70px;border-radius:15px;
+  background:linear-gradient(135deg,var(--blush),rgba(200,100,110,.15));
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;flex-shrink:0;
+}
+.bs-info{flex:1;}
+.bs-brand{font-size:.7rem;letter-spacing:2px;color:var(--gold);text-transform:uppercase;}
+.bs-name{font-size:.95rem;font-weight:600;margin:.2rem 0;}
+.bs-rating{font-size:.8rem;color:var(--text-muted);}
+.bs-price{font-family:var(--font-display);font-size:1.4rem;color:var(--accent);}
+
+/* TESTIMONIALS */
+.testimonials{background:var(--surface2);padding:6rem 5rem;border-top:1px solid var(--border);}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem;}
+.testimonial{background:var(--surface);border-radius:24px;padding:2rem;}
+.testimonial-stars{color:#f4c542;font-size:.9rem;margin-bottom:1rem;}
+.testimonial-text{font-size:.9rem;color:var(--text-muted);line-height:1.8;margin-bottom:1.5rem;}
+.testimonial-author{display:flex;align-items:center;gap:1rem;}
+.author-avatar{
+  width:42px;height:42px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;font-size:.9rem;flex-shrink:0;
+}
+.author-name{font-size:.9rem;font-weight:600;}
+.author-tag{font-size:.72rem;color:var(--text-muted);}
+
+/* FOOTER */
+footer{
+  background:var(--text);
+  color:rgba(245,230,232,.8);
+  padding:5rem 5rem 2rem;
+}
+[data-theme="dark"] footer{background:#0d0607;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:4rem;}
+.footer-logo{font-family:var(--font-display);font-size:2rem;color:#fff;margin-bottom:1rem;display:block;}
+.footer-logo span{color:var(--accent2);}
+.footer-desc{font-size:.85rem;line-height:1.8;opacity:.6;}
+.footer-col h4{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);margin-bottom:1.5rem;}
+.footer-col a{display:block;color:rgba(245,230,232,.6);text-decoration:none;font-size:.85rem;margin-bottom:.7rem;transition:color .3s;}
+.footer-col a:hover{color:var(--accent2);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:2rem;display:flex;justify-content:space-between;font-size:.75rem;opacity:.5;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px;}
+
+@media(max-width:1024px){
+  nav,section,.categories,.products,.bestsellers,.testimonials,footer,.banner{padding-left:2rem;padding-right:2rem;}
+  .banner{margin-left:2rem;margin-right:2rem;}
+  .hero{grid-template-columns:1fr;padding:8rem 2rem 3rem;}
+  .hero-visual{display:block;}
+  .cats-grid{grid-template-columns:repeat(3,1fr);}
+  .products-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .testimonials-grid{grid-template-columns:1fr;}
+  .banner{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  .cats-grid{grid-template-columns:repeat(2,1fr);}
+  .products-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .section-header{flex-direction:column;align-items:flex-start;gap:1rem;}
+}
+
+/* LANG */
+.lang-en{display:none;}
+[data-lang="en"] .lang-en{display:block;}
+[data-lang="en"] .lang-ar{display:none;}
+[data-lang="en"] html,[data-lang="en"] body{direction:ltr;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">LUMI<span>È</span>RE</a>
+  <div class="nav-links">
+    <a href="#products" class="lang-ar">المنتجات</a><a href="#products" class="lang-en">Products</a>
+    <a href="#categories" class="lang-ar">التصنيفات</a><a href="#categories" class="lang-en">Categories</a>
+    <a href="#bestsellers" class="lang-ar">الأكثر مبيعاً</a><a href="#bestsellers" class="lang-en">Bestsellers</a>
+    <a href="#contact" class="lang-ar">تواصل</a><a href="#contact" class="lang-en">Contact</a>
+  </div>
+  <div class="nav-actions">
+    <button class="ctrl-btn" onclick="toggleTheme()">🌙 / ☀️</button>
+    <button class="ctrl-btn" onclick="toggleLang()">EN / عر</button>
+    <button class="cart-btn">🛒 <span class="lang-ar">السلة (0)</span><span class="lang-en">Cart (0)</span></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">✨ <span class="lang-ar">كوليكشن ربيع 2025</span><span class="lang-en">Spring Collection 2025</span></div>
+    <h1 class="hero-title lang-ar">جمالك<em>أسطورتك</em></h1>
+    <h1 class="hero-title lang-en" style="display:none">Your Beauty<em>Your Legend</em></h1>
+    <p class="hero-sub lang-ar">اكتشفي أرقى مستحضرات التجميل العالمية. منتجات مختارة بعناية لتُبرز جمالك الطبيعي بأناقة وثقة لا مثيل لهما.</p>
+    <p class="hero-sub lang-en" style="display:none">Discover the finest luxury beauty products worldwide. Carefully curated to enhance your natural beauty with unmatched elegance and confidence.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-primary lang-ar">تسوقي الآن</a>
+      <a href="#products" class="btn-primary lang-en" style="display:none">Shop Now</a>
+      <a href="#categories" class="btn-outline lang-ar">اكتشفي المجموعة</a>
+      <a href="#categories" class="btn-outline lang-en" style="display:none">Explore Collection</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-img-wrap">
+      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&q=80" alt="Beauty" onerror="this.style='display:none'">
+    </div>
+    <div class="hero-badge-float left">
+      <div class="badge-num">4.9★</div>
+      <div class="badge-label lang-ar">تقييم العملاء</div><div class="badge-label lang-en" style="display:none">Customer Rating</div>
+    </div>
+    <div class="hero-badge-float top">
+      <div class="badge-num">500+</div>
+      <div class="badge-label lang-ar">منتج فاخر</div><div class="badge-label lang-en" style="display:none">Luxury Products</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <div class="marquee-item">✦ <span>Chanel</span></div>
+    <div class="marquee-item">✦ <span>Dior</span></div>
+    <div class="marquee-item">✦ <span>Charlotte Tilbury</span></div>
+    <div class="marquee-item">✦ <span>NARS</span></div>
+    <div class="marquee-item">✦ <span>Mac Cosmetics</span></div>
+    <div class="marquee-item">✦ <span>Urban Decay</span></div>
+    <div class="marquee-item">✦ <span>Benefit</span></div>
+    <div class="marquee-item">✦ <span>Too Faced</span></div>
+    <div class="marquee-item">✦ <span>Chanel</span></div>
+    <div class="marquee-item">✦ <span>Dior</span></div>
+    <div class="marquee-item">✦ <span>Charlotte Tilbury</span></div>
+    <div class="marquee-item">✦ <span>NARS</span></div>
+    <div class="marquee-item">✦ <span>Mac Cosmetics</span></div>
+    <div class="marquee-item">✦ <span>Urban Decay</span></div>
+    <div class="marquee-item">✦ <span>Benefit</span></div>
+    <div class="marquee-item">✦ <span>Too Faced</span></div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="categories reveal" id="categories">
+  <div class="section-header">
+    <div>
+      <div class="section-tag lang-ar">تصفحي بـ</div><div class="section-tag lang-en" style="display:none">Browse By</div>
+      <h2 class="section-title lang-ar">التصنيفات</h2><h2 class="section-title lang-en" style="display:none">Categories</h2>
+    </div>
+    <a href="#" class="view-all lang-ar">عرض الكل ←</a><a href="#" class="view-all lang-en" style="display:none">View All →</a>
+  </div>
+  <div class="cats-grid">
+    <a href="#" class="cat-card"><span class="cat-emoji">💄</span><div class="cat-name lang-ar">أحمر الشفاه</div><div class="cat-name lang-en" style="display:none">Lipstick</div><div class="cat-count lang-ar">٨٥ منتج</div><div class="cat-count lang-en" style="display:none">85 Products</div></a>
+    <a href="#" class="cat-card"><span class="cat-emoji">🌸</span><div class="cat-name lang-ar">العناية بالبشرة</div><div class="cat-name lang-en" style="display:none">Skincare</div><div class="cat-count lang-ar">١٢٠ منتج</div><div class="cat-count lang-en" style="display:none">120 Products</div></a>
+    <a href="#" class="cat-card"><span class="cat-emoji">👁️</span><div class="cat-name lang-ar">مكياج العيون</div><div class="cat-name lang-en" style="display:none">Eye Makeup</div><div class="cat-count lang-ar">٩٤ منتج</div><div class="cat-count lang-en" style="display:none">94 Products</div></a>
+    <a href="#" class="cat-card"><span class="cat-emoji">🌺</span><div class="cat-name lang-ar">العطور</div><div class="cat-name lang-en" style="display:none">Perfumes</div><div class="cat-count lang-ar">٦٧ منتج</div><div class="cat-count lang-en" style="display:none">67 Products</div></a>
+    <a href="#" class="cat-card"><span class="cat-emoji">💅</span><div class="cat-name lang-ar">العناية بالأظافر</div><div class="cat-name lang-en" style="display:none">Nail Care</div><div class="cat-count lang-ar">٥٢ منتج</div><div class="cat-count lang-en" style="display:none">52 Products</div></a>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-tag lang-ar">اختياراتنا</div><div class="section-tag lang-en" style="display:none">Our Picks</div>
+      <h2 class="section-title lang-ar">منتجات مميزة</h2><h2 class="section-title lang-en" style="display:none">Featured Products</h2>
+    </div>
+    <a href="#" class="view-all lang-ar">عرض الكل ←</a><a href="#" class="view-all lang-en" style="display:none">View All →</a>
+  </div>
+  <div class="tabs reveal">
+    <button class="tab active lang-ar" onclick="setTab(this)">الكل</button>
+    <button class="tab active lang-en" style="display:none" onclick="setTab(this)">All</button>
+    <button class="tab lang-ar" onclick="setTab(this)">أحمر الشفاه</button>
+    <button class="tab lang-en" style="display:none" onclick="setTab(this)">Lipstick</button>
+    <button class="tab lang-ar" onclick="setTab(this)">العناية</button>
+    <button class="tab lang-en" style="display:none" onclick="setTab(this)">Skincare</button>
+    <button class="tab lang-ar" onclick="setTab(this)">العيون</button>
+    <button class="tab lang-en" style="display:none" onclick="setTab(this)">Eyes</button>
+    <button class="tab lang-ar" onclick="setTab(this)">العطور</button>
+    <button class="tab lang-en" style="display:none" onclick="setTab(this)">Perfumes</button>
+  </div>
+  <div class="products-grid reveal">
+    <div class="product-card">
+      <div class="product-badge lang-ar">خصم 20%</div><div class="product-badge lang-en" style="display:none">20% Off</div>
+      <div class="product-img"><img src="./images/pillowtalk.png" alt="Pillow Talk" onerror="this.style.display='none'"></div>
+      <div class="product-info">
+        <div class="product-brand">Charlotte Tilbury</div>
+        <div class="product-name lang-ar">Pillow Talk - أحمر الشفاه الأيقوني</div><div class="product-name lang-en" style="display:none">Pillow Talk - Iconic Lipstick</div>
+        <div class="product-stars">★★★★★ <span>(٢٣٤)</span></div>
+        <div class="product-footer">
+          <div class="product-price"><span class="old">١٨٠</span>١٤٤ ر.س</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-badge new lang-ar">جديد</div><div class="product-badge new lang-en" style="display:none">New</div>
+<div class="product-img"><img src="./images/DiorCapture.jpg" alt="Capture Totale" onerror="this.style.display='none'"></div>
+
+      <div class="product-info">
+        <div class="product-brand">Dior</div>
+        <div class="product-name lang-ar">Capture Totale - كريم إعادة الشباب</div><div class="product-name lang-en" style="display:none">Capture Totale - Youth Cream</div>
+        <div class="product-stars">★★★★★ <span>(١٨٧)</span></div>
+        <div class="product-footer">
+          <div class="product-price">٣٨٠ ر.س</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+<div class="product-img"><img src="./images/NARSClimaxMascara.jpg" alt="Climax Mascara" onerror="this.style.display='none'"></div>
+      <div class="product-info">
+        <div class="product-brand">NARS</div>
+        <div class="product-name lang-ar">Climax Mascara - تأثير مبهر</div><div class="product-name lang-en" style="display:none">Climax Mascara - Stunning Effect</div>
+        <div class="product-stars">★★★★☆ <span>(٣١٢)</span></div>
+        <div class="product-footer">
+          <div class="product-price">١٢٥ ر.س</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-badge lang-ar">الأكثر مبيعاً</div><div class="product-badge lang-en" style="display:none">Bestseller</div>
+<div class="product-img"><img src="./images/ChanelN.jpg" alt="Chanel N°5" onerror="this.style.display='none'"></div>
+      <div class="product-info">
+        <div class="product-brand">Chanel</div>
+        <div class="product-name lang-ar">N°5 - العطر الأسطوري</div><div class="product-name lang-en" style="display:none">N°5 - The Legendary Perfume</div>
+        <div class="product-stars">★★★★★ <span>(٥٦٧)</span></div>
+        <div class="product-footer">
+          <div class="product-price">٦٥٠ ر.س</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+<div class="product-img"><img src="./images/UrbanDecayNakedPalette.jpg" alt="Naked Palette" onerror="this.style.display='none'"></div>
+      <div class="product-info">
+        <div class="product-brand">Urban Decay</div>
+        <div class="product-name lang-ar">Naked Palette - لوح ظلال العيون</div><div class="product-name lang-en" style="display:none">Naked Palette - Eye Shadow</div>
+        <div class="product-stars">★★★★★ <span>(٤٢٣)</span></div>
+        <div class="product-footer">
+          <div class="product-price">٢٢٠ ر.س</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-badge new lang-ar">جديد</div><div class="product-badge new lang-en" style="display:none">New</div>
+<div class="product-img"><img src="./images/OPIInfiniteShine.jpg" alt="Infinite Shine" onerror="this.style.display='none'"></div>
+      <div class="product-info">
+        <div class="product-brand">OPI</div>
+        <div class="product-name lang-ar">Infinite Shine - طلاء الأظافر الدائم</div><div class="product-name lang-en" style="display:none">Infinite Shine - Long-lasting Nail Polish</div>
+        <div class="product-stars">★★★★☆ <span>(٢٨٩)</span></div>
+        <div class="product-footer">
+          <div class="product-price">٨٥ ر.س</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+<div class="product-img"><img src="./images/MACStudioFix.jpg" alt="Studio Fix" onerror="this.style.display='none'"></div>
+      <div class="product-info">
+        <div class="product-brand">MAC</div>
+        <div class="product-name lang-ar">Studio Fix - باودر مثبت للمكياج</div><div class="product-name lang-en" style="display:none">Studio Fix - Makeup Setting Powder</div>
+        <div class="product-stars">★★★★★ <span>(٣٩١)</span></div>
+        <div class="product-footer">
+          <div class="product-price">١٦٥ ر.س</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+<div class="product-img"><img src="./images/BenefitHoola.jpg" alt="Hoola Bronzer" onerror="this.style.display='none'"></div>
+      <div class="product-info">
+        <div class="product-brand">Benefit</div>
+        <div class="product-name lang-ar">Hoola - برونزر الإشراق الطبيعي</div><div class="product-name lang-en" style="display:none">Hoola - Natural Glow Bronzer</div>
+        <div class="product-stars">★★★★☆ <span>(٢١٥)</span></div>
+        <div class="product-footer">
+          <div class="product-price">١٩٠ ر.س</div>
+          <button class="add-btn" onclick="addToCart(this)">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BANNER -->
+<div class="banner reveal">
+  <div>
+    <h2 class="banner-title lang-ar">اشتري ٣ واحصلي على الرابع مجاناً 🎁</h2>
+    <h2 class="banner-title lang-en" style="display:none">Buy 3 Get the 4th Free 🎁</h2>
+    <p class="banner-sub lang-ar">عرض محدود على جميع منتجات العناية بالبشرة. الكمية محدودة، اطلبي الآن!</p>
+    <p class="banner-sub lang-en" style="display:none">Limited offer on all skincare products. Limited quantities, order now!</p>
+    <a href="#products" class="btn-white lang-ar">تسوقي العرض</a>
+    <a href="#products" class="btn-white lang-en" style="display:none">Shop the Offer</a>
+  </div>
+  <div class="banner-visual">🎀</div>
+</div>
+
+<!-- BESTSELLERS -->
+<section class="bestsellers" id="bestsellers">
+  <div class="section-tag lang-ar">الأكثر مبيعاً</div><div class="section-tag lang-en" style="display:none">Bestsellers</div>
+  <h2 class="section-title reveal lang-ar">ما تحبه<br>عميلاتنا</h2><h2 class="section-title reveal lang-en" style="display:none">What Our<br>Clients Love</h2>
+  <div class="bestsellers-list reveal">
+    <div class="bestseller-item"><div class="bs-rank">01</div><div class="bs-img">💄</div><div class="bs-info"><div class="bs-brand">Charlotte Tilbury</div><div class="bs-name lang-ar">Pillow Talk Lipstick</div><div class="bs-name lang-en" style="display:none">Pillow Talk Lipstick</div><div class="bs-rating">★★★★★ ٤.٩ (٢٣٤ تقييم)</div></div><div class="bs-price">١٤٤ ر.س</div></div>
+    <div class="bestseller-item"><div class="bs-rank">02</div><div class="bs-img">🌺</div><div class="bs-info"><div class="bs-brand">Chanel</div><div class="bs-name lang-ar">N°5 Eau de Parfum</div><div class="bs-name lang-en" style="display:none">N°5 Eau de Parfum</div><div class="bs-rating">★★★★★ ٥.٠ (٥٦٧ تقييم)</div></div><div class="bs-price">٦٥٠ ر.س</div></div>
+    <div class="bestseller-item"><div class="bs-rank">03</div><div class="bs-img">🌸</div><div class="bs-info"><div class="bs-brand">Dior</div><div class="bs-name lang-ar">Capture Totale Cream</div><div class="bs-name lang-en" style="display:none">Capture Totale Cream</div><div class="bs-rating">★★★★★ ٤.٨ (١٨٧ تقييم)</div></div><div class="bs-price">٣٨٠ ر.س</div></div>
+    <div class="bestseller-item"><div class="bs-rank">04</div><div class="bs-img">🎨</div><div class="bs-info"><div class="bs-brand">Urban Decay</div><div class="bs-name lang-ar">Naked Eyeshadow Palette</div><div class="bs-name lang-en" style="display:none">Naked Eyeshadow Palette</div><div class="bs-rating">★★★★★ ٤.٩ (٤٢٣ تقييم)</div></div><div class="bs-price">٢٢٠ ر.س</div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<!-- <section class="testimonials">
+  <div class="section-tag lang-ar">آراء عميلاتنا</div><div class="section-tag lang-en" style="display:none">Client Reviews</div>
+  <h2 class="section-title reveal lang-ar">يقولون  عنا</h2><h2 class="section-title reveal lang-en" style="display:none">What They Say</h2>
+  <div class="testimonials-grid reveal">
+    <div class="testimonial">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text lang-ar">منتجات أصلية 100% والتوصيل كان سريع جداً. ريمل NARS غيّر حياتي! التغليف أنيق جداً ومناسب للهدايا.</p>
+      <p class="testimonial-text lang-en" style="display:none">100% authentic products and delivery was very fast. NARS mascara changed my life! The packaging is very elegant and perfect for gifts.</p>
+      <div class="testimonial-author"><div class="author-avatar">ن</div><div><div class="author-name lang-ar">نورا الشمري</div><div class="author-name lang-en" style="display:none">Nora Al-Shammari</div><div class="author-tag lang-ar">الرياض</div><div class="author-tag lang-en" style="display:none">Riyadh</div></div></div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text lang-ar">عطر شانيل N°5 وصل بحالة ممتازة، التعبئة رائعة. أسعار LUMIÈRE أفضل من الأسواق التقليدية. سأتسوق مجدداً بالتأكيد!</p>
+      <p class="testimonial-text lang-en" style="display:none">Chanel N°5 arrived in excellent condition, amazing packaging. LUMIÈRE prices are better than traditional stores. I will definitely shop again!</p>
+      <div class="testimonial-author"><div class="author-avatar">س</div><div><div class="author-name lang-ar">سارة القحطاني</div><div class="author-name lang-en" style="display:none">Sara Al-Qahtani</div><div class="author-tag lang-ar">جدة</div><div class="author-tag lang-en" style="display:none">Jeddah</div></div></div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text lang-ar">أخيراً موقع عربي موثوق للمنتجات الفاخرة! لوح الظلال رائع والألوان تثبت طوال اليوم. خدمة العملاء ممتازة جداً.</p>
+      <p class="testimonial-text lang-en" style="display:none">Finally a trusted Arabic site for luxury products! The eyeshadow palette is amazing and colors last all day. Customer service is excellent.</p>
+      <div class="testimonial-author"><div class="author-avatar">م</div><div><div class="author-name lang-ar">مريم الزهراني</div><div class="author-name lang-en" style="display:none">Mariam Al-Zahrani</div><div class="author-tag lang-ar">الدمام</div><div class="author-tag lang-en" style="display:none">Dammam</div></div></div>
+    </div>
+  </div>
+</section> -->
+
+<footer id="contact">
+  <div class="footer-grid">
+    <div><a href="#" class="footer-logo">LUMI<span>È</span>RE</a><p class="footer-desc lang-ar">وجهتك المفضلة لمستحضرات التجميل الفاخرة. أصالة مضمونة، توصيل سريع، خدمة استثنائية.</p><p class="footer-desc lang-en" style="display:none">Your favorite destination for luxury beauty products. Guaranteed authenticity, fast delivery, exceptional service.</p></div>
+    <div class="footer-col"><h4 class="lang-ar">تسوقي</h4><h4 class="lang-en" style="display:none">Shop</h4><a href="#" class="lang-ar">أحمر الشفاه</a><a href="#" class="lang-en" style="display:none">Lipstick</a><a href="#" class="lang-ar">العناية بالبشرة</a><a href="#" class="lang-en" style="display:none">Skincare</a><a href="#" class="lang-ar">العيون</a><a href="#" class="lang-en" style="display:none">Eyes</a><a href="#" class="lang-ar">العطور</a><a href="#" class="lang-en" style="display:none">Perfumes</a></div>
+    <div class="footer-col"><h4 class="lang-ar">مساعدة</h4><h4 class="lang-en" style="display:none">Help</h4><a href="#" class="lang-ar">تتبع الطلب</a><a href="#" class="lang-en" style="display:none">Track Order</a><a href="#" class="lang-ar">سياسة الإرجاع</a><a href="#" class="lang-en" style="display:none">Return Policy</a><a href="#" class="lang-ar">الأسئلة الشائعة</a><a href="#" class="lang-en" style="display:none">FAQ</a></div>
+    <div class="footer-col"><h4 class="lang-ar">تواصلي</h4><h4 class="lang-en" style="display:none">Contact</h4><a href="#">📞 +966 50 000 0000</a><a href="#">✉️ hello@lumiere.sa</a><a href="#">📷 @lumiere.beauty</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 LUMIÈRE</span><span class="lang-ar">جميع الحقوق محفوظة ✦ مصنوع بـ 💕</span><span class="lang-en" style="display:none">All rights reserved ✦ Made with 💕</span></div>
+</footer>
+
+<script>
+let cartCount=0;
+function addToCart(btn){
+  cartCount++;
+  document.querySelector('.cart-btn').innerHTML=`🛒 <span class="lang-ar">السلة (${cartCount})</span><span class="lang-en" style="display:${document.documentElement.getAttribute('data-lang')==='en'?'inline':'none'}">Cart (${cartCount})</span>`;
+  btn.textContent='✓';btn.style.background='#2d8a4e';
+  setTimeout(()=>{btn.textContent='+';btn.style.background='';},1500);
+}
+function setTab(el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+function toggleTheme(){
+  const html=document.documentElement;
+  html.setAttribute('data-theme',html.getAttribute('data-theme')==='light'?'dark':'light');
+}
+function toggleLang(){
+  const html=document.documentElement;
+  const lang=html.getAttribute('data-lang')==='ar'?'en':'ar';
+  html.setAttribute('data-lang',lang);
+  html.setAttribute('dir',lang==='ar'?'rtl':'ltr');
+  document.querySelectorAll('.lang-ar').forEach(el=>el.style.display=lang==='ar'?'':'none');
+  document.querySelectorAll('.lang-en').forEach(el=>el.style.display=lang==='en'?'':'none');
+}
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>

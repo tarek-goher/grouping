@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lamsa Restaurant — Fine Dining</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+
+<!--
+╔══════════════════════════════════════════════════════════════════════╗
+║              🖼️  IMAGE MAP — Lamsa Restaurant                       ║
+╠══════════════════════════════════════════════════════════════════════╣
+║  All images go in:  ./images/                                        ║
+║                                                                      ║
+║  ── HERO food cards (4 cards at bottom of hero) ──                  ║
+║  ./images/hero-starters.jpg      مقبلات / Starters                  ║
+║  ./images/hero-mains.jpg         أطباق رئيسية / Main Course         ║
+║  ./images/hero-desserts.jpg      حلويات / Desserts                  ║
+║  ./images/hero-drinks.jpg        مشروبات / Beverages                ║
+║                                                                      ║
+║  ── MENU items — ./images/menu/ ──                                  ║
+║  Starters:                                                           ║
+║    bastilla.jpg        Chicken Bastilla                              ║
+║    harira.jpg          Harira Soup                                   ║
+║    fattoush.jpg        Premium Fattoush                              ║
+║    mezze.jpg           Luxury Mezze Platter                          ║
+║  Main Course:                                                        ║
+║    lamb-ribs.jpg       Charcoal Lamb Ribs                           ║
+║    chicken-zaatar.jpg  Za'atar Grilled Chicken                      ║
+║    sea-bass.jpg        Herb-Crusted Sea Bass                         ║
+║    lamb-stew.jpg       Premium Lamb Stew                            ║
+║  Desserts:                                                           ║
+║    om-ali.jpg          Luxe Om Ali                                   ║
+║    kunafa.jpg          Mango Cream Kunafa                            ║
+║    fondue.jpg          Chocolate Fondue                              ║
+║    saffron.jpg         Saffron Truffle                               ║
+║  Beverages:                                                          ║
+║    arabic-coffee.jpg   Arabic Cardamom Coffee                        ║
+║    mint-tea.jpg        Moroccan Mint Tea                             ║
+║    pomegranate.jpg     Fresh Pomegranate Juice                       ║
+║    mojito.jpg          Basil Mojito                                  ║
+║                                                                      ║
+║  ── INSTAGRAM grid — ./images/social/ ──                            ║
+║    social-1.jpg  social-2.jpg  social-3.jpg  social-4.jpg           ║
+║    social-5.jpg  social-6.jpg  social-7.jpg  social-8.jpg           ║
+║                                                                      ║
+║  Best size: menu items 300×300px · social 400×400px                 ║
+║  Fallback: dark gradient shows if image is missing                   ║
+╚══════════════════════════════════════════════════════════════════════╝
+-->
+
+<style>
+:root{
+  --bg:#0B0804;--bg2:#120E09;--bg3:#1A1510;
+  --surface:#211A13;--border:rgba(212,168,83,0.1);--border2:rgba(212,168,83,0.2);
+  --cream:#F5EDD8;--cream2:#C8B89A;--cream3:#7A6A52;
+  --gold:#C8973A;--gold2:#E8B354;
+  --text:#F0E8D8;--text2:#9A8A72;--text3:#5A4E3E;
+  --glow:rgba(200,151,58,0.15);
+  --font-ar:'Noto Naskh Arabic',serif;
+  --font-disp:'Scheherazade New',serif;
+  --font-en:'Cormorant Garamond',serif;
+}
+[data-theme="light"]{
+  --bg:#FBF6EE;--bg2:#FFFFFF;--bg3:#F4EDE0;
+  --surface:#FFFFFF;--border:rgba(150,100,40,0.12);--border2:rgba(150,100,40,0.2);
+  --cream:#2A1F12;--cream2:#5A4530;--cream3:#8A7560;
+  --text:#1A1208;--text2:#6A5840;--text3:#A09080;
+  --glow:rgba(150,100,40,0.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-en);overflow-x:hidden;transition:background .3s,color .3s;direction:ltr}
+body[lang="ar"]{font-family:var(--font-ar);direction:rtl}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 6vw;height:72px;background:rgba(11,8,4,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+[data-theme="light"] nav{background:rgba(251,246,238,0.92)}
+.logo-ar{font-family:var(--font-disp);font-size:2rem;color:var(--gold)}
+.logo-en{font-family:var(--font-en);font-style:italic;font-size:1.6rem;font-weight:300;color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-link{background:none;border:none;color:var(--text2);cursor:pointer;font-size:.85rem;font-family:inherit;transition:color .2s;letter-spacing:.05em;}
+.nav-link:hover{color:var(--gold)}
+.nav-controls{display:flex;align-items:center;gap:10px}
+.btn-reserve{background:transparent;border:1px solid var(--gold);color:var(--gold);cursor:pointer;padding:8px 20px;border-radius:6px;font-size:.82rem;font-family:inherit;font-weight:600;transition:all .2s;}
+.btn-reserve:hover{background:var(--gold);color:#000}
+.btn-ctrl{background:none;border:1px solid var(--border);color:var(--text2);cursor:pointer;padding:6px 12px;border-radius:6px;font-size:.75rem;font-family:inherit;transition:all .2s}
+.btn-ctrl:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO */
+.hero{min-height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:90px 6vw 60px;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(200,151,58,0.06) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(139,26,46,0.08) 0%,transparent 50%);}
+.hero-ornament{font-size:1.5rem;color:var(--gold2);opacity:.4;margin-bottom:16px;letter-spacing:.3em;animation:fadeIn .8s ease both;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.restaurant-name{font-family:var(--font-disp);font-size:clamp(3.5rem,10vw,8rem);line-height:.95;color:var(--gold);animation:fadeUp .8s .1s ease both;text-shadow:0 0 60px rgba(200,151,58,0.3);}
+.restaurant-sub{font-family:var(--font-en);font-style:italic;font-weight:300;font-size:clamp(.9rem,2vw,1.2rem);color:var(--cream2);letter-spacing:.15em;margin:12px 0 32px;animation:fadeUp .8s .2s ease both;}
+.hero-divider{width:120px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 28px;animation:fadeIn .8s .3s ease both;}
+.hero-desc{font-size:clamp(.9rem,2vw,1.1rem);color:var(--text2);max-width:480px;line-height:1.8;font-weight:300;animation:fadeUp .8s .3s ease both;margin-bottom:40px;}
+.hero-btns{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;animation:fadeUp .8s .4s ease both}
+.btn-hero-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0B0804;border:none;cursor:pointer;padding:14px 36px;border-radius:8px;font-size:.95rem;font-weight:700;font-family:inherit;transition:all .25s;letter-spacing:.05em;}
+.btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px var(--glow)}
+.btn-hero-ghost{background:transparent;border:1px solid rgba(200,151,58,.35);color:var(--text);cursor:pointer;padding:14px 36px;border-radius:8px;font-size:.95rem;font-family:inherit;transition:all .25s;}
+.btn-hero-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO FOOD CARDS — with images */
+.food-row{display:flex;gap:16px;margin-top:60px;animation:fadeIn .8s .5s ease both;justify-content:center;flex-wrap:wrap;}
+.food-card{
+  width:160px;height:160px;border-radius:20px;
+  background:var(--surface);border:1px solid var(--border);
+  overflow:hidden;position:relative;
+  transition:all .4s;cursor:default;
+}
+.food-card:hover{transform:translateY(-8px) scale(1.05);border-color:var(--border2);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.food-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+.food-card:hover img{transform:scale(1.08)}
+.food-card-label{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(0,0,0,.8),transparent);
+  color:var(--gold2);font-size:.72rem;font-family:var(--font-en);
+  padding:16px 8px 8px;text-align:center;letter-spacing:.08em;
+}
+
+/* SECTION */
+section{padding:100px 6vw}
+.section-ornament{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:12px;color:var(--gold);font-size:1rem;letter-spacing:.2em;}
+.ornament-line{flex:1;max-width:60px;height:1px;background:var(--gold);opacity:.4}
+.section-title{font-family:var(--font-disp);font-size:clamp(2rem,5vw,3.5rem);color:var(--gold);text-align:center;margin-bottom:8px;}
+.section-sub{font-family:var(--font-en);font-style:italic;font-weight:300;font-size:1rem;color:var(--text2);text-align:center;max-width:400px;margin:0 auto 60px;letter-spacing:.08em;}
+
+/* MENU */
+.menu-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.menu-tabs{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;margin-bottom:48px;background:var(--bg3);padding:6px;border-radius:12px;max-width:fit-content;margin:0 auto 48px;}
+.menu-tab{background:transparent;border:none;cursor:pointer;padding:10px 24px;border-radius:8px;font-size:.85rem;font-family:inherit;color:var(--text2);transition:all .25s;font-weight:500;}
+.menu-tab.active{background:var(--surface);color:var(--gold);border:1px solid var(--border2)}
+.menu-tab:hover:not(.active){color:var(--text)}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;max-width:1000px;margin:0 auto;}
+
+/* MENU ITEM — image replaces emoji */
+.menu-item{display:flex;align-items:center;gap:16px;padding:16px;background:var(--bg3);border:1px solid var(--border);border-radius:14px;transition:all .3s;cursor:default;}
+.menu-item:hover{border-color:var(--border2);transform:translateY(-2px)}
+.menu-img{
+  flex-shrink:0;width:72px;height:72px;border-radius:12px;
+  overflow:hidden;background:var(--surface);
+}
+.menu-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s;}
+.menu-item:hover .menu-img img{transform:scale(1.08)}
+.menu-info{flex:1}
+.menu-name{font-size:.95rem;font-weight:700;margin-bottom:4px}
+.menu-desc{font-size:.8rem;color:var(--text2);line-height:1.4;margin-bottom:8px}
+.menu-price{font-family:var(--font-en);font-size:1rem;font-weight:600;color:var(--gold);}
+.menu-badge{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:3px 8px;border-radius:4px;margin-inline-start:8px;}
+.badge-new{background:rgba(200,151,58,.15);color:var(--gold);border:1px solid rgba(200,151,58,.3)}
+.badge-hot{background:rgba(139,26,46,.15);color:#E8566A;border:1px solid rgba(139,26,46,.3)}
+
+/* BOOKING */
+.booking-section{background:var(--bg3);border-bottom:1px solid var(--border)}
+.booking-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1000px;margin:0 auto;}
+@media(max-width:768px){.booking-wrap{grid-template-columns:1fr;gap:40px}}
+.booking-info h3{font-family:var(--font-disp);font-size:2rem;color:var(--gold);margin-bottom:16px}
+.booking-info p{font-size:.9rem;color:var(--text2);line-height:1.7;margin-bottom:24px}
+.info-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.info-list li{display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--text2)}
+.info-list li::before{content:'◆';color:var(--gold);font-size:.6rem}
+.booking-form{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:32px;}
+.form-title{font-family:var(--font-disp);font-size:1.4rem;color:var(--gold);text-align:center;margin-bottom:24px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:.8rem;color:var(--text2);margin-bottom:6px;letter-spacing:.05em}
+.form-control{width:100%;padding:11px 14px;border-radius:8px;background:var(--bg3);border:1px solid var(--border2);color:var(--text);font-size:.9rem;font-family:inherit;outline:none;transition:border-color .2s;}
+.form-control:focus{border-color:var(--gold)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.btn-book{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0B0804;border:none;border-radius:8px;font-size:.95rem;font-weight:700;font-family:inherit;cursor:pointer;transition:all .25s;margin-top:8px;letter-spacing:.05em;}
+.btn-book:hover{transform:translateY(-1px);box-shadow:0 8px 24px var(--glow)}
+
+/* INSTAGRAM — with images */
+.social-section{background:var(--bg2);border-top:1px solid var(--border)}
+.insta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:700px;margin:0 auto;}
+@media(max-width:600px){.insta-grid{grid-template-columns:repeat(2,1fr)}}
+.insta-item{
+  aspect-ratio:1;border-radius:12px;overflow:hidden;
+  background:var(--bg3);border:1px solid var(--border);
+  position:relative;cursor:pointer;transition:all .3s;
+}
+.insta-item:hover{transform:scale(1.03);border-color:var(--border2)}
+.insta-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+.insta-item:hover img{transform:scale(1.08)}
+.insta-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;gap:12px;opacity:0;transition:opacity .3s;}
+.insta-item:hover .insta-overlay{opacity:1}
+.insta-stat{color:#fff;font-size:.8rem;display:flex;align-items:center;gap:4px}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* FOOTER */
+footer{padding:48px 6vw 32px;border-top:1px solid var(--border);text-align:center;}
+.footer-logo{font-family:var(--font-disp);font-size:3rem;color:var(--gold);margin-bottom:8px}
+.footer-tagline{font-family:var(--font-en);font-style:italic;font-weight:300;color:var(--text2);font-size:.9rem;letter-spacing:.1em;margin-bottom:24px}
+.footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:24px}
+.footer-link{color:var(--text3);font-size:.8rem;text-decoration:none;transition:color .2s;background:none;border:none;cursor:pointer;font-family:inherit}
+.footer-link:hover{color:var(--gold)}
+.footer-copy{color:var(--text3);font-size:.78rem}
+
+@media(max-width:480px){
+  .restaurant-name{font-size:3rem}
+  .food-row{gap:10px}
+  .food-card{width:130px;height:130px}
+}
+</style>
+</head>
+<body lang="en">
+
+<nav>
+  <div id="logo-display" class="logo-en">Lamsa</div>
+  <div class="nav-links">
+    <button class="nav-link" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})" id="nl1">Menu</button>
+    <button class="nav-link" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" id="nl2">Reserve</button>
+    <button class="nav-link" onclick="document.getElementById('social').scrollIntoView({behavior:'smooth'})" id="nl3">Gallery</button>
+  </div>
+  <div class="nav-controls">
+    <button class="btn-ctrl" onclick="toggleLang()">عربي</button>
+    <button class="btn-ctrl" onclick="toggleTheme()">🌙</button>
+    <button class="btn-reserve" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" id="nav-reserve">Reserve a Table</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ornament">✦ ✦ ✦</div>
+  <div class="restaurant-name" id="hero-name">Lamsa</div>
+  <div class="restaurant-sub" id="hero-sub-title">Fine Dining · Arabic Cuisine · Cairo</div>
+  <div class="hero-divider"></div>
+  <p class="hero-desc" id="hero-desc">
+    An extraordinary dining experience that bridges authentic Arabic heritage with modern creativity — in the heart of Cairo, where every meal tells a story.
+  </p>
+  <div class="hero-btns">
+    <button class="btn-hero-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})" id="h-btn1">Reserve Your Table</button>
+    <button class="btn-hero-ghost" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})" id="h-btn2">Browse Menu</button>
+  </div>
+
+  <!-- ★ Hero food cards with images -->
+  <div class="food-row">
+    <div class="food-card">
+      <img src="./images/hero-starters.jpg" alt="Starters" onerror="this.style.display='none'">
+      <div class="food-card-label" id="fc1">Starters</div>
+    </div>
+    <div class="food-card">
+      <img src="./images/hero-mains.jpg" alt="Main Course" onerror="this.style.display='none'">
+      <div class="food-card-label" id="fc2">Main Course</div>
+    </div>
+    <div class="food-card">
+      <img src="./images/hero-desserts.jpg" alt="Desserts" onerror="this.style.display='none'">
+      <div class="food-card-label" id="fc3">Desserts</div>
+    </div>
+    <div class="food-card">
+      <img src="./images/hero-drinks.jpg" alt="Beverages" onerror="this.style.display='none'">
+      <div class="food-card-label" id="fc4">Beverages</div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="section-ornament">
+    <div class="ornament-line"></div>
+    <span id="menu-ornament-text">✦ OUR MENU ✦</span>
+    <div class="ornament-line"></div>
+  </div>
+  <h2 class="section-title" id="menu-title">Creativity on the Plate</h2>
+  <p class="section-sub" id="menu-sub">Seasonal dishes that change with the finest fresh ingredients</p>
+
+  <div class="menu-tabs reveal">
+    <button class="menu-tab active" onclick="switchTab(0,this)" id="tab0">Starters</button>
+    <button class="menu-tab" onclick="switchTab(1,this)" id="tab1">Main Course</button>
+    <button class="menu-tab" onclick="switchTab(2,this)" id="tab2">Desserts</button>
+    <button class="menu-tab" onclick="switchTab(3,this)" id="tab3">Beverages</button>
+  </div>
+
+  <div id="menu-grid" class="menu-grid reveal"></div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking-section" id="booking">
+  <div class="section-ornament">
+    <div class="ornament-line"></div>
+    <span id="book-ornament">✦ RESERVATIONS ✦</span>
+    <div class="ornament-line"></div>
+  </div>
+  <h2 class="section-title" id="book-title">Reserve Your Table</h2>
+  <p class="section-sub" id="book-sub">An unforgettable experience begins with a reservation</p>
+
+  <div class="booking-wrap reveal">
+    <div class="booking-info">
+      <h3 id="bi-title">An Unforgettable Experience</h3>
+      <p id="bi-desc">We offer each guest personal attention and an experience designed especially for you. Our team ensures every moment with us is truly memorable.</p>
+      <ul class="info-list">
+        <li id="bil1">Open 12 PM to 12 AM daily</li>
+        <li id="bil2">Restaurant capacity: 120 guests</li>
+        <li id="bil3">Private hall for special occasions</li>
+        <li id="bil4">Vegetarian & gluten-free menus available</li>
+        <li id="bil5">Live music every Friday & Saturday</li>
+      </ul>
+    </div>
+    <div class="booking-form">
+      <div class="form-title" id="form-title">✦ SECURE YOUR SEAT ✦</div>
+      <div class="form-group">
+        <label id="fl-name">Full Name</label>
+        <input class="form-control" type="text" id="fi-name" placeholder="John Smith">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label id="fl-date">Date</label>
+          <input class="form-control" type="date" id="fi-date">
+        </div>
+        <div class="form-group">
+          <label id="fl-time">Time</label>
+          <select class="form-control" id="fi-time">
+            <option>12:00</option><option>13:00</option><option>14:00</option>
+            <option>18:00</option><option>19:00</option><option>20:00</option>
+            <option>21:00</option><option>22:00</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label id="fl-guests">Number of Guests</label>
+        <select class="form-control" id="fi-guests">
+          <option>1</option><option>2</option><option>3</option><option>4</option>
+          <option>5-6</option><option>7-10</option><option>+10</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label id="fl-notes">Special Notes (optional)</label>
+        <input class="form-control" type="text" id="fi-notes" placeholder="Dietary requirements, special occasion...">
+      </div>
+      <button class="btn-book" onclick="submitBooking()" id="book-btn">Confirm Reservation ✦</button>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM / GALLERY -->
+<section class="social-section" id="social">
+  <div class="section-ornament">
+    <div class="ornament-line"></div>
+    <span id="insta-ornament">✦ OUR GALLERY ✦</span>
+    <div class="ornament-line"></div>
+  </div>
+  <h2 class="section-title" id="insta-title">Moments With You</h2>
+  <p class="section-sub" id="insta-sub">@lamsa.restaurant</p>
+
+  <!-- ★ Instagram grid with images -->
+  <div class="insta-grid reveal">
+    <div class="insta-item">
+      <img src="./images/social/social-1.jpg" alt="Gallery" onerror="this.style.display='none'">
+      <div class="insta-overlay"><span class="insta-stat">❤️ 2.4K</span><span class="insta-stat">💬 48</span></div>
+    </div>
+    <div class="insta-item">
+      <img src="./images/social/social-2.jpg" alt="Gallery" onerror="this.style.display='none'">
+      <div class="insta-overlay"><span class="insta-stat">❤️ 3.1K</span><span class="insta-stat">💬 72</span></div>
+    </div>
+    <div class="insta-item">
+      <img src="./images/social/social-3.jpg" alt="Gallery" onerror="this.style.display='none'">
+      <div class="insta-overlay"><span class="insta-stat">❤️ 1.8K</span><span class="insta-stat">💬 31</span></div>
+    </div>
+    <div class="insta-item">
+      <img src="./images/social/social-4.jpg" alt="Gallery" onerror="this.style.display='none'">
+      <div class="insta-overlay"><span class="insta-stat">❤️ 4.2K</span><span class="insta-stat">💬 96</span></div>
+    </div>
+    <div class="insta-item">
+      <img src="./images/social/social-5.jpg" alt="Gallery" onerror="this.style.display='none'">
+      <div class="insta-overlay"><span class="insta-stat">❤️ 2.8K</span><span class="insta-stat">💬 55</span></div>
+    </div>
+    <div class="insta-item">
+      <img src="./images/social/social-6.jpg" alt="Gallery" onerror="this.style.display='none'">
+      <div class="insta-overlay"><span class="insta-stat">❤️ 5.1K</span><span class="insta-stat">💬 140</span></div>
+    </div>
+    <div class="insta-item">
+      <img src="./images/social/social-7.jpg" alt="Gallery" onerror="this.style.display='none'">
+      <div class="insta-overlay"><span class="insta-stat">❤️ 2.2K</span><span class="insta-stat">💬 38</span></div>
+    </div>
+    <div class="insta-item">
+      <img src="./images/social/social-8.jpg" alt="Gallery" onerror="this.style.display='none'">
+      <div class="insta-overlay"><span class="insta-stat">❤️ 3.5K</span><span class="insta-stat">💬 87</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div id="footer-logo" class="footer-logo">Lamsa</div>
+  <div class="footer-tagline" id="footer-tagline">Where Authenticity Meets Creativity</div>
+  <div class="footer-links">
+    <button class="footer-link" id="fl1">Menu</button>
+    <button class="footer-link" id="fl2">Reservations</button>
+    <button class="footer-link" id="fl3">About Us</button>
+    <button class="footer-link" id="fl4">Contact</button>
+  </div>
+  <div class="footer-copy" id="footer-copy">© 2025 Lamsa Restaurant — Cairo, Egypt</div>
+</footer>
+
+<script>
+/* ── MENU DATA with img filenames ── */
+const menuData = {
+  ar: [
+    [
+      {img:'bastilla.jpg',      name:'بسطيلة الدجاج',          desc:'طبق مغربي تقليدي بالدجاج والمكسرات',              price:'125 جنيه', badge:'new'},
+      {img:'harira.jpg',        name:'حريرة بالجمال',           desc:'شوربة تقليدية بأرقى المكونات',                    price:'85 جنيه',  badge:''},
+      {img:'fattoush.jpg',      name:'سلطة الفتوش الفاخرة',     desc:'خضروات طازجة مع صلصة الرمان',                    price:'95 جنيه',  badge:''},
+      {img:'mezze.jpg',         name:'مزة فاخرة',               desc:'تشكيلة من الفلافل والحمص المميز',                 price:'150 جنيه', badge:'hot'},
+    ],
+    [
+      {img:'lamb-ribs.jpg',     name:'ضلع ضأن على الفحم',        desc:'مع خضروات مشوية وأرز بالأعشاب',                  price:'395 جنيه', badge:'hot'},
+      {img:'chicken-zaatar.jpg',name:'دجاج مشوي بالزعتر',        desc:'مع صلصة الليمون والزيتون والثوم',                 price:'285 جنيه', badge:''},
+      {img:'sea-bass.jpg',      name:'سمك فيليه بالأعشاب',       desc:'سمك طازج من البحر الأحمر مشوي',                  price:'345 جنيه', badge:'new'},
+      {img:'lamb-stew.jpg',     name:'يخنة اللحم الفاخرة',       desc:'تُطهى ببطء 8 ساعات بالتوابل العربية',             price:'320 جنيه', badge:''},
+    ],
+    [
+      {img:'om-ali.jpg',        name:'أم علي الفاخرة',           desc:'حلوى مصرية كلاسيكية بالكريمة المزدوجة',           price:'95 جنيه',  badge:''},
+      {img:'kunafa.jpg',        name:'كنافة بالقشطة والمانجو',   desc:'كنافة ناعمة بصوص مانجو طازج',                    price:'110 جنيه', badge:'new'},
+      {img:'fondue.jpg',        name:'فوندو الشوكولاتة',          desc:'شوكولاتة بلجيكية فاخرة مع الفراولة',              price:'130 جنيه', badge:''},
+      {img:'saffron.jpg',       name:'ترافل الزعفران',            desc:'بوظة الزعفران الإيراني مع التمر',                 price:'85 جنيه',  badge:''},
+    ],
+    [
+      {img:'arabic-coffee.jpg', name:'قهوة عربية بالهيل',         desc:'قهوة تقليدية برائحة الهيل والزعفران',             price:'65 جنيه',  badge:''},
+      {img:'mint-tea.jpg',      name:'شاي المنت المغربي',          desc:'شاي أخضر بالنعنع الطازج والسكر الناعم',           price:'55 جنيه',  badge:''},
+      {img:'pomegranate.jpg',   name:'عصير الرمان الطازج',         desc:'رمان طازج بإضافة ماء الورد',                     price:'75 جنيه',  badge:'new'},
+      {img:'mojito.jpg',        name:'موهيتو الريحان',             desc:'مشروب منعش بالريحان والليمون والنعنع',             price:'90 جنيه',  badge:''},
+    ]
+  ],
+  en: [
+    [
+      {img:'bastilla.jpg',      name:'Chicken Bastilla',         desc:'Traditional Moroccan pie with chicken & nuts',     price:'EGP 125',  badge:'new'},
+      {img:'harira.jpg',        name:'Harira Soup',              desc:'Traditional soup with premium ingredients',        price:'EGP 85',   badge:''},
+      {img:'fattoush.jpg',      name:'Premium Fattoush',         desc:'Fresh vegetables with pomegranate dressing',      price:'EGP 95',   badge:''},
+      {img:'mezze.jpg',         name:'Luxury Mezze Platter',     desc:'Selection of falafel & premium hummus',           price:'EGP 150',  badge:'hot'},
+    ],
+    [
+      {img:'lamb-ribs.jpg',     name:'Charcoal Lamb Ribs',       desc:'With grilled vegetables & herb rice',             price:'EGP 395',  badge:'hot'},
+      {img:'chicken-zaatar.jpg',name:"Za'atar Grilled Chicken",  desc:'With lemon, olive & garlic sauce',                price:'EGP 285',  badge:''},
+      {img:'sea-bass.jpg',      name:'Herb-Crusted Sea Bass',    desc:'Fresh Red Sea fish, grilled to perfection',       price:'EGP 345',  badge:'new'},
+      {img:'lamb-stew.jpg',     name:'Premium Lamb Stew',        desc:'Slow-cooked 8 hours with Arabic spices',          price:'EGP 320',  badge:''},
+    ],
+    [
+      {img:'om-ali.jpg',        name:'Luxe Om Ali',              desc:'Classic Egyptian dessert with double cream',      price:'EGP 95',   badge:''},
+      {img:'kunafa.jpg',        name:'Mango Cream Kunafa',       desc:'Silky kunafa with fresh mango sauce',             price:'EGP 110',  badge:'new'},
+      {img:'fondue.jpg',        name:'Chocolate Fondue',         desc:'Premium Belgian chocolate with strawberries',     price:'EGP 130',  badge:''},
+      {img:'saffron.jpg',       name:'Saffron Truffle',          desc:'Persian saffron ice cream with dates',            price:'EGP 85',   badge:''},
+    ],
+    [
+      {img:'arabic-coffee.jpg', name:'Arabic Cardamom Coffee',   desc:'Traditional coffee with cardamom & saffron',      price:'EGP 65',   badge:''},
+      {img:'mint-tea.jpg',      name:'Moroccan Mint Tea',        desc:'Green tea with fresh mint & cane sugar',          price:'EGP 55',   badge:''},
+      {img:'pomegranate.jpg',   name:'Fresh Pomegranate Juice',  desc:'Freshly squeezed with rose water',                price:'EGP 75',   badge:'new'},
+      {img:'mojito.jpg',        name:'Basil Mojito',             desc:'Refreshing basil, lime & mint mocktail',          price:'EGP 90',   badge:''},
+    ]
+  ]
+};
+
+let currentCat = 0;
+let currentLang = 'en';
+let currentTheme = 'dark';
+
+function renderMenu() {
+  const grid = document.getElementById('menu-grid');
+  const items = menuData[currentLang][currentCat];
+  grid.innerHTML = items.map(item => `
+    <div class="menu-item">
+      <div class="menu-img">
+        <img src="./images/menu/${item.img}" alt="${item.name}" onerror="this.style.display='none'">
+      </div>
+      <div class="menu-info">
+        <div class="menu-name">
+          ${item.name}
+          ${item.badge ? `<span class="menu-badge badge-${item.badge}">${item.badge==='new'?(currentLang==='ar'?'جديد':'NEW'):(currentLang==='ar'?'الأكثر طلباً':'HOT')}</span>` : ''}
+        </div>
+        <div class="menu-desc">${item.desc}</div>
+        <div class="menu-price">${item.price}</div>
+      </div>
+    </div>
+  `).join('');
+}
+renderMenu();
+
+function switchTab(idx, btn) {
+  currentCat = idx;
+  document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  renderMenu();
+}
+
+function submitBooking() {
+  const name = document.getElementById('fi-name').value;
+  if(!name){ alert(currentLang==='ar'?'الرجاء إدخال اسمك':'Please enter your name'); return; }
+  alert(currentLang==='ar'?`✅ تم تأكيد حجزك يا ${name}!`:`✅ Booking confirmed for ${name}! We'll be in touch shortly.`);
+}
+
+/* ── LANGUAGE ── */
+const content = {
+  ar: {
+    dir:'rtl', bodyLang:'ar', langBtn:'EN', logoClass:'logo-ar',
+    'logo-display':'لمسة',
+    'nl1':'القائمة','nl2':'احجز طاولة','nl3':'معرض الصور',
+    'nav-reserve':'احجز طاولة',
+    'hero-name':'لمسة','hero-sub-title':'Fine Dining · Arabic Cuisine · Cairo',
+    'hero-desc':'تجربة طعام استثنائية تجمع بين الأصالة العربية والإبداع العصري — في قلب القاهرة، حيث كل وجبة قصة.',
+    'h-btn1':'احجز طاولتك','h-btn2':'تصفح القائمة',
+    'fc1':'مقبلات','fc2':'أطباق رئيسية','fc3':'حلويات','fc4':'مشروبات',
+    'menu-ornament-text':'✦ قائمة الطعام ✦','menu-title':'إبداع على الطبق',
+    'menu-sub':'أطباق موسمية تتغير مع أفضل المكونات الطازجة',
+    'tab0':'مقبلات','tab1':'أطباق رئيسية','tab2':'حلويات','tab3':'مشروبات',
+    'book-ornament':'✦ الحجز ✦','book-title':'احجز طاولتك','book-sub':'تجربة لا تُنسى تبدأ بحجز',
+    'bi-title':'تجربة لا تُنسى','bi-desc':'نقدم لكل ضيف اهتماماً شخصياً وتجربة مصمَّمة خصيصاً لك.',
+    'bil1':'مفتوح من 12 ظهراً حتى 12 منتصف الليل','bil2':'سعة المطعم 120 ضيفاً',
+    'bil3':'قاعة خاصة للمناسبات الخاصة','bil4':'قائمة نباتية وخالية من الغلوتين',
+    'bil5':'موسيقى حية كل ليلة جمعة وسبت',
+    'form-title':'✦ أحجز مكانك ✦',
+    'fl-name':'الاسم الكامل','fl-date':'التاريخ','fl-time':'الوقت',
+    'fl-guests':'عدد الأشخاص','fl-notes':'ملاحظات خاصة',
+    'book-btn':'تأكيد الحجز ✦',
+    'insta-ornament':'✦ معرض الصور ✦','insta-title':'لحظاتنا معكم','insta-sub':'@lamsa.restaurant',
+    'footer-logo':'لمسة','footer-tagline':'حيث الأصالة تلتقي الإبداع',
+    'fl1':'القائمة','fl2':'الحجوزات','fl3':'عن المطعم','fl4':'اتصل بنا',
+    'footer-copy':'© 2025 مطعم لمسة — القاهرة، مصر'
+  },
+  en: {
+    dir:'ltr', bodyLang:'en', langBtn:'عربي', logoClass:'logo-en',
+    'logo-display':'Lamsa',
+    'nl1':'Menu','nl2':'Reserve','nl3':'Gallery',
+    'nav-reserve':'Reserve a Table',
+    'hero-name':'Lamsa','hero-sub-title':'Fine Dining · Arabic Cuisine · Cairo',
+    'hero-desc':'An extraordinary dining experience that bridges authentic Arabic heritage with modern creativity — in the heart of Cairo, where every meal tells a story.',
+    'h-btn1':'Reserve Your Table','h-btn2':'Browse Menu',
+    'fc1':'Starters','fc2':'Main Course','fc3':'Desserts','fc4':'Beverages',
+    'menu-ornament-text':'✦ OUR MENU ✦','menu-title':'Creativity on the Plate',
+    'menu-sub':'Seasonal dishes that change with the finest fresh ingredients',
+    'tab0':'Starters','tab1':'Main Course','tab2':'Desserts','tab3':'Beverages',
+    'book-ornament':'✦ RESERVATIONS ✦','book-title':'Reserve Your Table','book-sub':'An unforgettable experience begins with a reservation',
+    'bi-title':'An Unforgettable Experience','bi-desc':'We offer each guest personal attention and an experience designed especially for you.',
+    'bil1':'Open 12 PM to 12 AM daily','bil2':'Restaurant capacity: 120 guests',
+    'bil3':'Private hall for special occasions','bil4':'Vegetarian & gluten-free menus available',
+    'bil5':'Live music every Friday & Saturday',
+    'form-title':'✦ SECURE YOUR SEAT ✦',
+    'fl-name':'Full Name','fl-date':'Date','fl-time':'Time',
+    'fl-guests':'Number of Guests','fl-notes':'Special Notes',
+    'book-btn':'Confirm Reservation ✦',
+    'insta-ornament':'✦ OUR GALLERY ✦','insta-title':'Moments With You','insta-sub':'@lamsa.restaurant',
+    'footer-logo':'Lamsa','footer-tagline':'Where Authenticity Meets Creativity',
+    'fl1':'Menu','fl2':'Reservations','fl3':'About Us','fl4':'Contact',
+    'footer-copy':'© 2025 Lamsa Restaurant — Cairo, Egypt'
+  }
+};
+
+function applyLang(lang) {
+  currentLang = lang;
+  const d = content[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = d.dir;
+  document.body.setAttribute('lang', d.bodyLang);
+  document.querySelector('.btn-ctrl:first-child').textContent = d.langBtn;
+  const logoEl = document.getElementById('logo-display');
+  if(logoEl){ logoEl.textContent = d['logo-display']; logoEl.className = d.logoClass; }
+  const skip = ['dir','bodyLang','langBtn','logoClass','logo-display'];
+  Object.keys(d).forEach(k => {
+    if(skip.includes(k)) return;
+    const el = document.getElementById(k);
+    if(el) el.textContent = d[k];
+  });
+  renderMenu();
+}
+
+function toggleLang() {
+  applyLang(currentLang === 'ar' ? 'en' : 'ar');
+}
+
+function toggleTheme() {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', currentTheme === 'light' ? 'light' : 'dark');
+  document.querySelectorAll('.btn-ctrl')[1].textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+}
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+}, {threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html> 

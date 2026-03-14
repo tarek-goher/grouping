@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwiftDrop — التوصيل الذكي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* DARK */
+:root {
+  --bg:#08090C; --bg2:#0F1117; --bg3:#161820; --surface:#1A1D27;
+  --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.14);
+  --accent:#00E5A0; --accent2:#00B4FF;
+  --text:#F0F2F8; --text2:#8B90A7; --text3:#555A72;
+  --glow:rgba(0,229,160,0.18);
+  --nav-bg:rgba(8,9,12,0.84);
+  --card:#1A1D27;
+}
+/* LIGHT */
+[data-theme="light"] {
+  --bg:#EEF2FF; --bg2:#FFFFFF; --bg3:#E2E8F8; --surface:#FFFFFF;
+  --border:rgba(0,0,0,0.08); --border2:rgba(0,0,0,0.15);
+  --accent:#00996A; --accent2:#0062CC;
+  --text:#080B18; --text2:#455072; --text3:#8A90B4;
+  --glow:rgba(0,153,106,0.15);
+  --nav-bg:rgba(238,242,255,0.90);
+  --card:#FFFFFF;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Cairo',sans-serif;overflow-x:hidden;transition:background .3s,color .3s}
+body.en{font-family:'Space Grotesk',sans-serif;direction:ltr}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5vw;height:68px;
+  background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-size:1.3rem;font-weight:700;
+  background:linear-gradient(130deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.nav-right{display:flex;align-items:center;gap:8px}
+.btn-sm{
+  height:36px;padding:0 14px;border-radius:8px;cursor:pointer;
+  font-size:.8rem;font-weight:600;font-family:'Space Grotesk',sans-serif;
+  background:var(--surface);border:1px solid var(--border2);color:var(--text2);
+  transition:all .2s;
+}
+.btn-sm:hover{color:var(--text);background:var(--bg3)}
+.btn-cta{
+  height:36px;padding:0 20px;border-radius:8px;cursor:pointer;
+  background:var(--accent);color:#000;border:none;
+  font-size:.85rem;font-weight:700;font-family:inherit;transition:all .2s;
+}
+.btn-cta:hover{transform:translateY(-1px);box-shadow:0 6px 18px var(--glow)}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:88px 5vw 60px;position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 25%,rgba(0,229,160,0.07) 0%,transparent 65%),
+    radial-gradient(ellipse 35% 35% at 75% 75%,rgba(0,180,255,0.05) 0%,transparent 55%);
+}
+[data-theme="light"] .hero-bg{
+  background:
+    radial-gradient(ellipse 55% 45% at 50% 25%,rgba(0,153,106,0.06) 0%,transparent 65%),
+    radial-gradient(ellipse 35% 35% at 75% 75%,rgba(0,98,204,0.04) 0%,transparent 55%);
+}
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),
+    linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:64px 64px;opacity:.55;
+  -webkit-mask-image:radial-gradient(ellipse 75% 75% at 50% 50%,black 20%,transparent 100%);
+  mask-image:radial-gradient(ellipse 75% 75% at 50% 50%,black 20%,transparent 100%);
+}
+
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(1.7)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes scan{from{left:-60%}to{left:110%}}
+@keyframes scanRTL{from{right:-60%}to{right:110%}}
+@keyframes barFill{from{width:0}to{width:65%}}
+
+.badge{
+  position:relative;z-index:1;
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.28);
+  color:var(--accent);padding:6px 16px;border-radius:999px;
+  font-size:.78rem;font-weight:700;margin-bottom:26px;
+  animation:fadeDown .6s ease both;
+}
+[data-theme="light"] .badge{background:rgba(0,153,106,.09);border-color:rgba(0,153,106,.28)}
+.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+
+h1.htitle{
+  position:relative;z-index:1;
+  font-size:clamp(2.5rem,6.5vw,5rem);font-weight:900;line-height:1.06;
+  letter-spacing:-.03em;margin-bottom:22px;animation:fadeUp .7s .1s ease both;
+}
+.htitle .grad{
+  background:linear-gradient(130deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hsub{
+  position:relative;z-index:1;
+  font-size:clamp(.94rem,2.2vw,1.16rem);color:var(--text2);
+  max-width:530px;margin:0 auto 36px;font-weight:300;line-height:1.75;
+  animation:fadeUp .7s .2s ease both;
+}
+.hbtns{
+  position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;
+  margin-bottom:54px;animation:fadeUp .7s .3s ease both;
+}
+.btn-p{
+  background:linear-gradient(130deg,var(--accent),#00CC88);color:#000;
+  border:none;cursor:pointer;padding:13px 30px;border-radius:11px;
+  font-size:.95rem;font-weight:700;font-family:inherit;
+  display:flex;align-items:center;gap:8px;transition:all .25s;
+}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 36px var(--glow)}
+.btn-s{
+  background:transparent;border:1px solid var(--border2);color:var(--text);
+  cursor:pointer;padding:13px 30px;border-radius:11px;
+  font-size:.95rem;font-weight:600;font-family:inherit;
+  display:flex;align-items:center;gap:8px;transition:all .25s;
+}
+.btn-s:hover{background:var(--surface);transform:translateY(-2px)}
+
+/* PHONE */
+.phone-wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;animation:fadeIn .9s .4s ease both}
+.phone{
+  width:208px;height:435px;margin:0 auto;position:relative;
+  background:var(--card);border:2px solid var(--border2);border-radius:34px;overflow:hidden;
+  box-shadow:0 0 0 1px var(--border),0 40px 80px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.06);
+  animation:float 4.5s ease-in-out infinite;
+  transition:background .3s,border-color .3s;
+}
+.notch{width:70px;height:21px;background:var(--bg);border-radius:0 0 13px 13px;margin:0 auto;transition:background .3s}
+.pscreen{padding:10px;display:flex;flex-direction:column;gap:8px}
+.pbar{display:flex;justify-content:space-between;padding:3px 10px;font-size:.6rem;color:var(--text2)}
+.pbar .live-dot{color:var(--accent)}
+.pmap{
+  height:145px;border-radius:10px;overflow:hidden;position:relative;
+  background:linear-gradient(145deg,#0A1F18,#0D2820);
+  display:flex;align-items:center;justify-content:center;
+}
+[data-theme="light"] .pmap{background:linear-gradient(145deg,#B8D8C8,#90C4A8)}
+.scan-line{
+  position:absolute;width:55%;height:2px;top:50%;transform:translateY(-50%);
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  animation:scan 2.2s linear infinite;
+}
+.pin{
+  width:17px;height:17px;background:var(--accent);
+  border-radius:50% 50% 50% 0;transform:rotate(-45deg);
+  box-shadow:0 0 0 5px rgba(0,229,160,.18),0 0 16px var(--accent);
+  animation:pulse 2s infinite;
+}
+.prider{
+  display:flex;align-items:center;gap:9px;
+  padding:9px;background:var(--bg3);border-radius:10px;transition:background .3s;
+}
+.ravatar{
+  width:33px;height:33px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(130deg,var(--accent),var(--accent2));
+  display:flex;align-items:center;justify-content:center;font-size:.9rem;
+}
+.rname{font-size:.67rem;font-weight:700}
+.reta{font-size:.61rem;color:var(--accent)}
+.pbar2{height:4px;background:var(--border2);border-radius:4px;overflow:hidden}
+.pbar2-fill{
+  width:65%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));
+  border-radius:4px;animation:scan 2.8s linear infinite;
+}
+.pstatus{font-size:.61rem;color:var(--text2);text-align:center}
+/* floating chips */
+.pfloat{
+  position:absolute;
+  background:var(--card);border:1px solid var(--border2);border-radius:11px;
+  padding:9px 13px;display:flex;align-items:center;gap:8px;
+  box-shadow:0 8px 22px rgba(0,0,0,.25);font-size:.7rem;white-space:nowrap;
+  transition:background .3s,border-color .3s;
+}
+[data-theme="light"] .pfloat{box-shadow:0 8px 22px rgba(0,0,0,.1)}
+.pf-r{top:26%;right:-50px;animation:float 3.5s .4s ease-in-out infinite}
+.pf-l{bottom:17%;left:-50px;animation:float 4.2s .9s ease-in-out infinite}
+body.en .pf-r{right:auto;left:-50px}
+body.en .pf-l{left:auto;right:-50px}
+.pdot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
+
+/* STATS */
+.stats{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--border);max-width:640px;margin:50px auto 0;
+  border-radius:14px;overflow:hidden;animation:fadeUp .7s .55s ease both;
+}
+.scell{background:var(--card);padding:24px 16px;text-align:center;transition:background .3s}
+.snum{
+  font-family:'Space Grotesk',sans-serif;font-size:1.85rem;font-weight:700;
+  background:linear-gradient(130deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.slbl{font-size:.76rem;color:var(--text2);margin-top:4px}
+
+/* SECTIONS */
+.sec{padding:96px 5vw}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(0,180,255,.08);border:1px solid rgba(0,180,255,.2);
+  color:var(--accent2);padding:5px 13px;border-radius:999px;
+  font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:17px;
+}
+[data-theme="light"] .chip{background:rgba(0,98,204,.08);border-color:rgba(0,98,204,.2)}
+.stitle{font-size:clamp(1.7rem,3.8vw,2.8rem);font-weight:900;letter-spacing:-.02em;line-height:1.15;margin-bottom:13px}
+.ssub{font-size:.97rem;color:var(--text2);max-width:460px;line-height:1.75}
+.ssub-c{margin:0 auto;text-align:center}
+
+/* HOW */
+.how-bg{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);transition:background .3s}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:50px}
+.step{
+  padding:28px 24px;background:var(--bg3);border:1px solid var(--border);
+  border-radius:18px;position:relative;overflow:hidden;transition:all .3s;
+}
+.step:hover{transform:translateY(-4px);border-color:var(--border2)}
+.stepn{
+  position:absolute;top:14px;
+  font-family:'Space Grotesk',sans-serif;font-size:3.1rem;font-weight:800;
+  background:linear-gradient(130deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  opacity:.13;line-height:1;
+}
+:not(body.en) .stepn{left:18px}
+body.en .stepn{right:18px}
+.stepicon{
+  width:46px;height:46px;border-radius:12px;
+  background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.22);
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:17px;
+}
+[data-theme="light"] .stepicon{background:rgba(0,153,106,.09);border-color:rgba(0,153,106,.22)}
+.stept{font-size:1rem;font-weight:700;margin-bottom:8px}
+.stepd{font-size:.86rem;color:var(--text2);line-height:1.6}
+
+/* PRICING */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:20px;margin-top:50px}
+.pcard{
+  padding:30px 26px;background:var(--bg3);border:1px solid var(--border);
+  border-radius:20px;transition:all .3s;
+}
+.pcard.feat{
+  background:var(--surface);border-color:var(--accent);
+  box-shadow:0 0 0 1px var(--accent),0 20px 48px var(--glow);position:relative;
+}
+.pbadge{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--accent);color:#000;padding:4px 15px;border-radius:999px;
+  font-size:.71rem;font-weight:800;white-space:nowrap;
+}
+.pname{font-size:.77rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:9px}
+.pamount{font-family:'Space Grotesk',sans-serif;font-size:2.7rem;font-weight:700;line-height:1;margin-bottom:4px}
+.pperiod{font-size:.81rem;color:var(--text3);margin-bottom:22px}
+.pfeats{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:26px}
+.pfeats li{display:flex;align-items:center;gap:9px;font-size:.86rem;color:var(--text2)}
+.pfeats li::before{
+  content:'';min-width:18px;height:18px;border-radius:50%;flex-shrink:0;
+  background:rgba(0,229,160,.12);
+  background-image:url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='%2300E5A0' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:center;
+  box-shadow:inset 0 0 0 1px rgba(0,229,160,.3);
+}
+[data-theme="light"] .pfeats li::before{
+  background-color:rgba(0,153,106,.1);
+  background-image:url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='%2300996A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  box-shadow:inset 0 0 0 1px rgba(0,153,106,.28);
+}
+.bplan{width:100%;padding:12px;border-radius:10px;font-size:.92rem;font-weight:700;font-family:inherit;cursor:pointer;transition:all .25s}
+.bplan-filled{background:var(--accent);color:#000;border:none}
+.bplan-filled:hover{transform:translateY(-1px);box-shadow:0 10px 26px var(--glow)}
+.bplan-out{background:transparent;border:1px solid var(--border2);color:var(--text)}
+.bplan-out:hover{background:var(--surface)}
+
+/* STORE */
+.store-sec{text-align:center;border-top:1px solid var(--border)}
+.store-btns{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:36px}
+.sbtn{
+  display:flex;align-items:center;gap:12px;min-width:178px;
+  background:var(--surface);border:1px solid var(--border2);color:var(--text);
+  text-decoration:none;padding:12px 20px;border-radius:13px;transition:all .25s;
+}
+.sbtn:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 12px 30px rgba(0,0,0,.18)}
+[data-theme="light"] .sbtn:hover{box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.sico{
+  width:42px;height:42px;border-radius:9px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  background:var(--bg3);
+}
+.stxt small{display:block;font-size:.64rem;color:var(--text3);font-family:'Space Grotesk',sans-serif}
+.stxt strong{font-size:.95rem;font-weight:700;display:block}
+body.en .stxt{text-align:left}
+:not(body.en) .stxt{text-align:right}
+
+footer{padding:34px 5vw;text-align:center;border-top:1px solid var(--border);color:var(--text3);font-size:.82rem}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:680px){.stats{grid-template-columns:1fr 1fr}.pf-r,.pf-l{display:none}}
+@media(max-width:460px){.stats{grid-template-columns:1fr}h1.htitle{font-size:2.3rem}.hbtns{flex-direction:column;align-items:stretch}.btn-p,.btn-s{justify-content:center}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SwiftDrop ⚡</div>
+  <div class="nav-right">
+    <button class="btn-sm" id="btnLang" onclick="toggleLang()">EN</button>
+    <button class="btn-sm" id="btnTheme" onclick="toggleTheme()">🌙</button>
+    <button class="btn-cta" id="navCta">ابدأ الآن</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="badge"><span class="badge-dot"></span><span id="badgeTxt">🚀 متاح الآن في 50+ مدينة</span></div>
+
+  <h1 class="htitle">
+    <span id="hl1">التوصيل الذكي</span><br>
+    <span class="grad" id="hl2">في دقائق ⚡</span>
+  </h1>
+  <p class="hsub" id="heroSub">منصة توصيل تعتمد على الذكاء الاصطناعي لضمان أسرع وأذكى تجربة توصيل — في أي وقت، من أي مكان.</p>
+
+  <div class="hbtns">
+    <button class="btn-p" id="btnTry">🚀 جرّب مجاناً</button>
+    <button class="btn-s" id="btnWatch">▶ شاهد كيف يعمل</button>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="pscreen">
+        <div class="pbar"><span>SwiftDrop</span><span class="live-dot" id="phLive">● مباشر</span></div>
+        <div class="pmap">
+          <div class="scan-line"></div>
+          <div class="pin"></div>
+        </div>
+        <div class="prider">
+          <div class="ravatar">🛵</div>
+          <div>
+            <div class="rname" id="phName">أحمد المسلم</div>
+            <div class="reta" id="phEta">⏱ يصل خلال 8 دقائق</div>
+          </div>
+        </div>
+        <div class="pbar2"><div class="pbar2-fill"></div></div>
+        <div class="pstatus" id="phStatus">جاري التوصيل...</div>
+      </div>
+    </div>
+    <div class="pfloat pf-r">
+      <div class="pdot"></div>
+      <div>
+        <div style="font-weight:700" id="pf1t">تم التوصيل! ✅</div>
+        <div style="color:var(--text2);font-size:.63rem" id="pf1s">قبل 3 دقائق</div>
+      </div>
+    </div>
+    <div class="pfloat pf-l">
+      <span style="color:#F5C842">⭐</span>
+      <div>
+        <div style="font-weight:700" id="pf2t">+1,240 نقطة مكافأة</div>
+        <div style="color:var(--text2);font-size:.63rem" id="pf2s">رصيدك الجديد</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats reveal">
+    <div class="scell"><div class="snum">50M+</div><div class="slbl" id="st1">طلب موصّل</div></div>
+    <div class="scell"><div class="snum">8 min</div><div class="slbl" id="st2">متوسط التوصيل</div></div>
+    <div class="scell"><div class="snum">4.9 ⭐</div><div class="slbl" id="st3">تقييم العملاء</div></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec how-bg">
+  <div style="text-align:center">
+    <div class="chip" id="howChip">⚙️ كيف يعمل</div>
+    <h2 class="stitle" id="howTitle">ثلاث خطوات بسيطة</h2>
+    <p class="ssub ssub-c" id="howSub">من الطلب حتى التوصيل — مُصمَّم ليكون سهلاً وسريعاً</p>
+  </div>
+  <div class="steps">
+    <div class="step reveal"><div class="stepn">01</div><div class="stepicon">📦</div><div class="stept" id="s1t">أضف طلبك</div><p class="stepd" id="s1d">اختر المنتجات وحدد موقع التوصيل بضغطة واحدة. نظامنا يتعرف على عنوانك تلقائياً.</p></div>
+    <div class="step reveal"><div class="stepn">02</div><div class="stepicon">🤖</div><div class="stept" id="s2t">الذكاء الاصطناعي يختار المسار</div><p class="stepd" id="s2d">يحلل نظامنا 50+ متغيراً لاختيار أسرع مسار وأقرب موصّل في الوقت الفعلي.</p></div>
+    <div class="step reveal"><div class="stepn">03</div><div class="stepicon">⚡</div><div class="stept" id="s3t">تتبع مباشر</div><p class="stepd" id="s3d">تابع طلبك لحظة بلحظة على الخريطة مع إشعارات فورية في كل مرحلة.</p></div>
+    <div class="step reveal"><div class="stepn">04</div><div class="stepicon">🎯</div><div class="stept" id="s4t">توصيل مضمون</div><p class="stepd" id="s4d">ضمان استرداد كامل في حال التأخير. رضاك مسؤوليتنا الأولى.</p></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec">
+  <div style="text-align:center">
+    <div class="chip" id="prChip">💎 الأسعار</div>
+    <h2 class="stitle" id="prTitle">اختر خطتك</h2>
+    <p class="ssub ssub-c" id="prSub">بدّل بين الخطط في أي وقت. لا عقود مخفية.</p>
+  </div>
+  <div class="pgrid reveal">
+    <div class="pcard">
+      <div class="pname" id="pn1">أساسي</div>
+      <div class="pamount">$0<span style="font-size:1rem;font-weight:400;color:var(--text2)" id="pm1">/شهر</span></div>
+      <div class="pperiod" id="pp1">للأفراد والتجريب</div>
+      <ul class="pfeats"><li id="pf11">10 توصيلات شهرياً</li><li id="pf12">تتبع أساسي</li><li id="pf13">دعم عبر البريد</li></ul>
+      <button class="bplan bplan-out" id="pb1">ابدأ مجاناً</button>
+    </div>
+    <div class="pcard feat">
+      <div class="pbadge" id="featBadge">الأكثر شيوعاً ⭐</div>
+      <div class="pname" id="pn2">احترافي</div>
+      <div class="pamount">$29<span style="font-size:1rem;font-weight:400;color:var(--text2)" id="pm2">/شهر</span></div>
+      <div class="pperiod" id="pp2">للأعمال الصغيرة</div>
+      <ul class="pfeats"><li id="pf21">توصيلات غير محدودة</li><li id="pf22">تتبع AI متقدم</li><li id="pf23">تقارير تفصيلية</li><li id="pf24">دعم أولوية 24/7</li><li id="pf25">تكامل مع API</li></ul>
+      <button class="bplan bplan-filled" id="pb2">ابدأ الآن</button>
+    </div>
+    <div class="pcard">
+      <div class="pname" id="pn3">مؤسسي</div>
+      <div class="pamount" id="pa3">مخصص</div>
+      <div class="pperiod" id="pp3">للشركات الكبيرة</div>
+      <ul class="pfeats"><li id="pf31">كل مميزات الاحترافي</li><li id="pf32">SLA مضمون 99.9%</li><li id="pf33">مدير حساب مخصص</li><li id="pf34">تخصيص كامل</li></ul>
+      <button class="bplan bplan-out" id="pb3">تواصل معنا</button>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section class="sec store-sec">
+  <div class="chip" id="dlChip">📱 التطبيق</div>
+  <h2 class="stitle" id="dlTitle">حمّل التطبيق الآن</h2>
+  <p class="ssub ssub-c" id="dlSub">متاح على iOS و Android — مجاناً</p>
+  <div class="store-btns reveal">
+    <a href="#" class="sbtn">
+      <div class="sico">🍎</div>
+      <div class="stxt"><small id="dlAs">Download on the</small><strong>App Store</strong></div>
+    </a>
+    <a href="#" class="sbtn">
+      <div class="sico" style="font-size:1.2rem;font-weight:700;color:var(--accent)">▶</div>
+      <div class="stxt"><small id="dlGs">Get it on</small><strong>Google Play</strong></div>
+    </a>
+  </div>
+</section>
+
+<footer><p>© 2025 SwiftDrop — <span id="footerTxt">جميع الحقوق محفوظة</span></p></footer>
+
+<script>
+const T={
+  ar:{dir:'rtl',bc:'',lb:'EN',ti:'🌙',tl:'☀️',
+    navCta:'ابدأ الآن',badgeTxt:'🚀 متاح الآن في 50+ مدينة',
+    hl1:'التوصيل الذكي',hl2:'في دقائق ⚡',
+    heroSub:'منصة توصيل تعتمد على الذكاء الاصطناعي لضمان أسرع وأذكى تجربة توصيل — في أي وقت، من أي مكان.',
+    btnTry:'🚀 جرّب مجاناً',btnWatch:'▶ شاهد كيف يعمل',
+    phLive:'● مباشر',phName:'أحمد المسلم',phEta:'⏱ يصل خلال 8 دقائق',phStatus:'جاري التوصيل...',
+    pf1t:'تم التوصيل! ✅',pf1s:'قبل 3 دقائق',pf2t:'+1,240 نقطة مكافأة',pf2s:'رصيدك الجديد',
+    st1:'طلب موصّل',st2:'متوسط التوصيل',st3:'تقييم العملاء',
+    howChip:'⚙️ كيف يعمل',howTitle:'ثلاث خطوات بسيطة',howSub:'من الطلب حتى التوصيل — مُصمَّم ليكون سهلاً وسريعاً',
+    s1t:'أضف طلبك',s1d:'اختر المنتجات وحدد موقع التوصيل بضغطة واحدة. نظامنا يتعرف على عنوانك تلقائياً.',
+    s2t:'الذكاء الاصطناعي يختار المسار',s2d:'يحلل نظامنا 50+ متغيراً لاختيار أسرع مسار وأقرب موصّل في الوقت الفعلي.',
+    s3t:'تتبع مباشر',s3d:'تابع طلبك لحظة بلحظة على الخريطة مع إشعارات فورية في كل مرحلة.',
+    s4t:'توصيل مضمون',s4d:'ضمان استرداد كامل في حال التأخير. رضاك مسؤوليتنا الأولى.',
+    prChip:'💎 الأسعار',prTitle:'اختر خطتك',prSub:'بدّل بين الخطط في أي وقت. لا عقود مخفية.',
+    pn1:'أساسي',pm1:'/شهر',pp1:'للأفراد والتجريب',pf11:'10 توصيلات شهرياً',pf12:'تتبع أساسي',pf13:'دعم عبر البريد',pb1:'ابدأ مجاناً',
+    featBadge:'الأكثر شيوعاً ⭐',pn2:'احترافي',pm2:'/شهر',pp2:'للأعمال الصغيرة',
+    pf21:'توصيلات غير محدودة',pf22:'تتبع AI متقدم',pf23:'تقارير تفصيلية',pf24:'دعم أولوية 24/7',pf25:'تكامل مع API',pb2:'ابدأ الآن',
+    pn3:'مؤسسي',pa3:'مخصص',pp3:'للشركات الكبيرة',
+    pf31:'كل مميزات الاحترافي',pf32:'SLA مضمون 99.9%',pf33:'مدير حساب مخصص',pf34:'تخصيص كامل',pb3:'تواصل معنا',
+    dlChip:'📱 التطبيق',dlTitle:'حمّل التطبيق الآن',dlSub:'متاح على iOS و Android — مجاناً',
+    dlAs:'Download on the',dlGs:'Get it on',footerTxt:'جميع الحقوق محفوظة'},
+  en:{dir:'ltr',bc:'en',lb:'عربي',ti:'🌙',tl:'☀️',
+    navCta:'Get Started',badgeTxt:'🚀 Now live in 50+ cities',
+    hl1:'Smart Delivery',hl2:'In Minutes ⚡',
+    heroSub:'An AI-powered delivery platform ensuring the fastest, smartest delivery experience — anytime, anywhere.',
+    btnTry:'🚀 Try for Free',btnWatch:'▶ See How It Works',
+    phLive:'● Live',phName:'Ahmed Moslem',phEta:'⏱ Arriving in 8 min',phStatus:'On the way...',
+    pf1t:'Delivered! ✅',pf1s:'3 minutes ago',pf2t:'+1,240 Reward Points',pf2s:'Your new balance',
+    st1:'Orders Delivered',st2:'Avg. Delivery Time',st3:'Customer Rating',
+    howChip:'⚙️ HOW IT WORKS',howTitle:'Three Simple Steps',howSub:'From order to doorstep — designed to be effortless and fast.',
+    s1t:'Place Your Order',s1d:'Choose items and set delivery location in one tap. Our system auto-detects your address.',
+    s2t:'AI Picks the Route',s2d:'Our system analyzes 50+ variables to find the fastest route and nearest courier in real time.',
+    s3t:'Live Tracking',s3d:'Track your order on the map in real time with instant notifications at every step.',
+    s4t:'Guaranteed Delivery',s4d:'Full refund guarantee if delayed. Your satisfaction is our top priority.',
+    prChip:'💎 PRICING',prTitle:'Choose Your Plan',prSub:'Switch plans anytime. No hidden contracts.',
+    pn1:'BASIC',pm1:'/mo',pp1:'For individuals',pf11:'10 deliveries/month',pf12:'Basic tracking',pf13:'Email support',pb1:'Start Free',
+    featBadge:'Most Popular ⭐',pn2:'PRO',pm2:'/mo',pp2:'For small businesses',
+    pf21:'Unlimited deliveries',pf22:'Advanced AI tracking',pf23:'Detailed analytics',pf24:'Priority 24/7 support',pf25:'API integration',pb2:'Get Started',
+    pn3:'ENTERPRISE',pa3:'Custom',pp3:'For large companies',
+    pf31:'All Pro features',pf32:'99.9% SLA guarantee',pf33:'Dedicated account manager',pf34:'Full customization',pb3:'Contact Us',
+    dlChip:'📱 THE APP',dlTitle:'Download Now',dlSub:'Available on iOS & Android — Free',
+    dlAs:'Download on the',dlGs:'Get it on',footerTxt:'All rights reserved'}
+};
+
+let lang='ar', theme='dark';
+
+function applyLang(l){
+  const d=T[l];
+  document.documentElement.lang=l;
+  document.documentElement.dir=d.dir;
+  document.body.className=d.bc;
+  document.getElementById('btnLang').textContent=d.lb;
+  const skip=['dir','bc','lb','ti','tl'];
+  Object.keys(d).forEach(k=>{
+    if(skip.includes(k)) return;
+    const el=document.getElementById(k);
+    if(el) el.textContent=d[k];
+  });
+}
+function toggleLang(){lang=lang==='ar'?'en':'ar';applyLang(lang)}
+
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('btnTheme').textContent=t==='dark'?'🌙':'☀️';
+}
+function toggleTheme(){theme=theme==='dark'?'light':'dark';applyTheme(theme)}
+
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

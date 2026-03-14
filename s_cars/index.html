@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark" data-lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELOCE | فيلوتشي للسيارات الفاخرة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Cairo:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="master
+.css">
+</head>
+<body>
+
+<!-- ================================================================
+     NAV
+     ================================================================ -->
+<nav>
+  <a href="#" class="nav-logo">VEL<span>O</span>CE</a>
+  <div class="nav-links">
+    <a href="#cars"     class="lang-ar">السيارات</a>
+    <a href="#cars"     class="lang-en">Cars</a>
+    <a href="#services" class="lang-ar">الخدمات</a>
+    <a href="#services" class="lang-en">Services</a>
+    <a href="#about"    class="lang-ar">عنا</a>
+    <a href="#about"    class="lang-en">About</a>
+    <a href="#contact"  class="lang-ar">تواصل</a>
+    <a href="#contact"  class="lang-en">Contact</a>
+  </div>
+  <div class="nav-controls">
+    <button class="ctrl-btn" onclick="toggleTheme()">🌙 / ☀️</button>
+    <button class="ctrl-btn" onclick="toggleLang()">EN / عر</button>
+  </div>
+</nav>
+
+
+<section class="hero">
+
+  <!-- ★ صورة الهيرو (استبدل المسار بصورتك) -->
+  <img
+    class="hero-media"
+    src="./images/mclaren.jpg"
+    alt="Luxury Car"
+    onerror="this.style='display:none'"
+  >
+
+  <!-- ★ فيديو الهيرو — اشيل التعليق لو عندك فيديو -->
+  <!-- <video class="hero-video" autoplay muted loop playsinline>
+    <source src="" type="video/mp4">
+  </video> -->
+ 
+
+  <!-- overlay + glow -->
+  <div class="hero-overlay"></div>
+  <div class="hero-glow"></div>
+
+  <!-- content -->
+  <div class="hero-content">
+    <div class="hero-badge">
+      ✦
+      <span class="lang-ar">المجموعة الحصرية 2025</span>
+      <span class="lang-en">Exclusive Collection 2025</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="lang-ar">أسطورة<span class="line2">السرعة</span></span>
+      <span class="lang-en" style="display:none">Legend<span class="line2">of Speed</span></span>
+    </h1>
+
+    <p class="hero-sub lang-ar">
+      اكتشف مجموعتنا الحصرية من أفخم السيارات العالمية.
+      قوة لا تُقهر، فخامة لا تُضاهى، تجربة قيادة تُعيد تعريف الحدود.
+    </p>
+    <p class="hero-sub lang-en" style="display:none">
+      Discover our exclusive collection of the world's most luxurious automobiles.
+      Unmatched power, unrivaled elegance, a driving experience that redefines limits.
+    </p>
+
+    <div class="hero-btns">
+      <a href="#cars"    class="btn-primary lang-ar">استكشف المجموعة</a>
+      <a href="#cars"    class="btn-primary lang-en" style="display:none">Explore Collection</a>
+      <a href="#contact" class="btn-outline lang-ar">احجز تجربة قيادة</a>
+      <a href="#contact" class="btn-outline lang-en" style="display:none">Book Test Drive</a>
+    </div>
+  </div>
+
+  <!-- scroll hint -->
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="lang-ar">اكتشف</span>
+    <span class="lang-en" style="display:none">Scroll</span>
+  </div>
+
+</section>
+
+<!-- ================================================================
+     STATS
+     ================================================================ -->
+<div class="stats-bar reveal">
+  <div class="stat">
+    <span class="stat-num">500+</span>
+    <div class="stat-label lang-ar">سيارة في المجموعة</div>
+    <div class="stat-label lang-en" style="display:none">Cars in Collection</div>
+  </div>
+  <div class="stat">
+    <span class="stat-num">15+</span>
+    <div class="stat-label lang-ar">سنة من الخبرة</div>
+    <div class="stat-label lang-en" style="display:none">Years of Experience</div>
+  </div>
+  <div class="stat">
+    <span class="stat-num">50+</span>
+    <div class="stat-label lang-ar">علامة فاخرة</div>
+    <div class="stat-label lang-en" style="display:none">Luxury Brands</div>
+  </div>
+  <div class="stat">
+    <span class="stat-num">98%</span>
+    <div class="stat-label lang-ar">رضا العملاء</div>
+    <div class="stat-label lang-en" style="display:none">Client Satisfaction</div>
+  </div>
+</div>
+
+<!-- ================================================================
+     CARS GRID
+     ── كل كارت فيه .car-img-wrap > img  (object-fit:cover, height:260px)
+     ── حط صورتك في src أو استخدم onerror كـ fallback
+     ================================================================ -->
+<section id="cars">
+  <div class="section-tag lang-ar">مجموعتنا</div>
+  <div class="section-tag lang-en" style="display:none">Our Collection</div>
+  <h2 class="section-title reveal lang-ar">أبرز<br>السيارات</h2>
+  <h2 class="section-title reveal lang-en" style="display:none">Featured<br>Models</h2>
+
+  <div class="cars-grid reveal">
+
+    <!-- Ferrari -->
+    <div class="car-card">
+      <div class="car-img-wrap">
+        <img class="car-img" src="./images/Ferrari.jpg" alt="Ferrari 488"
+          onerror="this.closest('.car-img-wrap').style='background:linear-gradient(145deg,#1a0008,#0d0d0d);display:flex;align-items:center;justify-content:center;font-size:5rem'">
+      </div>
+      <div class="car-body">
+        <div class="car-brand">Ferrari</div>
+        <div class="car-name">488 Pista</div>
+        <div class="car-specs">
+          <span class="car-spec">⚡ 710 HP</span>
+          <span class="car-spec">🏁 2.85s</span>
+          <span class="car-spec">💨 340 km/h</span>
+        </div>
+        <div class="car-price">
+          $350,000
+          <span class="car-cta lang-ar">استفسر الآن ←</span>
+          <span class="car-cta lang-en" style="display:none">Inquire Now →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lamborghini -->
+    <div class="car-card">
+      <div class="car-img-wrap">
+        <img class="car-img" src="./images/Lamborghini1.jpg" alt="Lamborghini Huracán"
+          onerror="this.closest('.car-img-wrap').style='background:linear-gradient(145deg,#0a1a00,#0d0d0d);display:flex;align-items:center;justify-content:center;font-size:5rem'">
+      </div>
+      <div class="car-body">
+        <div class="car-brand">Lamborghini</div>
+        <div class="car-name">Huracán EVO</div>
+        <div class="car-specs">
+          <span class="car-spec">⚡ 640 HP</span>
+          <span class="car-spec">🏁 2.9s</span>
+          <span class="car-spec">💨 325 km/h</span>
+        </div>
+        <div class="car-price">
+          $280,000
+          <span class="car-cta lang-ar">استفسر الآن ←</span>
+          <span class="car-cta lang-en" style="display:none">Inquire Now →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Porsche -->
+    <div class="car-card">
+      <div class="car-img-wrap">
+        <img class="car-img" src="./images/Porsche.jpg" alt="Porsche 911"
+          onerror="this.closest('.car-img-wrap').style='background:linear-gradient(145deg,#1a1500,#0d0d0d);display:flex;align-items:center;justify-content:center;font-size:5rem'">
+      </div>
+      <div class="car-body">
+        <div class="car-brand">Porsche</div>
+        <div class="car-name">911 Turbo S</div>
+        <div class="car-specs">
+          <span class="car-spec">⚡ 650 HP</span>
+          <span class="car-spec">🏁 2.7s</span>
+          <span class="car-spec">💨 330 km/h</span>
+        </div>
+        <div class="car-price">
+          $220,000
+          <span class="car-cta lang-ar">استفسر الآن ←</span>
+          <span class="car-cta lang-en" style="display:none">Inquire Now →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rolls-Royce (no image yet) -->
+    <div class="car-card">
+      <div class="car-img-wrap" style="background:linear-gradient(145deg,#0a0a14,#0d0d0d);display:flex;align-items:center;justify-content:center;font-size:4rem;color:var(--gold)">
+        
+       
+        <img class="car-img" src="./images/roll-royce.jpg" alt="Rolls-Royce">
+       
+      </div>
+      <div class="car-body">
+        <div class="car-brand">Rolls-Royce</div>
+        <div class="car-name">Phantom VIII</div>
+        <div class="car-specs">
+          <span class="car-spec">⚡ 563 HP</span>
+          <span class="car-spec">🏁 5.1s</span>
+          <span class="car-spec">💨 250 km/h</span>
+        </div>
+        <div class="car-price">
+          $550,000
+          <span class="car-cta lang-ar">استفسر الآن ←</span>
+          <span class="car-cta lang-en" style="display:none">Inquire Now →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bentley -->
+    <div class="car-card">
+      <div class="car-img-wrap" style="background:linear-gradient(145deg,#0d1410,#0d0d0d);display:flex;align-items:center;justify-content:center;font-size:4rem">
+        
+        <img class="car-img" src="./images/Bentley.jpg" alt="Bentley">
+      </div>
+      <div class="car-body">
+        <div class="car-brand">Bentley</div>
+        <div class="car-name">Continental GT</div>
+        <div class="car-specs">
+          <span class="car-spec">⚡ 626 HP</span>
+          <span class="car-spec">🏁 3.6s</span>
+          <span class="car-spec">💨 318 km/h</span>
+        </div>
+        <div class="car-price">
+          $230,000
+          <span class="car-cta lang-ar">استفسر الآن ←</span>
+          <span class="car-cta lang-en" style="display:none">Inquire Now →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- McLaren -->
+    <div class="car-card">
+      <div class="car-img-wrap" style="background:linear-gradient(145deg,#14080a,#0d0d0d);display:flex;align-items:center;justify-content:center;font-size:4rem">
+        
+        <img class="car-img" src="./images/McLaren.jpg" alt="McLaren">
+      </div>
+      <div class="car-body">
+        <div class="car-brand">McLaren</div>
+        <div class="car-name">720S Spider</div>
+        <div class="car-specs">
+          <span class="car-spec">⚡ 720 HP</span>
+          <span class="car-spec">🏁 2.9s</span>
+          <span class="car-spec">💨 341 km/h</span>
+        </div>
+        <div class="car-price">
+          $315,000
+          <span class="car-cta lang-ar">استفسر الآن ←</span>
+          <span class="car-cta lang-en" style="display:none">Inquire Now →</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================================
+     FEATURED
+     ================================================================ -->
+<section class="featured" id="about">
+  <div class="featured-grid">
+
+    <div class="featured-content">
+      <div class="section-tag lang-ar">نجمة الموسم</div>
+      <div class="section-tag lang-en" style="display:none">Star of the Season</div>
+      <h2 class="section-title reveal lang-ar">Ferrari<br>SF90 Stradale</h2>
+      <h2 class="section-title reveal lang-en" style="display:none">Ferrari<br>SF90 Stradale</h2>
+      <p style="color:var(--text-muted);line-height:1.8;margin:1.5rem 0" class="lang-ar">
+        التحفة الهندسية الإيطالية. هجين خارق يجمع بين محرك V8 توربو وثلاثة محركات كهربائية في تناغم مثالي. مستقبل الأداء الفائق قد وصل.
+      </p>
+      <p style="color:var(--text-muted);line-height:1.8;margin:1.5rem 0" class="lang-en" style="display:none">
+        The Italian engineering masterpiece. A supercharged hybrid combining a twin-turbo V8 with three electric motors in perfect harmony. The future of high performance has arrived.
+      </p>
+      <div class="specs-list">
+        <div class="spec-item">
+          <span class="spec-key lang-ar">القوة الكلية</span>
+          <span class="spec-key lang-en" style="display:none">Total Power</span>
+          <span class="spec-val">986 HP</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key lang-ar">من 0 إلى 100</span>
+          <span class="spec-key lang-en" style="display:none">0 to 100 km/h</span>
+          <span class="spec-val">2.5s</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key lang-ar">السرعة القصوى</span>
+          <span class="spec-key lang-en" style="display:none">Top Speed</span>
+          <span class="spec-val">340 km/h</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key lang-ar">نوع المحرك</span>
+          <span class="spec-key lang-en" style="display:none">Engine Type</span>
+          <span class="spec-val">V8 Hybrid</span>
+        </div>
+      </div>
+      <a href="#contact" class="btn-primary lang-ar">احجز الآن</a>
+      <a href="#contact" class="btn-primary lang-en" style="display:none">Book Now</a>
+    </div>
+
+    <div class="featured-visual">
+      <div class="featured-accent"></div>
+      <div class="featured-img-wrap">
+        <img class="featured-img" src="./images/Ferrari2.jpg" alt="Ferrari SF90"
+          onerror="this.src='https://www.pngall.com/wp-content/uploads/13/Red-Ferrari-PNG-Image.png';this.style='object-fit:contain;padding:2rem'">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================================
+     SERVICES
+     ================================================================ -->
+<section id="services">
+  <div class="section-tag lang-ar">خدماتنا</div>
+  <div class="section-tag lang-en" style="display:none">Our Services</div>
+  <h2 class="section-title reveal lang-ar">تجربة<br>متكاملة</h2>
+  <h2 class="section-title reveal lang-en" style="display:none">Complete<br>Experience</h2>
+
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <span class="service-icon">🔑</span>
+      <div class="service-title lang-ar">تجربة قيادة</div>
+      <div class="service-title lang-en" style="display:none">Test Drive</div>
+      <p class="service-desc lang-ar">احجز تجربة قيادة حصرية مع متخصصينا على أفضل مسارات المنطقة</p>
+      <p class="service-desc lang-en" style="display:none">Book an exclusive test drive with our specialists on the region's finest tracks</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🛡️</span>
+      <div class="service-title lang-ar">ضمان شامل</div>
+      <div class="service-title lang-en" style="display:none">Full Warranty</div>
+      <p class="service-desc lang-ar">نوفر ضمان شامل لمدة 3 سنوات يغطي جميع أجزاء السيارة</p>
+      <p class="service-desc lang-en" style="display:none">We provide a comprehensive 3-year warranty covering all vehicle components</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🔧</span>
+      <div class="service-title lang-ar">صيانة VIP</div>
+      <div class="service-title lang-en" style="display:none">VIP Maintenance</div>
+      <p class="service-desc lang-ar">خدمة صيانة بمركزنا المتخصص مع توفير سيارة بديلة فاخرة</p>
+      <p class="service-desc lang-en" style="display:none">Maintenance at our specialist center with a luxury replacement car provided</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🚢</span>
+      <div class="service-title lang-ar">شحن دولي</div>
+      <div class="service-title lang-en" style="display:none">Global Shipping</div>
+      <p class="service-desc lang-ar">نشحن سيارتك من أي مكان في العالم مع توثيق جمركي كامل</p>
+      <p class="service-desc lang-en" style="display:none">We ship your car from anywhere in the world with complete customs documentation</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     TESTIMONIALS
+     ================================================================ -->
+<section class="testimonials">
+  <div class="section-tag lang-ar">آراء العملاء</div>
+  <div class="section-tag lang-en" style="display:none">Client Reviews</div>
+  <h2 class="section-title reveal lang-ar">يقولون<br>عنا</h2>
+  <h2 class="section-title reveal lang-en" style="display:none">What They<br>Say</h2>
+
+  <div class="testimonials-grid reveal">
+    <div class="testimonial">
+      <p class="testimonial-text lang-ar">تجربة لا تُنسى منذ اللحظة الأولى. الفريق محترف جداً والسيارة فاقت كل توقعاتي. بالتأكيد سأعود للشراء مجدداً.</p>
+      <p class="testimonial-text lang-en" style="display:none">An unforgettable experience from the very first moment. The team is extremely professional and the car exceeded all my expectations.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">خ</div>
+        <div>
+          <div class="author-name lang-ar">خالد المنصور</div>
+          <div class="author-name lang-en" style="display:none">Khaled Al-Mansour</div>
+          <div class="author-title lang-ar">رجل أعمال — الرياض</div>
+          <div class="author-title lang-en" style="display:none">Businessman — Riyadh</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text lang-ar">اشتريت فيراري 488 وكانت أفضل قرار في حياتي. الخدمة مميزة والأسعار تنافسية جداً مقارنة بالسوق.</p>
+      <p class="testimonial-text lang-en" style="display:none">I bought a Ferrari 488 and it was the best decision of my life. Excellent service and very competitive prices.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">ف</div>
+        <div>
+          <div class="author-name lang-ar">فيصل الأحمدي</div>
+          <div class="author-name lang-en" style="display:none">Faisal Al-Ahmadi</div>
+          <div class="author-title lang-ar">مهندس — دبي</div>
+          <div class="author-title lang-en" style="display:none">Engineer — Dubai</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text lang-ar">التوصيل كان سريع والتغليف رائع. السيارة وصلت بحالة مثالية. شكراً لفريق VELOCE على الاحترافية العالية.</p>
+      <p class="testimonial-text lang-en" style="display:none">Delivery was fast and packaging was excellent. The car arrived in perfect condition. Thank you VELOCE.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">م</div>
+        <div>
+          <div class="author-name lang-ar">محمد العتيبي</div>
+          <div class="author-name lang-en" style="display:none">Mohammed Al-Otaibi</div>
+          <div class="author-title lang-ar">طبيب — الكويت</div>
+          <div class="author-title lang-en" style="display:none">Doctor — Kuwait</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     CTA
+     ================================================================ -->
+<section class="cta-section" id="contact">
+  <div class="section-tag" style="justify-content:center;margin-bottom:1rem">✦ Contact</div>
+  <h2 class="section-title reveal lang-ar">ابدأ رحلتك<br><span style="color:var(--accent)">اليوم</span></h2>
+  <h2 class="section-title reveal lang-en" style="display:none">Start Your<br><span style="color:var(--accent)">Journey</span></h2>
+  <p class="lang-ar">فريقنا جاهز لمساعدتك في اختيار سيارة أحلامك وتوفير أفضل تجربة شراء ممكنة</p>
+  <p class="lang-en" style="display:none">Our team is ready to help you choose your dream car and provide the best possible buying experience</p>
+  <div class="hero-btns" style="justify-content:center;margin-top:2.5rem">
+    <a href="tel:+966500000000" class="btn-primary lang-ar">📞 اتصل بنا</a>
+    <a href="tel:+966500000000" class="btn-primary lang-en" style="display:none">📞 Call Us</a>
+    <a href="#" class="btn-outline lang-ar">💬 واتساب</a>
+    <a href="#" class="btn-outline lang-en" style="display:none">💬 WhatsApp</a>
+  </div>
+</section>
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">VEL<span>O</span>CE</a>
+      <p class="lang-ar">وجهتك الأولى للسيارات الفاخرة والرياضية. نقدم تجربة شراء لا مثيل لها منذ عام 2008.</p>
+      <p class="lang-en" style="display:none">Your premier destination for luxury and sports cars. An unmatched buying experience since 2008.</p>
+    </div>
+    <div class="footer-col">
+      <h4 class="lang-ar">السيارات</h4>
+      <h4 class="lang-en" style="display:none">Cars</h4>
+      <a href="#">Ferrari</a>
+      <a href="#">Lamborghini</a>
+      <a href="#">Porsche</a>
+      <a href="#">Rolls-Royce</a>
+      <a href="#">Bentley</a>
+    </div>
+    <div class="footer-col">
+      <h4 class="lang-ar">الخدمات</h4>
+      <h4 class="lang-en" style="display:none">Services</h4>
+      <a href="#" class="lang-ar">تجربة قيادة</a>
+      <a href="#" class="lang-en" style="display:none">Test Drive</a>
+      <a href="#" class="lang-ar">صيانة VIP</a>
+      <a href="#" class="lang-en" style="display:none">VIP Service</a>
+      <a href="#" class="lang-ar">تمويل</a>
+      <a href="#" class="lang-en" style="display:none">Financing</a>
+      <a href="#" class="lang-ar">شحن دولي</a>
+      <a href="#" class="lang-en" style="display:none">International Shipping</a>
+    </div>
+    <div class="footer-col">
+      <h4 class="lang-ar">تواصل معنا</h4>
+      <h4 class="lang-en" style="display:none">Contact</h4>
+      <a href="#">📞 +966 50 000 0000</a>
+      <a href="#">✉️ info@veloce.sa</a>
+      <a href="#" class="lang-ar">📍 الرياض، المملكة</a>
+      <a href="#" class="lang-en" style="display:none">📍 Riyadh, KSA</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 VELOCE.
+      <span class="lang-ar">جميع الحقوق محفوظة.</span>
+      <span class="lang-en" style="display:none">All rights reserved.</span>
+    </span>
+    <span class="lang-ar">مصنوع بـ ❤️ في المملكة العربية السعودية</span>
+    <span class="lang-en" style="display:none">Made with ❤️ in Saudi Arabia</span>
+  </div>
+</footer>
+
+<!-- ================================================================
+     JAVASCRIPT
+     ================================================================ -->
+<script>
+/* ── theme ── */
+function toggleTheme(){
+  const h = document.documentElement;
+  h.setAttribute('data-theme', h.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+}
+
+/* ── language ── */
+function toggleLang(){
+  const h   = document.documentElement;
+  const lng = h.getAttribute('data-lang')==='ar' ? 'en' : 'ar';
+  h.setAttribute('data-lang', lng);
+  h.setAttribute('dir', lng==='ar' ? 'rtl' : 'ltr');
+  document.querySelectorAll('.lang-ar').forEach(el => el.style.display = lng==='ar' ? '' : 'none');
+  document.querySelectorAll('.lang-en').forEach(el => el.style.display = lng==='en' ? '' : 'none');
+}
+
+/* ── scroll reveal ── */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* ── counter animation ── */
+function animateCounter(el, target, suffix=''){
+  let count = 0;
+  const step = target / 60;
+  const timer = setInterval(() => {
+    count += step;
+    if(count >= target){ count = target; clearInterval(timer); }
+    el.textContent = Math.floor(count) + suffix;
+  }, 28);
+}
+const statsObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      document.querySelectorAll('.stat-num').forEach(el => {
+        const raw    = el.textContent;
+        const num    = parseInt(raw);
+        const suffix = raw.replace(String(num), '');
+        el.textContent = '0' + suffix;
+        animateCounter(el, num, suffix);
+      });
+      statsObs.disconnect();
+    }
+  });
+}, { threshold: 0.5 });
+const statsBar = document.querySelector('.stats-bar');
+if(statsBar) statsObs.observe(statsBar);
+</script>
+
+</body>
+</html>

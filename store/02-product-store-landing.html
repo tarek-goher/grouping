@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS X — ساعة المستقبل</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* DARK */
+:root {
+  --bg:#04050A; --bg2:#080A10; --bg3:#0D0F18;
+  --surface:#111320; --border:rgba(255,255,255,0.06); --border2:rgba(255,255,255,0.12);
+  --gold:#D4A853; --gold2:#F0C870; --gold3:#A07830;
+  --text:#EEF0FF; --text2:#7A7E9A; --text3:#3A3E55;
+  --glow:rgba(212,168,83,0.18);
+  --nav-bg:rgba(4,5,10,0.88);
+  --card:#111320;
+}
+/* LIGHT */
+[data-theme="light"] {
+  --bg:#FAF6EE; --bg2:#FFFFFF; --bg3:#F0EBE0;
+  --surface:#FFFFFF; --border:rgba(0,0,0,0.07); --border2:rgba(0,0,0,0.13);
+  --gold:#B07A20; --gold2:#C88C28; --gold3:#886015;
+  --text:#0A0B12; --text2:#5A5A72; --text3:#9898B0;
+  --glow:rgba(176,122,32,0.14);
+  --nav-bg:rgba(250,246,238,0.92);
+  --card:#FFFFFF;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Tajawal',sans-serif;overflow-x:hidden;transition:background .3s,color .3s}
+body.en{font-family:'DM Sans',sans-serif;direction:ltr}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 6vw;height:70px;
+  background:var(--nav-bg);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border-bottom:1px solid var(--border);
+}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.12em;color:var(--gold)}
+.nav-r{display:flex;align-items:center;gap:10px}
+.btn-t{
+  height:36px;padding:0 14px;border-radius:8px;cursor:pointer;
+  background:transparent;border:1px solid var(--border2);color:var(--text2);
+  font-size:.78rem;font-family:'DM Sans',sans-serif;font-weight:500;transition:all .2s;
+}
+.btn-t:hover{border-color:var(--gold);color:var(--gold)}
+.btn-order{
+  height:36px;padding:0 22px;border-radius:8px;cursor:pointer;
+  background:linear-gradient(130deg,var(--gold),var(--gold2));color:#000;
+  border:none;font-size:.83rem;font-weight:700;font-family:inherit;transition:all .2s;
+}
+.btn-order:hover{transform:translateY(-1px);box-shadow:0 6px 20px var(--glow)}
+
+/* HERO */
+.hero{
+  min-height:100vh;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:90px 6vw 60px;
+}
+/* animated rings (replaces video bg) */
+.rings{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.ring{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  border-radius:50%;border:1px solid;animation:ringExpand 5s ease-out infinite;
+}
+.ring:nth-child(1){width:250px;height:250px;border-color:rgba(212,168,83,.45);animation-delay:0s}
+.ring:nth-child(2){width:420px;height:420px;border-color:rgba(212,168,83,.2);animation-delay:1.2s}
+.ring:nth-child(3){width:620px;height:620px;border-color:rgba(212,168,83,.1);animation-delay:2.4s}
+.ring:nth-child(4){width:850px;height:850px;border-color:rgba(212,168,83,.04);animation-delay:3.6s}
+.hero-glow{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 65% 60% at 50% 50%,rgba(30,20,0,0.9) 0%,transparent 70%);
+}
+[data-theme="light"] .hero-glow{
+  background:radial-gradient(ellipse 65% 60% at 50% 50%,rgba(250,246,238,0.88) 0%,transparent 70%);
+}
+@keyframes ringExpand{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}
+  15%{opacity:1}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.3)}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+@keyframes shimmer{from{left:-100%}to{left:200%}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}
+
+.hero-label{
+  position:relative;z-index:2;
+  font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.32em;
+  color:var(--gold);margin-bottom:18px;animation:fadeUp .7s ease both;
+}
+h1.ptitle{
+  position:relative;z-index:2;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(4.5rem,13vw,9.5rem);
+  letter-spacing:.08em;line-height:.9;
+  background:linear-gradient(180deg,#FFFFFF 0%,var(--gold) 55%,var(--gold3) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:fadeUp .8s .1s ease both;
+}
+[data-theme="light"] h1.ptitle{
+  background:linear-gradient(180deg,#1A1200 0%,var(--gold) 55%,var(--gold3) 100%);
+  -webkit-background-clip:text;background-clip:text;
+}
+.hsub{
+  position:relative;z-index:2;
+  font-size:clamp(.93rem,2vw,1.15rem);color:var(--text2);
+  max-width:480px;margin:18px auto 36px;line-height:1.75;font-weight:300;
+  animation:fadeUp .8s .2s ease both;
+}
+.hprice{
+  position:relative;z-index:2;
+  font-size:clamp(1.5rem,4vw,2.4rem);font-weight:800;
+  font-family:'DM Sans',sans-serif;color:var(--gold);
+  margin-bottom:30px;animation:fadeUp .8s .3s ease both;
+}
+.hprice .old{font-size:1rem;text-decoration:line-through;color:var(--text3);margin-inline-start:12px;font-weight:400}
+.hbtns{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  animation:fadeUp .8s .4s ease both;
+}
+.btn-buy{
+  padding:15px 38px;border-radius:12px;font-size:.95rem;font-weight:700;font-family:inherit;
+  cursor:pointer;display:flex;align-items:center;gap:8px;
+  background:linear-gradient(130deg,var(--gold),var(--gold2));color:#000;
+  border:none;position:relative;overflow:hidden;transition:all .25s;
+}
+.btn-buy::after{
+  content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+  animation:shimmer 2.5s 1s ease infinite;
+}
+.btn-buy:hover{transform:translateY(-2px);box-shadow:0 14px 36px var(--glow)}
+.btn-more{
+  padding:15px 38px;border-radius:12px;font-size:.95rem;font-family:inherit;cursor:pointer;
+  background:transparent;border:1px solid rgba(212,168,83,.32);color:var(--text);transition:all .25s;
+}
+.btn-more:hover{border-color:var(--gold);color:var(--gold)}
+
+/* WATCH */
+.watch-wrap{
+  position:relative;z-index:2;margin:52px auto 0;
+  width:220px;animation:float 5s ease-in-out infinite;
+}
+.wband-t,.wband-b{
+  width:76px;height:48px;margin:0 auto;
+  background:linear-gradient(180deg,#222,#0F0F0F);border-radius:8px;
+}
+[data-theme="light"] .wband-t,[data-theme="light"] .wband-b{background:linear-gradient(180deg,#888,#555)}
+.wband-t{margin-bottom:-3px}
+.wband-b{margin-top:-3px}
+.wbody{
+  width:176px;height:212px;margin:0 auto;position:relative;
+  background:linear-gradient(145deg,#1A1A2E,#0D0D1C,#1A1A2E);
+  border-radius:44px;border:2px solid rgba(212,168,83,.28);
+  box-shadow:0 0 60px rgba(212,168,83,.1),0 36px 70px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.05);
+  overflow:hidden;
+}
+[data-theme="light"] .wbody{
+  background:linear-gradient(145deg,#2A2A4A,#1A1A30,#2A2A4A);
+}
+.wcrown{
+  position:absolute;width:9px;height:28px;
+  background:linear-gradient(180deg,#444,#1A1A1A);border-radius:3px;
+  top:50%;transform:translateY(-50%);
+}
+:not(body.en) .wcrown{left:-5px}
+body.en .wcrown{right:-5px}
+.wscreen{
+  width:138px;height:152px;margin:22px auto 0;
+  background:radial-gradient(ellipse at 40% 30%,#0C1E32,#040C18);
+  border-radius:32px;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:10px;
+}
+.wtime{font-family:'DM Sans',sans-serif;font-size:1.95rem;font-weight:300;color:#fff;letter-spacing:.04em}
+.wdate{font-size:.58rem;color:rgba(255,255,255,.38);font-family:'DM Sans',sans-serif;letter-spacing:.1em}
+.wring{
+  width:76px;height:76px;border-radius:50%;
+  background:conic-gradient(var(--gold) 0% 68%,rgba(255,255,255,.1) 68% 100%);
+  display:flex;align-items:center;justify-content:center;
+}
+.wring-inner{width:58px;height:58px;border-radius:50%;background:#040C18;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+
+/* SECTIONS */
+.sec{padding:100px 6vw}
+.stag{font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.22em;color:var(--gold);margin-bottom:14px;display:block}
+.stitle{font-size:clamp(1.8rem,4vw,3rem);font-weight:900;letter-spacing:-.02em;line-height:1.15;margin-bottom:14px}
+.ssub{font-size:.97rem;color:var(--text2);max-width:460px;line-height:1.75}
+.center{text-align:center}.center .ssub{margin:0 auto}
+
+/* SPECS */
+.specs-bg{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);transition:background .3s}
+.specs-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;max-width:1050px;margin:0 auto}
+@media(max-width:760px){.specs-grid{grid-template-columns:1fr;gap:36px}}
+.spec-visual{
+  width:280px;height:280px;border-radius:56px;margin:0 auto;
+  background:var(--bg3);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;font-size:7rem;
+  box-shadow:0 36px 70px rgba(0,0,0,.35);animation:float 5.5s 1s ease-in-out infinite;
+  transition:background .3s;
+}
+.spec-list{display:flex;flex-direction:column;gap:18px}
+.spec-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:18px;background:var(--bg3);border:1px solid var(--border);border-radius:13px;
+  transition:all .3s;
+}
+.spec-item:hover{border-color:rgba(212,168,83,.3);transform:translateX(-4px)}
+body.en .spec-item:hover{transform:translateX(4px)}
+[data-theme="light"] .spec-item:hover{border-color:rgba(176,122,32,.3)}
+.sico{
+  width:42px;height:42px;border-radius:11px;flex-shrink:0;
+  background:rgba(212,168,83,.1);border:1px solid rgba(212,168,83,.22);
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem;
+}
+[data-theme="light"] .sico{background:rgba(176,122,32,.09);border-color:rgba(176,122,32,.22)}
+.spec-item h4{font-size:.93rem;font-weight:700;margin-bottom:3px}
+.spec-item p{font-size:.83rem;color:var(--text2);line-height:1.5}
+
+/* FEATURES */
+.feat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:2px;background:var(--border);border-radius:18px;overflow:hidden;margin-top:52px;
+}
+.feat-item{
+  background:var(--bg2);padding:32px 26px;transition:all .3s;
+}
+[data-theme="light"] .feat-item{background:var(--card)}
+.feat-item:hover{background:var(--bg3)}
+[data-theme="light"] .feat-item:hover{background:var(--bg3)}
+.fn{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--gold);opacity:.18;margin-bottom:6px;letter-spacing:.1em}
+.fi{font-size:1.7rem;margin-bottom:12px}
+.ft{font-size:.97rem;font-weight:700;margin-bottom:7px}
+.fd{font-size:.83rem;color:var(--text2);line-height:1.55}
+
+/* TESTIMONIALS */
+.test-bg{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);transition:background .3s}
+.slider-wrap{position:relative;overflow:hidden;max-width:860px;margin:52px auto 0}
+.slider-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.slide{min-width:100%;padding:0 16px}
+.tcard{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:22px;
+  padding:36px;text-align:center;transition:background .3s,border-color .3s;
+}
+.stars{font-size:1.15rem;margin-bottom:18px}
+.ttext{font-size:1.05rem;line-height:1.75;color:var(--text2);margin-bottom:26px;font-style:italic;font-weight:300}
+.ttext::before{content:'\201C';font-size:2.8rem;color:var(--gold);line-height:0;vertical-align:-.45em}
+.rev-info{display:flex;align-items:center;justify-content:center;gap:12px}
+.rev-av{
+  width:50px;height:50px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(130deg,var(--gold),var(--gold2));
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;color:#000;
+}
+.rev-name{font-weight:700;font-size:.92rem}
+.rev-role{font-size:.78rem;color:var(--text2)}
+.dots{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:26px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--border2);cursor:pointer;transition:all .3s}
+.dot.active{background:var(--gold);width:22px;border-radius:4px}
+.arrows{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px}
+.arw{
+  width:42px;height:42px;border-radius:50%;background:var(--surface);border:1px solid var(--border2);
+  color:var(--text2);cursor:pointer;font-size:1rem;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;
+}
+.arw:hover{border-color:var(--gold);color:var(--gold)}
+
+footer{padding:38px 6vw;text-align:center;border-top:1px solid var(--border);color:var(--text3);font-size:.82rem}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:580px){h1.ptitle{font-size:4rem}.hbtns{flex-direction:column;align-items:stretch}.btn-buy,.btn-more{justify-content:center}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">NEXUS X</div>
+  <div class="nav-r">
+    <button class="btn-t" id="btnLang" onclick="toggleLang()">EN</button>
+    <button class="btn-t" id="btnTheme" onclick="toggleTheme()">🌙</button>
+    <button class="btn-order" id="navOrder">اطلب الآن — $899</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="rings">
+    <div class="ring"></div><div class="ring"></div>
+    <div class="ring"></div><div class="ring"></div>
+  </div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-label" id="heroLabel">⌚ الجيل القادم من الساعات الذكية</div>
+  <h1 class="ptitle">NEXUS X</h1>
+  <p class="hsub" id="heroSub">مصنوعة من التيتانيوم الفضائي. مدعومة بالذكاء الاصطناعي. مصممة لمن يرفضون المألوف.</p>
+
+  <div class="watch-wrap">
+    <div class="wband-t"></div>
+    <div class="wbody">
+      <div class="wcrown"></div>
+      <div class="wscreen">
+        <div class="wtime" id="wTime">09:41</div>
+        <div class="wdate" id="wDate">SAT, JAN 9</div>
+        <div class="wring"><div class="wring-inner">❤️</div></div>
+      </div>
+    </div>
+    <div class="wband-b"></div>
+  </div>
+
+  <div class="hprice" id="heroPrice">$899 <span class="old">$1,299</span></div>
+
+  <div class="hbtns">
+    <button class="btn-buy" id="btnBuy">🛒 اشتري الآن</button>
+    <button class="btn-more" id="btnMore">اكتشف المزيد</button>
+  </div>
+</section>
+
+<!-- SPECS -->
+<section class="sec specs-bg">
+  <div class="center reveal" style="max-width:1050px;margin:0 auto 52px">
+    <span class="stag" id="specsTag">المواصفات</span>
+    <h2 class="stitle" id="specsTitle">مُهندَسة بدقة لا تُضاهى</h2>
+    <p class="ssub" style="margin:0 auto;text-align:center" id="specsSub">كل مكوّن اختير بعناية مفرطة لتقديم تجربة لا مثيل لها</p>
+  </div>
+  <div class="specs-grid reveal">
+   <div class="spec-visual">
+  <img src="./images/img1.jpg" alt="NEXUS X" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+</div>
+    <div class="spec-list">
+      <div class="spec-item"><div class="sico">⚡</div><div><h4 id="s1t">بطارية 72 ساعة</h4><p id="s1d">تقنية شحن ذكي تتكيف مع نمط استخدامك. شحن كامل في 45 دقيقة.</p></div></div>
+      <div class="spec-item"><div class="sico">🔬</div><div><h4 id="s2t">صحة متقدمة بالذكاء الاصطناعي</h4><p id="s2d">رصد دقيق لـ ECG و SpO2 ومستوى الإجهاد في الوقت الفعلي.</p></div></div>
+      <div class="spec-item"><div class="sico">🛡️</div><div><h4 id="s3t">هيكل تيتانيوم فضائي</h4><p id="s3d">أقوى من الصلب بـ5 مرات وأخف بـ40%. مقاومة للماء حتى 100م.</p></div></div>
+      <div class="spec-item"><div class="sico">📡</div><div><h4 id="s4t">شاشة AMOLED 2000 nits</h4><p id="s4d">مرئية تماماً في ضوء الشمس المباشر. ألوان حية وسطوع استثنائي.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="sec">
+  <div class="center reveal">
+    <span class="stag" id="featTag">المميزات</span>
+    <h2 class="stitle" id="featTitle">أكثر من مجرد ساعة</h2>
+    <p class="ssub" style="margin:0 auto;text-align:center" id="featSub">منظومة متكاملة تعيش معك</p>
+  </div>
+  <div class="feat-grid reveal">
+    <div class="feat-item"><div class="fn">01</div><div class="fi">🤖</div><div class="ft" id="f1t">مساعد AI</div><p class="fd" id="f1d">يتعلم من عاداتك ويعطيك توصيات صحية يومية مخصصة.</p></div>
+    <div class="feat-item"><div class="fn">02</div><div class="fi">🏃</div><div class="ft" id="f2t">80+ رياضة</div><p class="fd" id="f2d">تتبع دقيق لكل نشاط رياضي مع تحليل الأداء المفصل.</p></div>
+    <div class="feat-item"><div class="fn">03</div><div class="fi">😴</div><div class="ft" id="f3t">تحليل النوم</div><p class="fd" id="f3d">مراحل النوم الدقيقة مع اقتراحات لتحسين جودة نومك.</p></div>
+    <div class="feat-item"><div class="fn">04</div><div class="fi">📍</div><div class="ft" id="f4t">GPS مدمج</div><p class="fd" id="f4d">خرائط offline كاملة. استكشف بدون هاتفك.</p></div>
+    <div class="feat-item"><div class="fn">05</div><div class="fi">💳</div><div class="ft" id="f5t">دفع لا تلامسي</div><p class="fd" id="f5d">ادفع بإيماءة من معصمك في أكثر من 100 مليون متجر.</p></div>
+    <div class="feat-item"><div class="fn">06</div><div class="fi">🔒</div><div class="ft" id="f6t">أمان بيومتري</div><p class="fd" id="f6d">قفل تلقائي بمغادرة المعصم. بياناتك مشفرة دائماً.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec test-bg">
+  <div class="center reveal">
+    <span class="stag" id="revTag">التقييمات</span>
+    <h2 class="stitle" id="revTitle">ماذا يقول أصحابها</h2>
+  </div>
+  <div class="slider-wrap reveal">
+    <div class="slider-track" id="sliderTrack">
+      <div class="slide"><div class="tcard">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="ttext" id="r1txt">أفضل ساعة استخدمتها في حياتي. دقة القياسات الصحية أذهلتني — كشفت انخفاضاً في الأكسجين قبل أن أشعر بأي أعراض.</p>
+        <div class="rev-info"><div class="rev-av">م</div><div><div class="rev-name" id="r1name">محمد الأحمدي</div><div class="rev-role" id="r1role">طبيب قلب، الرياض</div></div></div>
+      </div></div>
+      <div class="slide"><div class="tcard">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="ttext" id="r2txt">اشتريتها منذ 6 أشهر ولا أزال أُعيد اكتشافها يومياً. المساعد الذكي يعرف جدولي أفضل مني أنا.</p>
+        <div class="rev-info"><div class="rev-av">س</div><div><div class="rev-name" id="r2name">سارة المنصور</div><div class="rev-role" id="r2role">رائدة أعمال، دبي</div></div></div>
+      </div></div>
+      <div class="slide"><div class="tcard">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="ttext" id="r3txt">استخدمتها في سباق الماراثون وعلى البحر وفي الجبال — أداء لا يتزعزع. التصميم يجذب النظر في كل مكان.</p>
+        <div class="rev-info"><div class="rev-av">ك</div><div><div class="rev-name" id="r3name">كريم وهبي</div><div class="rev-role" id="r3role">رياضي محترف، القاهرة</div></div></div>
+      </div></div>
+    </div>
+    <div class="dots">
+      <div class="dot active" onclick="goTo(0)"></div>
+      <div class="dot" onclick="goTo(1)"></div>
+      <div class="dot" onclick="goTo(2)"></div>
+    </div>
+    <div class="arrows">
+      <button class="arw" onclick="slide(-1)">←</button>
+      <button class="arw" onclick="slide(1)">→</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="logo" style="font-size:1.35rem;margin-bottom:6px">NEXUS X</p>
+  <p>© 2025 NEXUS — <span id="footerTxt">جميع الحقوق محفوظة</span></p>
+</footer>
+
+<script>
+/* clock */
+function tick(){
+  const n=new Date(),h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0');
+  const el=document.getElementById('wTime');if(el)el.textContent=h+':'+m;
+}
+tick();setInterval(tick,1000);
+
+/* slider */
+let cur=0;
+const slides=document.querySelectorAll('.slide');
+function updateSlider(){
+  document.getElementById('sliderTrack').style.transform=`translateX(${cur*-100}%)`;
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===cur));
+}
+function slide(dir){cur=(cur+dir+slides.length)%slides.length;updateSlider()}
+function goTo(i){cur=i;updateSlider()}
+setInterval(()=>slide(1),5200);
+
+/* language */
+const T={
+  ar:{dir:'rtl',bc:'',lb:'EN',
+    navOrder:'اطلب الآن — $899',heroLabel:'⌚ الجيل القادم من الساعات الذكية',
+    heroSub:'مصنوعة من التيتانيوم الفضائي. مدعومة بالذكاء الاصطناعي. مصممة لمن يرفضون المألوف.',
+    heroPrice:'$899',btnBuy:'🛒 اشتري الآن',btnMore:'اكتشف المزيد',
+    specsTag:'المواصفات',specsTitle:'مُهندَسة بدقة لا تُضاهى',specsSub:'كل مكوّن اختير بعناية مفرطة لتقديم تجربة لا مثيل لها',
+    s1t:'بطارية 72 ساعة',s1d:'تقنية شحن ذكي تتكيف مع نمط استخدامك. شحن كامل في 45 دقيقة.',
+    s2t:'صحة متقدمة بالذكاء الاصطناعي',s2d:'رصد دقيق لـ ECG و SpO2 ومستوى الإجهاد في الوقت الفعلي.',
+    s3t:'هيكل تيتانيوم فضائي',s3d:'أقوى من الصلب بـ5 مرات وأخف بـ40%. مقاومة للماء حتى 100م.',
+    s4t:'شاشة AMOLED 2000 nits',s4d:'مرئية تماماً في ضوء الشمس المباشر. ألوان حية وسطوع استثنائي.',
+    featTag:'المميزات',featTitle:'أكثر من مجرد ساعة',featSub:'منظومة متكاملة تعيش معك',
+    f1t:'مساعد AI',f1d:'يتعلم من عاداتك ويعطيك توصيات صحية يومية مخصصة.',
+    f2t:'80+ رياضة',f2d:'تتبع دقيق لكل نشاط رياضي مع تحليل الأداء المفصل.',
+    f3t:'تحليل النوم',f3d:'مراحل النوم الدقيقة مع اقتراحات لتحسين جودة نومك.',
+    f4t:'GPS مدمج',f4d:'خرائط offline كاملة. استكشف بدون هاتفك.',
+    f5t:'دفع لا تلامسي',f5d:'ادفع بإيماءة من معصمك في أكثر من 100 مليون متجر.',
+    f6t:'أمان بيومتري',f6d:'قفل تلقائي بمغادرة المعصم. بياناتك مشفرة دائماً.',
+    revTag:'التقييمات',revTitle:'ماذا يقول أصحابها',
+    r1txt:'أفضل ساعة استخدمتها في حياتي. دقة القياسات الصحية أذهلتني — كشفت انخفاضاً في الأكسجين قبل أن أشعر بأي أعراض.',
+    r1name:'محمد الأحمدي',r1role:'طبيب قلب، الرياض',
+    r2txt:'اشتريتها منذ 6 أشهر ولا أزال أُعيد اكتشافها يومياً. المساعد الذكي يعرف جدولي أفضل مني أنا.',
+    r2name:'سارة المنصور',r2role:'رائدة أعمال، دبي',
+    r3txt:'استخدمتها في سباق الماراثون وعلى البحر وفي الجبال — أداء لا يتزعزع. التصميم يجذب النظر في كل مكان.',
+    r3name:'كريم وهبي',r3role:'رياضي محترف، القاهرة',
+    footerTxt:'جميع الحقوق محفوظة'},
+  en:{dir:'ltr',bc:'en',lb:'عربي',
+    navOrder:'Order Now — $899',heroLabel:'⌚ The Next Generation Smartwatch',
+    heroSub:'Crafted from aerospace titanium. Powered by AI. Designed for those who refuse ordinary.',
+    heroPrice:'$899',btnBuy:'🛒 Buy Now',btnMore:'Explore Features',
+    specsTag:'SPECIFICATIONS',specsTitle:'Engineered with Unmatched Precision',specsSub:'Every component chosen obsessively to deliver an unparalleled experience.',
+    s1t:'72-Hour Battery',s1d:'Smart adaptive charging learns your usage pattern. Full charge in 45 minutes.',
+    s2t:'AI-Powered Health Suite',s2d:'Medical-grade ECG, SpO2, and stress monitoring in real time.',
+    s3t:'Aerospace Titanium Build',s3d:'5× stronger than steel, 40% lighter. Water resistant to 100m.',
+    s4t:'2000-nit AMOLED Display',s4d:'Perfectly visible in direct sunlight. Vivid colors, exceptional brightness.',
+    featTag:'FEATURES',featTitle:'More Than a Watch',featSub:'A complete ecosystem that lives with you.',
+    f1t:'AI Assistant',f1d:'Learns your habits and delivers personalized daily health insights.',
+    f2t:'80+ Sports Modes',f2d:'Precise tracking for any activity with detailed performance analysis.',
+    f3t:'Sleep Analysis',f3d:'Detailed sleep stages with suggestions to improve your sleep quality.',
+    f4t:'Built-in GPS',f4d:'Full offline maps. Explore without your phone.',
+    f5t:'Contactless Payments',f5d:'Pay with a flick of your wrist at 100M+ stores worldwide.',
+    f6t:'Biometric Security',f6d:'Auto-locks when off wrist. Your data is always encrypted.',
+    revTag:'REVIEWS',revTitle:'What Owners Say',
+    r1txt:'The best watch I have ever worn. The health accuracy amazed me — it detected a drop in oxygen before I felt any symptoms.',
+    r1name:'Mohammed Al-Ahmadi',r1role:'Cardiologist, Riyadh',
+    r2txt:'Six months in and I am still discovering new things daily. The AI assistant knows my schedule better than I do.',
+    r2name:'Sarah Al-Mansour',r2role:'Entrepreneur, Dubai',
+    r3txt:'Used it in a marathon, at sea, and in the mountains — flawless. The design turns heads everywhere.',
+    r3name:'Karim Wahbi',r3role:'Professional Athlete, Cairo',
+    footerTxt:'All rights reserved'}
+};
+
+let lang='ar',theme='dark';
+function applyLang(l){
+  const d=T[l];
+  document.documentElement.lang=l;document.documentElement.dir=d.dir;
+  document.body.className=d.bc;
+  document.getElementById('btnLang').textContent=d.lb;
+  const skip=['dir','bc','lb'];
+  Object.keys(d).forEach(k=>{
+    if(skip.includes(k)) return;
+    const el=document.getElementById(k);
+    if(el) el.textContent=d[k];
+  });
+  /* heroPrice has the <span> child — only update text node */
+  const hp=document.getElementById('heroPrice');
+  if(hp){
+    hp.childNodes[0].textContent=d.heroPrice+' ';
+  }
+}
+function toggleLang(){lang=lang==='ar'?'en':'ar';applyLang(lang)}
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('btnTheme').textContent=t==='dark'?'🌙':'☀️';
+}
+function toggleTheme(){theme=theme==='dark'?'light':'dark';applyTheme(theme)}
+
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
